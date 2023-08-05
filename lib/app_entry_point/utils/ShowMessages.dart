@@ -17,7 +17,7 @@ class ShowMessages{
 
   void showSnackBarGreen(title, message) async{
     Get.snackbar(title, message,
-      backgroundColor: Constants.accent,
+      backgroundColor: Constants.accentOrange,
       colorText: Colors.white,
       snackPosition: kIsWeb ? SnackPosition.TOP : SnackPosition.BOTTOM,
       maxWidth: kIsWeb ? 400 : Get.width,

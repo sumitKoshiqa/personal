@@ -1,35 +1,47 @@
+import 'package:ekikrit/Consumer/Landing/Pages/ConsumerHome.dart';
+import 'package:ekikrit/Consumer/Profile/Pages/YourAccount.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/auth_middleware.dart';
-import 'package:ekikrit/app_entry_point/routing/middleware/middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/params_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:ekikrit/onBoarding/pages/splash.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
 
-class AppPages {
+
+
+class AppPages{
   AppPages._();
-
-  static const INITIAL = Routes.SPLASH;
 
   static final List<GetMiddleware> middleWares = [
     AuthMiddleware(),
-    RoutingMiddleware(),
-    ParamsMiddleware()
+    ParamsMiddleware(),
   ];
 
   static final routes = [
+
+    // splash
     GetPage(
-        name: Routes.SPLASH,
+        name: "/",
         page: () => const Splash(),
         // middlewares: middleWares,
         transition: Transition.noTransition),
-    // GetPage(
-    //     name: Routes.LOGIN,
-    //     page: () => const LoginEntryPoint(),
-    //     transition: Transition.noTransition),
-    // GetPage(
-    //     name: Routes.VERIFY_OTP,
-    //     page: () => const VerifyOtp(),
-    //     transition: Transition.noTransition),
+
+
+    // consumer home
+    GetPage(
+        name: "/home",
+        page: () => const ConsumerHome(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+    // consumer account
+    GetPage(
+        name: "/account",
+        page: () => const YourAccount(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+
+
   ];
+
 }

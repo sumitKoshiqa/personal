@@ -36,16 +36,16 @@ class MyApp extends StatelessWidget {
               Locale('bn', 'BD'),
             ],
             theme: ThemeData(
-                primarySwatch: Colors.green,
+                primarySwatch: Colors.orange,
                 fontFamily: 'SfProDisplay',
                 appBarTheme: AppBarTheme(
-                    backgroundColor: Constants.appBackgroundPrimary,
+                    backgroundColor: Constants.lightOrange,
                     elevation: 0,
                     iconTheme: IconThemeData(color: Colors.black,size: 18),
 
                     titleTextStyle: appTheme.textTheme.titleMedium),
                 textTheme: appTheme.textTheme),
-            initialRoute: AppPages.INITIAL,
+            initialRoute: '/',
             getPages: AppPages.routes,
             // home: const CreateProfileDoctor(showNavBar: false, phone: "9468506570"),
             // home: const HomeContainerDoctor(),

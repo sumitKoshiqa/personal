@@ -1,5 +1,5 @@
-import 'package:ekikrit/App/CustomSpacers.dart';
 import 'package:ekikrit/Common/Widgets/BackButtonPrimary.dart';
+import 'package:ekikrit/app_entry_point/utils/CustomSpacers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

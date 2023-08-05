@@ -20,7 +20,6 @@ dependencies:
   dio_smart_retry: ^1.0.0
   email_validator: ^2.1.17
   flutter_inappwebview: ^5.7.2+3
-  #  flutter_inappwebview: ^6.0.0-beta.24+1
   webview_flutter: ^4.2.2
   url_launcher: ^6.1.7
   permission_handler: ^10.2.0
@@ -30,23 +29,15 @@ dependencies:
   url_strategy: ^0.2.0
   flutter_stripe: ^9.0.0+1
   intl: ^0.17.0
-
   cupertino_icons: ^1.0.2
   flutter_local_notifications: ^15.1.0+1
   firebase_core: ^2.13.0
   firebase_messaging: ^14.6.1
   uuid: ^3.0.7
-  google_fonts: ^4.0.3
   font_awesome_flutter: ^10.4.0
   device_info_plus: ^8.2.0
-  cached_network_image: ^3.2.0
-  get: ^4.6.5
-  get_storage: ^2.0.3
   flutter_svg: ^2.0.5
   flutter_screenutil: ^5.8.2
-  path_provider: ^2.0.15
-  dio: ^4.0.6
-  dio_smart_retry: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -65,8 +56,6 @@ flutter:
     - assets/
     - assets/drawer-consumer/
     - assets/your-account/
-  # To add assets to your application, add an assets section, like this:
-  assets:
     - assets/images/onboarding/
     - assets/i18n/
 

@@ -1,6 +1,4 @@
 import 'package:ekikrit/app_entry_point/routing/controller/routing_controller.dart';
-import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ParamsMiddleware extends GetMiddleware {
@@ -16,28 +14,4 @@ class ParamsMiddleware extends GetMiddleware {
     return super.onPageCalled(page);
   }
 
-  RouteSettings? checkParams() {
-    switch (routePage.name) {
-      case Routes.CONSUMER_DISEASE:
-        return checkDiseaseParams(routePage);
-
-      default:
-        return null;
-    }
-  }
-
-  RouteSettings? checkDiseaseParams(GetPage<dynamic> page) {
-    print("params==>${page.parameters!["selSpecialityId"]}");
-    if (page.parameters!.isEmpty ||
-        page.parameters!["selSpecialityId"] == null) {
-      return const RouteSettings(name: Routes.CONSUMER_SPECIALITY);
-    }
-    return null;
-  }
-
-  @override
-  RouteSettings? redirect(String? route) {
-    print("params onRedirectCalled");
-    return checkParams();
-  }
 }
