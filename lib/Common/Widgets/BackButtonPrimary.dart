@@ -13,19 +13,21 @@ class _BackButtonPrimaryState extends State<BackButtonPrimary> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 40,
+      height: 30,
+      width: 30,
       decoration: BoxDecoration(
         color: Constants.accentOrange,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Center(
         child: IconButton(
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(),
           tooltip: "Back",
           onPressed: (){
             Get.back();
           },
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white,),
+          icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: Colors.white,),
         ),
       ),
     );

@@ -3,5 +3,6 @@ abstract class Routes {
 
   static const SPLASH = '/';
   static const CONSUMER_HOME = '/home';
+  static const CONSUMER_ACCOUNT = '/account';
 
 }

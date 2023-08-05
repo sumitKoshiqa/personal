@@ -1,6 +1,6 @@
 import 'package:ekikrit/App/Constants.dart';
 import 'package:ekikrit/Common/Widgets/BackButtonSecondary.dart';
-import 'package:ekikrit/Consumer/Profile/Pages/DrawerLayoutConsumer.dart';
+import 'package:ekikrit/Consumer/Landing/Widgets/DrawerLayoutConsumer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

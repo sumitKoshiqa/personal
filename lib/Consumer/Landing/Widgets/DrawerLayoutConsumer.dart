@@ -1,5 +1,7 @@
 import 'package:ekikrit/App/Constants.dart';
 import 'package:ekikrit/App/CustomSpacers.dart';
+import 'package:ekikrit/Common/Routing/CustomNavigator.dart';
+import 'package:ekikrit/Common/Routing/Routes.dart';
 import 'package:ekikrit/Common/Widgets/BackButtonSecondary.dart';
 import 'package:ekikrit/Common/Widgets/InfoCardPrimary.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +138,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_ACCOUNT);
+                  },
                   title: "Your Account",
                   imagePath: 'assets/drawer-consumer/account.png',
                   buttonColor: Constants.lightOrange,
