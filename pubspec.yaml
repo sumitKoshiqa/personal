@@ -9,6 +9,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.6.5
+  get_storage: ^2.0.3
+  google_fonts: ^4.0.0
+  auto_size_text: ^3.0.0
+  cached_network_image: ^3.2.0
+  carousel_slider: ^4.1.1
+  persistent_bottom_nav_bar: ^5.0.2
+  dio: ^4.0.6
+  dio_smart_retry: ^1.0.0
+  email_validator: ^2.1.17
+  flutter_inappwebview: ^5.7.2+3
+  #  flutter_inappwebview: ^6.0.0-beta.24+1
+  webview_flutter: ^4.2.2
+  url_launcher: ^6.1.7
+  permission_handler: ^10.2.0
+  flutter_otp_text_field: ^1.1.1
+  lottie: ^2.3.0
+  image_picker: ^0.8.7+1
+  url_strategy: ^0.2.0
+  flutter_stripe: ^9.0.0+1
+  intl: ^0.17.0
 
   cupertino_icons: ^1.0.2
   flutter_local_notifications: ^15.1.0+1
@@ -40,6 +61,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/
+    - assets/drawer-consumer/
+    - assets/your-account/
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/onboarding/
