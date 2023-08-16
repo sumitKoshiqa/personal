@@ -324,15 +324,6 @@ class _LoginPageState extends State<LoginPage> {
                         height: 24,
                         child: Stack(
                           children: [
-                            // Positioned(
-                            //   left: 0,
-                            //   top: 0,
-                            //   child: Container(
-                            //     width: 24,
-                            //     height: 24,
-                            //     decoration: BoxDecoration(color: Colors.black),
-                            //   ),
-                            // ),
                             Positioned(
                               left: 0,
                               top: 0,

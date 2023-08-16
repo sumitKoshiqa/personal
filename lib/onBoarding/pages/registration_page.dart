@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:ekikrit/Common/Widgets/TextFieldPrimary.dart';
 import 'package:ekikrit/Common/Widgets/option_selector.dart';
 import 'package:ekikrit/Common/Widgets/header.dart';
 import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
 import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Common/utils/common_service_provider.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
@@ -22,7 +24,7 @@ class _RegistrationState extends State<Registration> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   List<String> genderList = ["Male", "Female"];
-  String selectedGender = "Male";
+  String selectedGender = "MALE";
   final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
@@ -102,72 +104,27 @@ class _RegistrationState extends State<Registration> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    vSpacer(15),
-                    TextFormField(
-                      controller: _nameController,
-                      textAlign: TextAlign.left,
-                      keyboardType: TextInputType.text,
-                      onChanged: (value) {},
-                      style: TextStyle(
-                          fontSize: Constants.fontSizeText,
-                          fontWeight: FontWeight.w500),
-                      decoration: InputDecoration(
-                        hintText: 'First Name',
-                        fillColor: Color(0xFFFFF7EB),
-                        prefixIcon: Icon(
-                          Icons.manage_accounts_outlined
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                               Radius.circular(10),
-                              ),
-                          borderSide: BorderSide(
-                              width: 10,
-                              // style: BorderStyle.solid,
-                              color: Color(0xFFFFF7EB)),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color(0xFFF9A826), width: 1),
-                        ),
-                        filled: true,
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
-                    ),
-                    vSpacer(24),
-                    TextFormField(
-                      controller: _lastNameController,
-                      textAlign: TextAlign.left,
-                      keyboardType: TextInputType.text,
-                      onChanged: (value) {},
-                      style: TextStyle(
-                          fontSize: Constants.fontSizeText,
-                          fontWeight: FontWeight.w500),
-                      decoration: InputDecoration(
-                        hintText: 'last Name',
-                        fillColor: Color(0xFF7A992D).withOpacity(0.1),
-                        prefixIcon: Icon(
-                            Icons.manage_accounts_outlined
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          borderSide: BorderSide(
-                              width: 1,
-                              // style: BorderStyle.solid,
-                              color: Color(0xFF7A992D)),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
+                    CustomSpacers.height14,
 
-                              color: Color(0xFF7A992D), width: 1),
-                        ),
-                        filled: true,
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
+                    TextFieldPrimary(
+                      textEditingController: _lastNameController,
+                      color: Constants.lightOrange,
+                      hint: "First Name",
+                      isEnabled: true,
+                      imagePath: 'assets/your-account/name.png',
                     ),
-                    vSpacer(24),
+
+                    CustomSpacers.height14,
+
+                    TextFieldPrimary(
+                      textEditingController: _lastNameController,
+                      color: Constants.lightGreen,
+                      hint: "Last Name",
+                      isEnabled: true,
+                      imagePath: 'assets/your-account/name.png',
+                    ),
+
+                    CustomSpacers.height14,
                     OptionSelector(
                         selectedOption: selectedGender,
                         options: genderList,
@@ -178,71 +135,24 @@ class _RegistrationState extends State<Registration> {
                           });
                         }
                     ),
-                    vSpacer(24),
-                    TextFormField(
-                      controller: _emailController,
-                      textAlign: TextAlign.left,
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) {},
-                      style: TextStyle(
-                          fontSize: Constants.fontSizeText,
-                          fontWeight: FontWeight.w500),
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        fillColor: Color(0xFF7A992D).withOpacity(0.1),
-                        prefixIcon: Icon(
-                            Icons.email_outlined
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          borderSide: BorderSide(
-                              width: 1,
-                              // style: BorderStyle.solid,
-                              color: Color(0xFF7A992D)),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
+                    CustomSpacers.height14,
 
-                              color: Color(0xFF7A992D), width: 1),
-                        ),
-                        filled: true,
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
-
+                    TextFieldPrimary(
+                      textEditingController: _emailController,
+                      color: Constants.lightGreen,
+                      hint: "Email Address",
+                      isEnabled: true,
+                      imagePath: 'assets/your-account/mail.png',
                     ),
-                    vSpacer(24),
-                    TextFormField(
-                      controller: _phoneController,
-                      textAlign: TextAlign.left,
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {},
-                      style: TextStyle(
-                          fontSize: Constants.fontSizeText,
-                          fontWeight: FontWeight.w500),
-                      decoration: InputDecoration(
-                        hintText: 'Phone',
-                        fillColor: Color(0xFFFFF7EB),
-                        prefixIcon: Icon(
-                            Icons.phone
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          borderSide: BorderSide(
-                              width: 20,
-                              // style: BorderStyle.solid,
-                              color: Color(0xFFFFF7EB)),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color(0xFFF9A826), width: 1),
-                        ),
-                        filled: true,
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
+
+                    CustomSpacers.height14,
+
+                    TextFieldPrimary(
+                      textEditingController: _phoneController,
+                      color: Constants.lightOrange,
+                      hint: "Phone",
+                      isEnabled: true,
+                      imagePath: 'assets/your-account/phone.png',
                     ),
 
                   ],
