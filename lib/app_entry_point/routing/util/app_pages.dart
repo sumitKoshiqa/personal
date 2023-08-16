@@ -1,7 +1,10 @@
 import 'package:ekikrit/Consumer/Landing/Pages/ConsumerHome.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CreateMinor.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CreateProxy.dart';
+import 'package:ekikrit/Consumer/Profile/Pages/CustomerService.dart';
+import 'package:ekikrit/Consumer/Profile/Pages/LegalPolicyPage.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/MinorsPage.dart';
+import 'package:ekikrit/Consumer/Profile/Pages/NotificationSettings.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/ProxyPage.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/YourAccount.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/auth_middleware.dart';
@@ -76,6 +79,28 @@ class AppPages{
     GetPage(
         name: Routes.CONSUMER_CREATE_MINORS,
         page: () => const CreateMinor(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+
+    // consumer notification settings
+    GetPage(
+        name: Routes.CONSUMER_NOTIFICATION_SETTINGS,
+        page: () => const NotificationSettings(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+    // consumer customer service
+    GetPage(
+        name: Routes.CONSUMER_CUSTOMER_SERVICE,
+        page: () => const CustomerService(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+    // consumer customer policy page
+    GetPage(
+        name: Routes.CONSUMER_POLICY_PAGE,
+        page: () => const LegalPolicyPage(),
         middlewares: middleWares,
         transition: Transition.noTransition),
 
