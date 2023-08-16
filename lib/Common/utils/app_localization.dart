@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:ekikrit/Common/utils/app_constants.dart';
 import 'package:ekikrit/app_entry_point/controller/localization_controller.dart';
 import 'package:ekikrit/app_entry_point/model/language.dart';
-import 'package:ekikrit/app_entry_point/utils/app_constants.dart';
+
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 

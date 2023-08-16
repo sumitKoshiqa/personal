@@ -1,4 +1,5 @@
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
+
+import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;

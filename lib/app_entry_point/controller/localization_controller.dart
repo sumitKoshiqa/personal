@@ -1,5 +1,5 @@
+import 'package:ekikrit/Common/utils/app_constants.dart';
 import 'package:ekikrit/app_entry_point/model/language.dart';
-import 'package:ekikrit/app_entry_point/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

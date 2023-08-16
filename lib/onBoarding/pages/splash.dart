@@ -1,5 +1,5 @@
-import 'package:ekikrit/app_entry_point/utils/PreferenceManager.dart';
-import 'package:ekikrit/app_entry_point/utils/get_device_id.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/get_device_id.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

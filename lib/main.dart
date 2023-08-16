@@ -1,5 +1,5 @@
+import 'package:ekikrit/Common/utils/app_localization.dart';
 import 'package:ekikrit/app_entry_point/app.dart';
-import 'package:ekikrit/app_entry_point/utils/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';

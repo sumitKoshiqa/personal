@@ -1,6 +1,7 @@
-import 'package:ekikrit/app_entry_point/utils/ApiEndPoints.dart';
-import 'package:ekikrit/app_entry_point/utils/PreferenceManager.dart';
-import 'package:ekikrit/app_entry_point/utils/common_service_provider.dart';
+import 'package:ekikrit/Common/utils/ApiEndPoints.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/common_service_provider.dart';
+
 import 'package:ekikrit/onBoarding/pages/registration_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
