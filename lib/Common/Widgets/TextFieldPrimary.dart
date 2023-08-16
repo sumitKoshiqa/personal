@@ -6,12 +6,13 @@ import 'package:get/get.dart';
 class TextFieldPrimary extends StatefulWidget {
   final String? hint, imagePath;
   final Color? color, disabledColor;
+  final bool? isEnabled;
   final Function? onChanged;
   final TextEditingController? textEditingController;
 
   const TextFieldPrimary({required this.color, required this.hint,
     required this.imagePath, this.onChanged,
-    required this.textEditingController, this.disabledColor, Key? key}) : super(key: key);
+    required this.textEditingController, this.disabledColor, this.isEnabled, Key? key}) : super(key: key);
 
   @override
   State<TextFieldPrimary> createState() => _TextFieldPrimaryState();
@@ -36,15 +37,20 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
             onChanged: (value){
               widget.onChanged!(value);
             },
-            enabled: false,
+            enabled: widget.isEnabled ?? false,
             decoration: InputDecoration(
               border: InputBorder.none,
               labelText: widget.hint,
               contentPadding: const EdgeInsets.all(4),
               labelStyle: Get.textTheme.titleMedium!.copyWith(
-                  color: Colors.grey.shade600
+                  color: Colors.grey.shade600,
+                fontWeight: FontWeight.w500
               ),
               hintText: widget.hint,
+              hintStyle: Get.textTheme.titleMedium!.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.w500
+              ),
               prefixIcon: SizedBox(
                 height: 5,
                 width: 5,

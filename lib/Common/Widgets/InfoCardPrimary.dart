@@ -43,7 +43,7 @@ class _InfoCardPrimaryState extends State<InfoCardPrimary> {
             Expanded(
               child: Text(widget.title!,
                 style: Get.theme.textTheme.titleMedium!.copyWith(
-                    fontWeight: FontWeight.w600
+                    fontWeight: FontWeight.w400
                 ),
               ),
             ),

@@ -9,7 +9,7 @@ class AuthMiddleware extends GetMiddleware {
 
   @override
   GetPage? onPageCalled(GetPage? page) {
-    checkIfAuthenticated(page?.name ?? "");
+    // checkIfAuthenticated(page?.name ?? "");
 
     return super.onPageCalled(page);
   }

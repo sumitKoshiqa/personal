@@ -56,6 +56,7 @@ flutter:
   assets:
     - assets/
     - assets/drawer-consumer/
+    - assets/proxy-guardian/
     - assets/your-account/
     - assets/images/onboarding/
     - assets/i18n/
