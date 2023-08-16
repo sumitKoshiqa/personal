@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BackButtonPrimary extends StatefulWidget {
-  const BackButtonPrimary({Key? key}) : super(key: key);
+  final Color? buttonBg;
+  const BackButtonPrimary({this.buttonBg, Key? key}) : super(key: key);
 
   @override
   State<BackButtonPrimary> createState() => _BackButtonPrimaryState();
@@ -17,7 +18,7 @@ class _BackButtonPrimaryState extends State<BackButtonPrimary> {
       height: 30,
       width: 30,
       decoration: BoxDecoration(
-        color: Constants.accentOrange,
+        color: widget.buttonBg ?? Constants.accentOrange,
         borderRadius: BorderRadius.circular(15),
       ),
       child: Center(

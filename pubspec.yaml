@@ -56,9 +56,11 @@ flutter:
   assets:
     - assets/
     - assets/drawer-consumer/
+    - assets/notification/
     - assets/proxy-guardian/
     - assets/your-account/
     - assets/images/onboarding/
+    - assets/policy/
     - assets/i18n/
 
   # An image asset can refer to one or more resolution-specific "variants", see

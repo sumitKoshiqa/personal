@@ -169,7 +169,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_CUSTOMER_SERVICE);
+                  },
                   title: "Customer Service",
                   imagePath: 'assets/drawer-consumer/support.png',
                   buttonColor: Constants.lightGreen,
@@ -200,7 +202,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_POLICY_PAGE);
+                  },
                   title: "Standards & Legal Policy",
                   imagePath: 'assets/drawer-consumer/standard.png',
                   buttonColor: Constants.lightOrange,
@@ -209,7 +213,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_NOTIFICATION_SETTINGS);
+                  },
                   title: "Notification Settings",
                   imagePath: 'assets/drawer-consumer/notification.png',
                   buttonColor: Constants.lightGreen,
