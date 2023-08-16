@@ -1,7 +1,7 @@
 import 'package:ekikrit/Common/Widgets/InfoCardPrimary.dart';
 import 'package:ekikrit/Common/Widgets/NavBar.dart';
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
-import 'package:ekikrit/app_entry_point/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +55,7 @@ class _LegalPolicyPageState extends State<LegalPolicyPage> {
                           onTap: (){},
                           title: "HIPPA Compliance",
                           imagePath: 'assets/policy/hippa.png',
-                          buttonColor: Constants.lightOrange,
+                          buttonColor: Constants.lightGreen,
                         ),
 
                         CustomSpacers.height14,
@@ -64,7 +64,7 @@ class _LegalPolicyPageState extends State<LegalPolicyPage> {
                           onTap: (){},
                           title: "Cookie Policy",
                           imagePath: 'assets/policy/cookies.png',
-                          buttonColor: Constants.lightGreen,
+                          buttonColor: Constants.lightOrange,
                         ),
 
 
