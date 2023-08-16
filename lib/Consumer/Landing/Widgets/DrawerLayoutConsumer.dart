@@ -1,9 +1,9 @@
 import 'package:ekikrit/Common/Widgets/BackButtonSecondary.dart';
 import 'package:ekikrit/Common/Widgets/InfoCardPrimary.dart';
+import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/custom_navigator.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
-import 'package:ekikrit/app_entry_point/utils/CustomSpacers.dart';
-import 'package:ekikrit/app_entry_point/utils/custom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';

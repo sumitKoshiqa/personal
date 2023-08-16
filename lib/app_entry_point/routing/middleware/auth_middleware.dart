@@ -1,8 +1,9 @@
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
+import 'package:ekikrit/Common/utils/custom_navigator.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
-import 'package:ekikrit/app_entry_point/utils/PreferenceManager.dart';
-import 'package:ekikrit/app_entry_point/utils/ShowMessages.dart';
-import 'package:ekikrit/app_entry_point/utils/custom_navigator.dart';
+
 import 'package:get/get.dart';
 
 class AuthMiddleware extends GetMiddleware {

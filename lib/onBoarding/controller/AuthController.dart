@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:ekikrit/Common/utils/GetDio.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/custom_navigator.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
-import 'package:ekikrit/app_entry_point/utils/GetDio.dart';
-import 'package:ekikrit/app_entry_point/utils/PreferenceManager.dart';
-import 'package:ekikrit/app_entry_point/utils/custom_navigator.dart';
+
 import 'package:ekikrit/onBoarding/data_model/CountryCodeModel.dart';
 import 'package:ekikrit/onBoarding/networking/auth_api_calls.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

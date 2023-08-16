@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:ekikrit/Common/Widgets/option_selector.dart';
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
-import 'package:ekikrit/app_entry_point/utils/PreferenceManager.dart';
-import 'package:ekikrit/app_entry_point/utils/common_service_provider.dart';
 import 'package:ekikrit/Common/Widgets/header.dart';
+import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/common_service_provider.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

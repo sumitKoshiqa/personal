@@ -1,5 +1,4 @@
-
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:flutter/material.dart';
 
 class ButtonPrimary extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:ekikrit/Common/Widgets/header.dart';
-import 'package:ekikrit/app_entry_point/utils/common_service_provider.dart';
+import 'package:ekikrit/Common/utils/common_service_provider.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +20,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
     final arguments = Get.arguments as Map<String, dynamic>;
     phone = arguments['phone'];
     authController.start.value = 30;
-    authController.startTimer();
+    // authController.startTimer();
     super.initState();
 
   }
@@ -60,30 +60,30 @@ class _VerifyOTPState extends State<VerifyOTP> {
 
               const SizedBox(height: 50,),
 
-              OtpTextField(
-                numberOfFields: 6,
-                borderColor: Colors.black,
-                showFieldAsBox: false,
-                showCursor: true,
-                borderWidth: 2,
-                autoFocus: true,
-                keyboardType: TextInputType.phone,
-                enabledBorderColor: Colors.grey.shade700,
-                focusedBorderColor: Colors.green,
-                textStyle: theme.textTheme.bodyMedium,
-                onCodeChanged: (String code) {
-                },
-                handleControllers: (controllers) {
-                  //get all textFields controller, if needed
-                  controls = controllers;
-                },
-                onSubmit: (String verificationCode){
-                  authController.verifyOTP(
-                      phone: phone,
-                      otp: verificationCode
-                  );
-                }, // end onSubmit
-              ),
+              // OtpTextField(
+              //   numberOfFields: 6,
+              //   borderColor: Colors.black,
+              //   showFieldAsBox: false,
+              //   showCursor: true,
+              //   borderWidth: 2,
+              //   autoFocus: true,
+              //   keyboardType: TextInputType.phone,
+              //   enabledBorderColor: Colors.grey.shade700,
+              //   focusedBorderColor: Colors.green,
+              //   textStyle: theme.textTheme.bodyMedium,
+              //   onCodeChanged: (String code) {
+              //   },
+              //   handleControllers: (controllers) {
+              //     //get all textFields controller, if needed
+              //     controls = controllers;
+              //   },
+              //   onSubmit: (String verificationCode){
+              //     authController.verifyOTP(
+              //         phone: phone,
+              //         otp: verificationCode
+              //     );
+              //   }, // end onSubmit
+              // ),
 
               const SizedBox(height: 40,),
 
@@ -96,20 +96,20 @@ class _VerifyOTPState extends State<VerifyOTP> {
                 ],
               ): Container(),
 
-              authController.allowRetry.value ? CupertinoButton(
-                onPressed: ()async{
-                  await authController.generateToken();
-                  authController.resendOTP(
-                    phone: phone,
-                  );
-
-                },
-                child: Text("Resend OTP",
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: CupertinoColors.activeBlue,
-                  ),
-                ),
-              ): Container(),
+              // authController.allowRetry.value ? CupertinoButton(
+              //   onPressed: ()async{
+              //     await authController.generateToken();
+              //     authController.resendOTP(
+              //       phone: phone,
+              //     );
+              //
+              //   },
+              //   child: Text("Resend OTP",
+              //     style: theme.textTheme.titleMedium?.copyWith(
+              //       color: CupertinoColors.activeBlue,
+              //     ),
+              //   ),
+              // ): Container(),
 
 
               const SizedBox(height: 20,),
@@ -118,6 +118,6 @@ class _VerifyOTPState extends State<VerifyOTP> {
             ],
           ),
         )
-    )
+    );
   }
 }

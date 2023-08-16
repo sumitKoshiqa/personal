@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/Widgets/TextFieldPrimary.dart';
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
-import 'package:ekikrit/app_entry_point/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

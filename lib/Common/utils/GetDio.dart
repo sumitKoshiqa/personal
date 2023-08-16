@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart' as dioLib;
-import 'package:dio_smart_retry/dio_smart_retry.dart';
-import 'package:ekikrit/app_entry_point/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+
 
 
 class GetDio {
