@@ -49,6 +49,6 @@ class _SplashState extends State<Splash> {
   void initState() {
     print("splash===>");
     super.initState();
-    // checkLogin();
+    checkLogin();
   }
 }

@@ -19,8 +19,9 @@ class AuthMiddleware extends GetMiddleware {
     var token = PreferenceManager().getToken();
     print("checking if authenticated...$isLogin>>>$token");
     if (!isLogin && token.isEmpty) {
-      CustomNavigator.pushReplace(Routes.SPLASH);
-    } else {
+      CustomNavigator.pushReplace(Routes.LOGIN);
+    }
+    else {
       print(
           "userRole===> ${PreferenceManager().getUserRole()}");
       print("urlFirst===> ${url.split("/")[1]}");
@@ -31,8 +32,8 @@ class AuthMiddleware extends GetMiddleware {
         ShowMessages().showSnackBarRed(
             "REDIRECTING_TITLE".trParams({"x": "INVALID_USER_ROLE".tr}),
             "REDIRECT_DESCRIPTION".tr);
-        // Get.put(AuthController()).logOut();
-        CustomNavigator.pushReplace(Routes.SPLASH);
+        Get.put(AuthController()).logOut();
+        CustomNavigator.pushReplace(Routes.LOGIN);
       }
     }
   }

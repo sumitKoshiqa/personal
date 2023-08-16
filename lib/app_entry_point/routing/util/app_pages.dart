@@ -3,6 +3,7 @@ import 'package:ekikrit/Consumer/Profile/Pages/YourAccount.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/auth_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/params_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
+import 'package:ekikrit/onBoarding/pages/login_page.dart';
 import 'package:ekikrit/onBoarding/pages/splash.dart';
 import 'package:get/get.dart';
 
@@ -20,22 +21,28 @@ class AppPages{
 
     // splash
     GetPage(
-        name: "/",
+        name: Routes.SPLASH,
         page: () => const Splash(),
         // middlewares: middleWares,
+        transition: Transition.noTransition),
+
+    // login
+    GetPage(
+        name: Routes.LOGIN,
+        page: () =>  LoginPage(),
         transition: Transition.noTransition),
 
 
     // consumer home
     GetPage(
-        name: "/home",
+        name: Routes.CONSUMER_HOME,
         page: () => const ConsumerHome(),
         middlewares: middleWares,
         transition: Transition.noTransition),
 
     // consumer account
     GetPage(
-        name: "/account",
+        name: Routes.CONSUMER_ACCOUNT,
         page: () => const YourAccount(),
         middlewares: middleWares,
         transition: Transition.noTransition),

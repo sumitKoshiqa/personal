@@ -23,6 +23,7 @@ dependencies:
   webview_flutter: ^4.2.2
   url_launcher: ^6.1.7
   permission_handler: ^10.2.0
+  google_sign_in: ^6.1.4
   flutter_otp_text_field: ^1.1.1
   lottie: ^2.3.0
   image_picker: ^0.8.7+1

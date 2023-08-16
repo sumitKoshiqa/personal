@@ -2,6 +2,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
+
+
+
   static const String stRupeeSymbol = '\u{20B9}';
   static String appFont = "Manrope";
   static double fontSizeLarge = 22;
