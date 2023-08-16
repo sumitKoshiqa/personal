@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 class LegalPolicyPage extends StatefulWidget {
   const LegalPolicyPage({Key? key}) : super(key: key);
 
+
   @override
   State<LegalPolicyPage> createState() => _LegalPolicyPageState();
 }
