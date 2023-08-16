@@ -16,7 +16,6 @@ class _VerifyOTPState extends State<VerifyOTP> {
   String phone = '';
   @override
   void initState() {
-
     final arguments = Get.arguments as Map<String, dynamic>;
     phone = arguments['phone'];
     authController.start.value = 30;

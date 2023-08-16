@@ -24,7 +24,7 @@ class _RegistrationState extends State<Registration> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   List<String> genderList = ["Male", "Female"];
-  String selectedGender = "MALE";
+  String selectedGender = "Male";
   final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,7 @@ class _RegistrationState extends State<Registration> {
         child: Scaffold(
           bottomNavigationBar: Container(
             height: 300,
+            padding: EdgeInsets.only(bottom: MediaQuery.of (context).viewInsets.bottom),
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
@@ -84,84 +85,94 @@ class _RegistrationState extends State<Registration> {
             ),
           ),
 
-          body: Column(
-            children:  [
-              vSpacer(16),
-              const Header(),
-              Container(
-                padding: EdgeInsets.only(left: 20,right: 20),
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  children: [
-                    vSpacer(24),
-                    Text(
-                      'Registration with Email',
-                      style: TextStyle(
-                        color: Color(0xFF424141),
-                        fontSize: 20,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w600,
+          body: SingleChildScrollView(
+            child: Column(
+              children:  [
+                vSpacer(16),
+                const Header(),
+                Container(
+                  padding: EdgeInsets.only(left: 20,right: 20),
+                  child: ListView(
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
+                      vSpacer(44),
+                      Text(
+                        'Registration with Email',
+                        style: TextStyle(
+                          color: Color(0xFF424141),
+                          fontSize: 20,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    CustomSpacers.height14,
+                      CustomSpacers.height24,
 
-                    TextFieldPrimary(
-                      textEditingController: _lastNameController,
-                      color: Constants.lightOrange,
-                      hint: "First Name",
-                      isEnabled: true,
-                      imagePath: 'assets/your-account/name.png',
-                    ),
+                      TextFieldPrimary(
+                        textEditingController: _nameController,
+                        color: Constants.lightOrange,
+                        hint: "First Name",
+                        isEnabled: true,
+                        txtInputType: TextInputType.text,
+                        textLength: 100,
+                        imagePath: 'assets/your-account/name.png',
+                      ),
 
-                    CustomSpacers.height14,
+                      CustomSpacers.height24,
 
-                    TextFieldPrimary(
-                      textEditingController: _lastNameController,
-                      color: Constants.lightGreen,
-                      hint: "Last Name",
-                      isEnabled: true,
-                      imagePath: 'assets/your-account/name.png',
-                    ),
+                      TextFieldPrimary(
+                        textEditingController: _lastNameController,
+                        color: Constants.lightGreen,
+                        hint: "Last Name",
+                        isEnabled: true,
+                        txtInputType: TextInputType.text,
+                        textLength: 100,
+                        imagePath: 'assets/your-account/name.png',
+                      ),
 
-                    CustomSpacers.height14,
-                    OptionSelector(
-                        selectedOption: selectedGender,
-                        options: genderList,
-                        bgColor: 0xFFFFF7EB,
-                        setNewValue: (val) {
-                          setState(() {
-                            selectedGender = val;
-                          });
-                        }
-                    ),
-                    CustomSpacers.height14,
+                      CustomSpacers.height24,
+                      OptionSelector(
+                          selectedOption: selectedGender,
+                          options: genderList,
+                          bgColor: 0xFFFFF7EB,
+                          setNewValue: (val) {
+                            setState(() {
+                              selectedGender = val;
+                            });
+                          }
+                      ),
+                      CustomSpacers.height24,
 
-                    TextFieldPrimary(
-                      textEditingController: _emailController,
-                      color: Constants.lightGreen,
-                      hint: "Email Address",
-                      isEnabled: true,
-                      imagePath: 'assets/your-account/mail.png',
-                    ),
+                      TextFieldPrimary(
+                        textEditingController: _emailController,
+                        color: Constants.lightGreen,
+                        hint: "Email Address",
+                        isEnabled: true,
+                        txtInputType: TextInputType.emailAddress,
+                        textLength: 100,
+                        imagePath: 'assets/your-account/mail.png',
+                      ),
 
-                    CustomSpacers.height14,
+                      CustomSpacers.height24,
 
-                    TextFieldPrimary(
-                      textEditingController: _phoneController,
-                      color: Constants.lightOrange,
-                      hint: "Phone",
-                      isEnabled: true,
-                      imagePath: 'assets/your-account/phone.png',
-                    ),
+                      TextFieldPrimary(
+                        textEditingController: _phoneController,
+                        color: Constants.lightOrange,
+                        hint: "Phone",
+                        isEnabled: true,
+                        txtInputType: TextInputType.number,
+                        textLength: 10,
+                        imagePath: 'assets/your-account/phone.png',
+                      ),
 
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
 
 
-            ],
+              ],
+            ),
           ),
         )
     );

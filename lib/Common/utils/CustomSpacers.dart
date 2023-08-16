@@ -30,15 +30,19 @@ class CustomSpacers {
   );
 
   static const height28 = SizedBox(
-    height: 24,
+    height: 28,
   );
 
   static const height32 = SizedBox(
-    height: 24,
+    height: 32,
   );
 
   static const height36 = SizedBox(
     height: 36,
+  );
+
+  static const height44 = SizedBox(
+    height: 44,
   );
 
   static const height60 = SizedBox(

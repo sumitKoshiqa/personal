@@ -1,7 +1,7 @@
 
 class ApiEndPoints {
   // STAGE
-  static const String baseUrl = "https://api-stage.lybl.com/gateway/";
+  static const String baseUrl = "http://3.142.229.170:30008/";
 
   static const String logoutURL = "${baseUrl}authentication/user/logout";
   static const String sendOTP = "${baseUrl}authentication/user/otp/initiate";

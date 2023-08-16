@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:ekikrit/Common/utils/GetDio.dart';
 import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/Common/utils/custom_navigator.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 
@@ -49,6 +50,50 @@ class AuthController extends GetxController with StateMixin {
     );
     print('data>>> $data');
 
+  }
+
+  disableLoader() async {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      isLoading.value = false;
+    });
+  }
+
+  sendOTP({email,isWeb}) async {
+    isLoading.value = true;
+    isSendingOTP.value = true;
+    var uuid = const Uuid();
+    // to do check if user is generated already
+    PreferenceManager().saveUniqueId(uniqueId: uuid.v1());
+    var data = await AuthenticationApi().sendOTP(
+        email: email,
+        captchaToken: gReCaptchaToken!.value,
+        isWeb: isWeb
+    );
+    print('data>>> $data');
+    if (data != null) {
+      // if(data.statusCode == 'OK') {
+      // SendOtpResponseModel sendOtpResponseModel = data;
+      // CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'phone': phone});
+      if(!isWeb) {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          disableLoader();
+          isSendingOTP.value = false;
+        });
+      }else {
+        // CustomNavigator.pushTo(Routes.VERIFY_OTP,
+        //     arguments: {'phone': phone});
+      }
+
+      // }else{
+      //   ShowMessages()
+      //       .showSnackBarRed("Oops!!!", "$data");
+      // }
+    } else {
+      ShowMessages()
+          .showSnackBarRed("Oops!!!", "User Account is Locked for 24 hours");
+    }
+    isLoading.value = false;
+    isSendingOTP.value = false;
   }
 
 
