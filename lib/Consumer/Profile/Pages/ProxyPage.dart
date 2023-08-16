@@ -3,10 +3,9 @@ import 'package:ekikrit/Common/Widgets/ButtonPrimary.dart';
 import 'package:ekikrit/Common/Widgets/ButtonSecondary.dart';
 import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/Widgets/TextFieldPrimary.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/custom_navigator.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
-import 'package:ekikrit/app_entry_point/utils/Constants.dart';
-import 'package:ekikrit/app_entry_point/utils/CustomSpacers.dart';
-import 'package:ekikrit/app_entry_point/utils/custom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
