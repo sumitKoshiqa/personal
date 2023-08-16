@@ -103,7 +103,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
 
                     Text("(Acting As)",
                       style: Get.theme.textTheme.titleMedium!.copyWith(
-                        color: Colors.grey.shade700
+                        color: Colors.grey.shade700,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400
                       ),
                     ),
 
@@ -176,7 +178,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_MINORS);
+                  },
                   title: "Guardian",
                   imagePath: 'assets/drawer-consumer/guardian.png',
                   buttonColor: Constants.lightOrange,
@@ -185,7 +189,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_PROXY);
+                  },
                   title: "Proxy",
                   imagePath: 'assets/drawer-consumer/proxy.png',
                   buttonColor: Constants.lightGreen,
