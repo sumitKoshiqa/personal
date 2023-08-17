@@ -76,9 +76,9 @@ class _LinkIdentityState extends State<LinkIdentity> {
                       onTap: ()async{
                         final datePick= await showDatePicker(
                             context: context,
-                            initialDate:  DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,),
+                            initialDate:  DateTime.now(),
                             firstDate:  DateTime(1900),
-                            lastDate:  DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,),
+                            lastDate:  DateTime.now().add(Duration(days: 1)),
                         );
                         if(datePick!=null && datePick!=birthDate){
                           setState(() {
