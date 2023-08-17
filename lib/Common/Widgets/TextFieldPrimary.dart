@@ -9,11 +9,13 @@ class TextFieldPrimary extends StatefulWidget {
   final Color? color, disabledColor;
   final bool? isEnabled;
   final Function? onChanged;
+  final int? textLength;
+  final TextInputType? txtInputType;
   final TextEditingController? textEditingController;
 
   const TextFieldPrimary({required this.color, required this.hint,
     required this.imagePath, this.onChanged,
-    required this.textEditingController, this.disabledColor, this.isEnabled, Key? key}) : super(key: key);
+    required this.textEditingController,this.txtInputType, this.disabledColor, this.textLength,this.isEnabled, Key? key}) : super(key: key);
 
   @override
   State<TextFieldPrimary> createState() => _TextFieldPrimaryState();
@@ -39,8 +41,12 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
               widget.onChanged!(value);
             },
             enabled: widget.isEnabled ?? false,
+            keyboardType: widget.txtInputType,
+
+            maxLength: widget.textLength,
             decoration: InputDecoration(
               border: InputBorder.none,
+              counterText: '',
               labelText: widget.hint,
               contentPadding: const EdgeInsets.all(4),
               labelStyle: Get.textTheme.titleMedium!.copyWith(

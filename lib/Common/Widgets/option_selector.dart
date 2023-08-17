@@ -16,6 +16,7 @@ class OptionSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('options>>> ${options.length}');
     return Container(
       padding: EdgeInsets.only(left: 20, right: 20),
       decoration: ShapeDecoration(

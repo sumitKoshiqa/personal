@@ -1,8 +1,7 @@
 
 class ApiEndPoints {
-
-  static const String baseUrl = "http://3.142.229.170:30001/gateway/";
-
+  // STAGE
+  static const String baseUrl = "http://3.142.229.170:30008/";
 
   static const String logoutURL = "${baseUrl}authentication/user/logout";
   static const String sendOTP = "${baseUrl}authentication/user/otp/initiate";
@@ -16,7 +15,6 @@ class ApiEndPoints {
   // profile
   static const String getProfiles = "${baseUrl}profile/user/basic-profile";
   static const String createProfile = "${baseUrl}profile/user/basic-profile";
-
 
 
 }

@@ -35,11 +35,11 @@ class AuthenticationApi {
   // register User
   Future<dynamic> registerUser({jsonParam}) async {
     try {
-      print("jsonParam otp >> ${jsonParam}");
+      print("jsonParam otp >> ${jsonDecode(jsonParam)}");
       print("reSend otp >> ${ApiEndPoints.createProfile}");
       Response response = await dio.post(
           ApiEndPoints.createProfile,
-          data: jsonParam);
+          data: jsonDecode(jsonParam));
       print("Send otp response $response");
       if (response.statusCode == 200) {
         // SendOtpResponseModel sendOtpResponseModel =
@@ -78,9 +78,9 @@ class AuthenticationApi {
     }
   }
   // // send otp
-  Future<dynamic> sendOTP({phone, captchaToken, isWeb}) async {
+  Future<dynamic> sendOTP({email, captchaToken, isWeb}) async {
     try {
-      String jsonParam = '{ "clientId": "4283b2dc-df16-4d33-a24f-6537d7a84e07", "clientSecret": "string", "authenticationProviderEnum": "EMAIL", "authenticationWayEnum": "OTP", "phoneNumber": "String", "email": "$phone","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "qwerty" }';
+      String jsonParam = '{ "clientId": "4283b2dc-df16-4d33-a24f-6537d7a84e07", "clientSecret": "string", "authenticationProviderEnum": "EMAIL", "authenticationWayEnum": "OTP", "phoneNumber": "String", "email": "$email","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "qwerty" }';
       print("Send otp >> ${(isWeb)?ApiEndPoints.sendOTP:ApiEndPoints.sendOTPMobile}");
       print("jsonParam >> $jsonParam");
       Response response = await dio.post(
