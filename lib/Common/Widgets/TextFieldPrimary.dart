@@ -75,7 +75,7 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
                   height: 5,
                   width: 5,
                   child: Padding(
-                    padding: widget.imagePath! == "assets/your-account/phone.png" ? const EdgeInsets.all(12) : const EdgeInsets.only(top: 10, bottom: 10, ),
+                    padding: widget.imagePath! == "assets/your-account/phone.png" ? const EdgeInsets.all(15) : const EdgeInsets.only(top: 12, bottom: 12, ),
                     child: Image(
                       image: AssetImage(widget.imagePath!),
                     ),
