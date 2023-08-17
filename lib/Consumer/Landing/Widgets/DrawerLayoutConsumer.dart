@@ -151,7 +151,9 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 InfoCardPrimary(
-                  onTap: (){},
+                  onTap: (){
+                    CustomNavigator.pushTo(Routes.CONSUMER_ORDERS);
+                  },
                   title: "Order",
                   imagePath: 'assets/drawer-consumer/order.png',
                   buttonColor: Constants.lightGreen,
