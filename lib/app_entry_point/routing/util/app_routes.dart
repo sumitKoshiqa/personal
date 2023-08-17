@@ -12,5 +12,6 @@ abstract class Routes {
   static const CONSUMER_NOTIFICATION_SETTINGS = '/notification-settings';
   static const CONSUMER_CUSTOMER_SERVICE = '/customer-service';
   static const CONSUMER_POLICY_PAGE = '/standards-and-policy';
+  static const CONSUMER_ORDERS = '/orders';
 
 }

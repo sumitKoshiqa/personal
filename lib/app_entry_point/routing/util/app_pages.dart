@@ -1,4 +1,5 @@
 import 'package:ekikrit/Consumer/Landing/Pages/ConsumerHome.dart';
+import 'package:ekikrit/Consumer/Landing/Pages/HomeContainerConsumer.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CreateMinor.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CreateProxy.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CustomerService.dart';
@@ -7,6 +8,7 @@ import 'package:ekikrit/Consumer/Profile/Pages/MinorsPage.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/NotificationSettings.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/ProxyPage.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/YourAccount.dart';
+import 'package:ekikrit/Consumer/Shopping/Pages/Orders.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/auth_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/params_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
@@ -43,7 +45,7 @@ class AppPages{
     // consumer home
     GetPage(
         name: Routes.CONSUMER_HOME,
-        page: () => const ConsumerHome(),
+        page: () => HomeContainerConsumer(),
         middlewares: middleWares,
         transition: Transition.noTransition),
 
@@ -101,6 +103,14 @@ class AppPages{
     GetPage(
         name: Routes.CONSUMER_POLICY_PAGE,
         page: () => const LegalPolicyPage(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+
+    // consumer orders
+    GetPage(
+        name: Routes.CONSUMER_ORDERS,
+        page: () => const Orders(),
         middlewares: middleWares,
         transition: Transition.noTransition),
 
