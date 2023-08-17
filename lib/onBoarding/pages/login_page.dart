@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: ShapeDecoration(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(0),
                 ),
                 shadows: [
                   BoxShadow(
@@ -54,13 +54,18 @@ class _LoginPageState extends State<LoginPage> {
                   Positioned(
                     left: 35,
                     top: 396,
-                    child: Container(
-                      width: 336,
-                      height: 53,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFFFF7EB),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(LoginWithEmail());
+                      },
+                      child: Container(
+                        width: 336,
+                        height: 53,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFFFF7EB),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                         ),
                       ),
                     ),
@@ -68,13 +73,18 @@ class _LoginPageState extends State<LoginPage> {
                   Positioned(
                     left: 35,
                     top: 465,
-                    child: Container(
-                      width: 336,
-                      height: 53,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFF5F9EC),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                    child: InkWell(
+                      onTap: (){
+
+                      },
+                      child: Container(
+                        width: 336,
+                        height: 53,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFF5F9EC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                         ),
                       ),
                     ),
@@ -82,13 +92,18 @@ class _LoginPageState extends State<LoginPage> {
                   Positioned(
                     left: 35,
                     top: 534,
-                    child: Container(
-                      width: 336,
-                      height: 53,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFFFF7EB),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                    child: InkWell(
+                      onTap: (){
+
+                      },
+                      child: Container(
+                        width: 336,
+                        height: 53,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFFFF7EB),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                         ),
                       ),
                     ),
@@ -96,13 +111,18 @@ class _LoginPageState extends State<LoginPage> {
                   Positioned(
                     left: 35,
                     top: 603,
-                    child: Container(
-                      width: 336,
-                      height: 53,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFF5F9EC),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                    child: InkWell(
+                      onTap: (){
+
+                      },
+                      child: Container(
+                        width: 336,
+                        height: 53,
+                        decoration: ShapeDecoration(
+                          color: Color(0xFFF5F9EC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
                         ),
                       ),
                     ),
@@ -139,37 +159,6 @@ class _LoginPageState extends State<LoginPage> {
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.32,
                       ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 99,
-                    top: 747,
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Have an account? ',
-                            style: TextStyle(
-                              color: Color(0xFFFAB100),
-                              fontSize: 16,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'Log in',
-                            style: TextStyle(
-                              color: Color(0xFFFAB100),
-                              fontSize: 16,
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.w700,
-                              decoration: TextDecoration.underline,
-
-                            ),
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                   Positioned(

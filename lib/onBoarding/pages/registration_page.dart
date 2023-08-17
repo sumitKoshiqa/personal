@@ -102,7 +102,10 @@ class _RegistrationState extends State<Registration> {
                   onTap: ()async{
                 String stParam = getUserProfileParam();
                 print('stParam>>> ${jsonDecode(stParam)}');
-                await authController.userRegistration(jsonEncode(stParam));
+                await authController.userRegistration(
+                  jsonParam: jsonEncode(stParam),
+                  enteredPhone: _phoneController.text.trim().toString()
+                );
               }, buttonText: "Submit"),
               vSpacer(16),
 

@@ -32,7 +32,6 @@ class AuthenticationApi {
       return false;
     }
   }
-
   // register User
   Future<dynamic> registerUser({jsonParam}) async {
     try {
@@ -54,10 +53,35 @@ class AuthenticationApi {
       return null;
     }
   }
-
-
+  // verify Profile
+  Future<dynamic> verifyProfile({phone, otp}) async {
+    print(
+        'PreferenceManager().getUniqueId()>>> ${PreferenceManager().getUniqueId()}');
+    try {
+      String jsonParam =
+          '{"smsOtp": "$otp","emailOtp": "string","deviceId": "${PreferenceManager().getDeviceId()}","appId": "${PreferenceManager().getUniqueId()}"}';
+      print('jsonParam>>> $jsonParam');
+      print('ApiEndPoints.verifyOTP>>> ${ApiEndPoints.verifyProfile}');
+      Response response =
+      await dio.post(ApiEndPoints.verifyProfile, data: jsonParam);
+      print(
+          "Verify otp response for $phone $otp $response");
+      if (response.statusCode == 200) {
+        VerifyOtpResponseModel verifyOtpResponseModel =
+        VerifyOtpResponseModel.fromJson(response.data);
+        return verifyOtpResponseModel;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      ShowMessages()
+          .showSnackBarRed("Invalid OTP", "OTP didn't match. Try again!");
+      print("Exception occurred verify otp $e");
+      return null;
+    }
+  }
   // resend otp
-  Future<dynamic> resendOTP({phone, captchaToken, isWeb}) async {
+  Future<dynamic> resendOTP({phone, captchaToken}) async {
     try {
       String jsonParam =
           '{ "clientId": "${Constants.clientId}", "clientSecret": "string", "authenticationProviderEnum": "INTERNAL", "authenticationWayEnum": "OTP", "phoneNumber": "", "email": "$phone","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "$captchaToken" }';

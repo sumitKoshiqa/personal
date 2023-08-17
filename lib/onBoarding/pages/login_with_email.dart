@@ -79,7 +79,7 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
           children: [
             Container(
               width: Get.width,
-              height: Get.height/2.5,
+              height: Get.height/2,
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
 
@@ -153,9 +153,6 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                 color: Constants.lightGreen,
                 hint: "Email Address",
                 isEnabled: true,
-                onChanged: (){
-
-                },
                 txtInputType: TextInputType.emailAddress,
                 textLength: 100,
                 imagePath: 'assets/your-account/mail.png',

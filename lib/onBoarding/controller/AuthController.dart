@@ -50,7 +50,7 @@ class AuthController extends GetxController with StateMixin {
     // getCountryCodes();
   }
 
-  userRegistration(String jsonParam)async{
+  userRegistration({jsonParam,enteredPhone})async{
     var data = await AuthenticationApi().registerUser(
       jsonParam: jsonParam
     );
@@ -58,7 +58,7 @@ class AuthController extends GetxController with StateMixin {
     if(data != null) {
       RegistrationDataModel resResponseModel = data;
       PreferenceManager().saveProfileId(profileID:resResponseModel.response!.profile!.id);
-      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+      CustomNavigator.pushReplace(Routes.VERIFY_OTP,arguments: {'phone': enteredPhone,'isRegistered': 'true'});
     }
   }
 
@@ -82,7 +82,7 @@ class AuthController extends GetxController with StateMixin {
     if (data != null) {
       if(data.statusCode == 'OK') {
       // SendOtpResponseModel sendOtpResponseModel = data;
-      CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'email': email});
+      CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'email': email,'isRegistered': 'false'});
       if(!isWeb) {
         Future.delayed(const Duration(milliseconds: 500), () {
           disableLoader();
@@ -90,7 +90,7 @@ class AuthController extends GetxController with StateMixin {
         });
       }else {
         CustomNavigator.pushTo(Routes.VERIFY_OTP,
-            arguments: {'email': email});
+            arguments: {'email': email,'isRegistered': 'false'});
       }
       }else{
         ShowMessages()
@@ -104,7 +104,7 @@ class AuthController extends GetxController with StateMixin {
     isSendingOTP.value = false;
   }
 
-  resendOTP({phone,isWeb}) async {
+  resendOTP({phone}) async {
     isLoading.value = true;
     isSendingOTP.value = true;
     // var uuid = const Uuid();
@@ -112,14 +112,11 @@ class AuthController extends GetxController with StateMixin {
     var data = await AuthenticationApi().resendOTP(
         phone: phone,
         captchaToken: gReCaptchaToken!.value,
-        isWeb: isWeb
+
     );
     if (data != null) {
       SendOtpResponseModel sendOtpResponseModel = data;
-
       ShowMessages().showSnackBarRed("Success", "Confirmation code has been sent again");
-
-      // CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'phone': phone});
       Future.delayed(const Duration(milliseconds: 500), () {
         disableLoader();
         isSendingOTP.value = false;
@@ -131,6 +128,22 @@ class AuthController extends GetxController with StateMixin {
       ShowMessages()
           .showSnackBarRed("Error!", "Error occurred while sending OTP!!!");
     }
+  }
+
+  verifyProfile({phone, otp}) async {
+    isLoading.value = true;
+    var data = await AuthenticationApi().verifyProfile(
+      phone: phone,
+      otp: otp,
+    );
+    // print('verifyOtp>>> ${verifyOtpResponseModel.verifyResponse.token}');
+    if (data != null) {
+      VerifyOtpResponseModel verifyOtpResponseModel = data;
+      print('verifyOtp>>> ${verifyOtpResponseModel.verifyResponse.token}');
+      PreferenceManager().savePhone(phone: phone);
+      handleProfile();
+    }
+    isLoading.value = false;
   }
 
   verifyOTP({email, otp}) async {
@@ -150,13 +163,13 @@ class AuthController extends GetxController with StateMixin {
       PreferenceManager().saveEmail(eMail: email);
       PreferenceManager().saveToken(token: verifyOtpResponseModel.verifyResponse.token);
       handleProfile();
-      CustomNavigator.pushReplace(Routes.REGISTRATION);
     }
     isLoading.value = false;
   }
   handleProfile() async {
     isLoading.value = true;
     var profileData = await ProfileApi().getProfile();
+    print('profileData>>> $profileData');
     if (profileData != null) {
       if (profileData == "No Content") {
         CustomNavigator.pushReplace(Routes.REGISTRATION);
@@ -175,6 +188,7 @@ class AuthController extends GetxController with StateMixin {
         disableLoader();
       }
     } else {
+      CustomNavigator.pushReplace(Routes.REGISTRATION);
       disableLoader();
     }
   }
