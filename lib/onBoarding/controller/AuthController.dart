@@ -141,7 +141,7 @@ class AuthController extends GetxController with StateMixin {
       // PreferenceManager().savePhone(phone: phone);
       PreferenceManager().saveEmail(eMail: email);
       PreferenceManager().saveToken(token: verifyOtpResponseModel.verifyResponse.token);
-      CustomNavigator.pushReplace("${Routes.CONSUMER_CREATE_PROFILE}?showNavBar=false");
+      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
     }
     isLoading.value = false;
   }
