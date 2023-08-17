@@ -1,4 +1,5 @@
 import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
 import 'package:ekikrit/Consumer/Landing/Widgets/DrawerLayoutConsumer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,8 +29,12 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                 Container(
                   height: 50,
                   width: Get.width,
+                  color: Colors.transparent,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      CustomSpacers.width10,
+
                       IconButton(
                         onPressed: (){
                           _scaffoldKey.currentState!.openDrawer();

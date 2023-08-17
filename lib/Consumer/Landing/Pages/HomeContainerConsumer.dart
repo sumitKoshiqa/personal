@@ -1,13 +1,14 @@
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Consumer/Landing/Pages/Blank.dart';
 import 'package:ekikrit/Consumer/Landing/Widgets/DrawerLayoutConsumer.dart';
+import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
+import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Recommendations/Pages/FormulationRecommendations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:get/get.dart';
-import '../../Shopping/Controller/CartController.dart';
 import '../Controller/HomeNavigationController.dart';
 import 'ConsumerHome.dart';
 
@@ -20,10 +21,12 @@ class HomeContainerConsumer extends StatefulWidget {
 }
 
 class _HomeContainerConsumerState extends State<HomeContainerConsumer> {
-  HomeNavigationController homeNavigationController =
-      Get.put(HomeNavigationController());
+
+  HomeNavigationController homeNavigationController = Get.put(HomeNavigationController());
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   // CartController cartController = Get.put(CartController());
+  ProfileController profileController = Get.put(ProfileController());
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -58,15 +61,13 @@ class _HomeContainerConsumerState extends State<HomeContainerConsumer> {
         inactiveColorPrimary: Colors.grey.shade800,
       ),
       PersistentBottomNavBarItem(
-        icon: Container(
-          child: Center(
-            child: Stack(
-              children: const [
-                Icon(
-                  Icons.shopping_cart_outlined,
-                ),
-              ],
-            ),
+        icon: const Center(
+          child: Stack(
+            children: [
+              Icon(
+                Icons.shopping_cart_outlined,
+              ),
+            ],
           ),
         ),
         title: ("Cart"),
@@ -168,10 +169,10 @@ class _HomeContainerConsumerState extends State<HomeContainerConsumer> {
             IndexedStack(
               index: homeNavigationController.selectedIndex.value,
               children: <Widget>[
-                ConsumerHome(),
-                FormulationRecommendations(),
-                Blank(),
-                Blank(),
+                const ConsumerHome(),
+                const FormulationRecommendations(),
+                const Blank(),
+                const Blank(),
               ],
             ),
         )
