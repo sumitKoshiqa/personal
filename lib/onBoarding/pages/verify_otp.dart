@@ -169,7 +169,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                       padding: const EdgeInsets.only(left: 20.0, right: 20),
                       child: Center(
                         child: Text(
-                          (!isVerifyEmail)?'An OTP has been sent to your email address $phone':'An OTP has been sent to your email address $email',
+                          (!isVerifyEmail)?'An OTP has been sent to your phone number $phone':'An OTP has been sent to your email address $email',
                           style: TextStyle(
                             color: Color(0xFF424141),
                             fontSize: 20,

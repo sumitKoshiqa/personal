@@ -17,7 +17,7 @@ class GetDio {
     dio.options.headers['X-USER-ID'] = "1";
     dio.options.headers["X-ACCESS-TOKEN"] = token;
     dio.options.headers["profileId"] = profileId;
-    dio.options.headers["X-PROFILE-ID"] = "2f1cc46e-90b6-4218-b532-dc9bbf477d82";
+    dio.options.headers["X-PROFILE-ID"] = profileId;
     dio.options.headers["deviceId"] = deviceId;
     dio.options.headers["appId"] = appId;
     dio.options.headers["zoneId"] = "IST";

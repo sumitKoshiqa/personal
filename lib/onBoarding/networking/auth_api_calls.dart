@@ -8,10 +8,33 @@ import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/onBoarding/data_model/SendOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/VerifyOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/registration_data_model.dart';
+import 'package:ekikrit/onBoarding/data_model/verify_profile_data_model.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthenticationApi {
   var dio = GetDio().getDio();
+
+  // Link Account
+  Future<dynamic> linkAccount({jsonParam}) async {
+    try {
+      print("jsonParam otp >> ${jsonDecode(jsonParam)}");
+      print("reSend otp >> ${ApiEndPoints.linkAccount}");
+      Response response = await dio.post(
+          ApiEndPoints.linkAccount,
+          data: jsonDecode(jsonParam));
+      print("Send otp response 43 $response");
+      if (response.statusCode == 200) {
+        RegistrationDataModel regResponseDataModel =
+        RegistrationDataModel.fromJson(response.data);
+        return regResponseDataModel;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Exception occurred sending otp $e");
+      return null;
+    }
+  }
 
   //Logout
   Future<dynamic> logout() async {
@@ -59,7 +82,7 @@ class AuthenticationApi {
         'PreferenceManager().getUniqueId()>>> ${PreferenceManager().getUniqueId()}');
     try {
       String jsonParam =
-          '{"smsOtp": "$otp","emailOtp": "string","deviceId": "${PreferenceManager().getDeviceId()}","appId": "${PreferenceManager().getUniqueId()}"}';
+          '{"smsOtp": "$otp","emailOtp": "$otp","deviceId": "${PreferenceManager().getDeviceId()}","appId": "${PreferenceManager().getUniqueId()}"}';
       print('jsonParam>>> $jsonParam');
       print('ApiEndPoints.verifyOTP>>> ${ApiEndPoints.verifyProfile}');
       Response response =
@@ -67,9 +90,9 @@ class AuthenticationApi {
       print(
           "Verify otp response for $phone $otp $response");
       if (response.statusCode == 200) {
-        VerifyOtpResponseModel verifyOtpResponseModel =
-        VerifyOtpResponseModel.fromJson(response.data);
-        return verifyOtpResponseModel;
+        VerifyProfileDataModel verifyProfileDataModel =
+        VerifyProfileDataModel.fromJson(response.data);
+        return verifyProfileDataModel;
       } else {
         return null;
       }

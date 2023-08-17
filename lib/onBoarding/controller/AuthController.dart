@@ -14,7 +14,9 @@ import 'package:ekikrit/onBoarding/data_model/CountryCodeModel.dart';
 import 'package:ekikrit/onBoarding/data_model/SendOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/VerifyOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/registration_data_model.dart';
+import 'package:ekikrit/onBoarding/data_model/verify_profile_data_model.dart';
 import 'package:ekikrit/onBoarding/networking/auth_api_calls.dart';
+import 'package:ekikrit/onBoarding/pages/registration_successful.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:g_recaptcha_v3/g_recaptcha_v3.dart';
@@ -44,10 +46,17 @@ class AuthController extends GetxController with StateMixin {
   @override
   void onInit() {
     super.onInit();
-    if(!kIsWeb) {
-      // checkVersionUpdate();
+  }
+
+  linkIdentity({jsonParam})async{
+    var data = await AuthenticationApi().linkAccount(
+        jsonParam: jsonParam
+    );
+    print('data>>> $data');
+    if(data != null) {
+      RegistrationDataModel resResponseModel = data;
+      PreferenceManager().saveProfileId(profileID:resResponseModel.response!.profile!.id);
     }
-    // getCountryCodes();
   }
 
   userRegistration({jsonParam,enteredPhone})async{
@@ -136,12 +145,12 @@ class AuthController extends GetxController with StateMixin {
       phone: phone,
       otp: otp,
     );
-    // print('verifyOtp>>> ${verifyOtpResponseModel.verifyResponse.token}');
     if (data != null) {
-      VerifyOtpResponseModel verifyOtpResponseModel = data;
-      print('verifyOtp>>> ${verifyOtpResponseModel.verifyResponse.token}');
+      VerifyProfileDataModel verifyOtpResponseModel = data;
+      print('verifyOtp>>> ${verifyOtpResponseModel.response!.profile!.name!.firstName}');
       PreferenceManager().savePhone(phone: phone);
-      handleProfile();
+      Get.to(RegistrationSuccessful());
+
     }
     isLoading.value = false;
   }
