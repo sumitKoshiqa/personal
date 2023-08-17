@@ -31,100 +31,85 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-        layout: ListView(
-          children:  [
-            vSpacer(16),
-            const Header(),
-            Container(
-              padding: EdgeInsets.only(left: 20,right: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  vSpacer(44),
-                  Text(
-                    'Registration with Email',
-                    style: TextStyle(
-                      color: Color(0xFF424141),
-                      fontSize: 20,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w600,
+        layout: Container(
+          padding: EdgeInsets.only(left: 20,right: 20),
+          child: Column(
+            children:  [
+              vSpacer(8),
+              const Header(),
+              Expanded(
+                child: ListView(
+                  children: [
+                    vSpacer(44),
+                    Text(
+                      'Registration with Email',
+                      style: TextStyle(
+                        color: Color(0xFF424141),
+                        fontSize: 20,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  CustomSpacers.height24,
-                  TextFieldPrimary(
-                    textEditingController: _nameController,
-                    color: Constants.lightOrange,
-                    hint: "First Name",
-                    isEnabled: true,
-                    txtInputType: TextInputType.text,
-                    textLength: 100,
-                    imagePath: 'assets/your-account/name.png',
-                  ),
+                    CustomSpacers.height24,
+                    TextFieldPrimary(
+                      textEditingController: _nameController,
+                      color: Constants.lightOrange,
+                      hint: "First Name",
+                      isEnabled: true,
+                      txtInputType: TextInputType.text,
+                      textLength: 100,
+                      imagePath: 'assets/your-account/name.png',
+                    ),
 
-                  CustomSpacers.height24,
+                    CustomSpacers.height24,
 
-                  TextFieldPrimary(
-                    textEditingController: _lastNameController,
-                    color: Constants.lightGreen,
-                    hint: "Last Name",
-                    isEnabled: true,
-                    txtInputType: TextInputType.text,
-                    textLength: 100,
-                    imagePath: 'assets/your-account/name.png',
-                  ),
+                    TextFieldPrimary(
+                      textEditingController: _lastNameController,
+                      color: Constants.lightGreen,
+                      hint: "Last Name",
+                      isEnabled: true,
+                      txtInputType: TextInputType.text,
+                      textLength: 100,
+                      imagePath: 'assets/your-account/name.png',
+                    ),
 
-                  CustomSpacers.height24,
-                  OptionSelector(
-                      selectedOption: selectedGender,
-                      options: genderList,
-                      bgColor: 0xFFFFF7EB,
-                      setNewValue: (val) {
-                        setState(() {
-                          selectedGender = val;
-                        });
-                      }
-                  ),
-                  CustomSpacers.height24,
+                    CustomSpacers.height24,
+                    OptionSelector(
+                        selectedOption: selectedGender,
+                        options: genderList,
+                        bgColor: 0xFFFFF7EB,
+                        setNewValue: (val) {
+                          setState(() {
+                            selectedGender = val;
+                          });
+                        }
+                    ),
+                    CustomSpacers.height24,
+                    TextFieldPrimary(
+                      textEditingController: _phoneController,
+                      color: Constants.lightOrange,
+                      hint: "Phone",
+                      isEnabled: true,
+                      txtInputType: TextInputType.number,
+                      textLength: 10,
+                      imagePath: 'assets/your-account/phone.png',
+                    ),
 
-                  TextFieldPrimary(
-                    textEditingController: _emailController,
-                    color: Constants.lightGreen,
-                    hint: "Email Address",
-                    isEnabled: true,
-                    txtInputType: TextInputType.emailAddress,
-                    textLength: 100,
-                    imagePath: 'assets/your-account/mail.png',
-                  ),
-
-                  CustomSpacers.height24,
-
-                  TextFieldPrimary(
-                    textEditingController: _phoneController,
-                    color: Constants.lightOrange,
-                    hint: "Phone",
-                    isEnabled: true,
-                    txtInputType: TextInputType.number,
-                    textLength: 10,
-                    imagePath: 'assets/your-account/phone.png',
-                  ),
-
-                ],
+                  ],
+                ),
               ),
-            ),
-            CustomSpacers.height60,
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: ButtonPrimary(
+              ButtonPrimary(
                   onTap: ()async{
                 String stParam = getUserProfileParam();
                 print('stParam>>> ${jsonDecode(stParam)}');
                 await authController.userRegistration(jsonEncode(stParam));
               }, buttonText: "Submit"),
-            )
+              vSpacer(16),
 
 
 
-          ],
+            ],
+          ),
         )
     );
 
@@ -136,7 +121,7 @@ class _RegistrationState extends State<Registration> {
         "firstName": "${_nameController.text.trim()}",
         "lastName": "${_lastNameController.text.trim()}"
       },
-      "email": "${_emailController.text.trim()}",
+      "email": "${PreferenceManager().getEmail()}",
       "phone": {
         "countryCode": "+91",
         "number": "${_phoneController.text.trim()}"

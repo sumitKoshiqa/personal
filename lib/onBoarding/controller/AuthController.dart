@@ -5,6 +5,9 @@ import 'package:ekikrit/Common/utils/GetDio.dart';
 import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/Common/utils/custom_navigator.dart';
+import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
+import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
+import 'package:ekikrit/Consumer/Profile/Networking/ProfileApi.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 
 import 'package:ekikrit/onBoarding/data_model/CountryCodeModel.dart';
@@ -36,7 +39,7 @@ class AuthController extends GetxController with StateMixin {
   late Timer timer;
   RxList<CountryCodeModel> countryList = <CountryCodeModel>[].obs;
   RxList<CountryCodeModel> filteredList = <CountryCodeModel>[].obs;
-
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   void onInit() {
@@ -146,9 +149,34 @@ class AuthController extends GetxController with StateMixin {
       // PreferenceManager().savePhone(phone: phone);
       PreferenceManager().saveEmail(eMail: email);
       PreferenceManager().saveToken(token: verifyOtpResponseModel.verifyResponse.token);
+      handleProfile();
       CustomNavigator.pushReplace(Routes.REGISTRATION);
     }
     isLoading.value = false;
+  }
+  handleProfile() async {
+    isLoading.value = true;
+    var profileData = await ProfileApi().getProfile();
+    if (profileData != null) {
+      if (profileData == "No Content") {
+        CustomNavigator.pushReplace(Routes.REGISTRATION);
+      }
+      else {
+        ProfileResponseModel profileResponseModel = profileData;
+
+        PreferenceManager().saveProfileId(
+            profileID: profileResponseModel.data!.profile!.id!);
+        PreferenceManager().saveProfileName(
+            profileName:
+            '${profileResponseModel.data!.profile!.name!.firstName!} ${profileResponseModel.data!.profile!.name!.lastName!}');
+        PreferenceManager().saveEmail(
+            eMail: profileResponseModel.data!.profile!.phone!.number!);
+        CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+        disableLoader();
+      }
+    } else {
+      disableLoader();
+    }
   }
 
   startTimer() {
