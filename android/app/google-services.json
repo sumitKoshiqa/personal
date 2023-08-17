@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950962169504",
+    "project_id": "ekikrit-e4477",
+    "storage_bucket": "ekikrit-e4477.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950962169504:android:96cc89dd9abd24f86acbc5",
+        "android_client_info": {
+          "package_name": "com.ekikrit.ekikrit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950962169504-alql3epoghm6pn1indjrp7gr7gds09mb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACqnmGP6CjA6niYDpZR1lrtLR-LAsf3vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950962169504-alql3epoghm6pn1indjrp7gr7gds09mb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

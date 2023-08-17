@@ -5,6 +5,7 @@ abstract class Routes {
   static const LOGIN = '/login';
   static const VERIFY_OTP = '/verify_otp';
   static const CONSUMER_HOME = '/home';
+  static const LINK_ACCOUNT = '/link-account';
   static const REGISTRATION = '/registration';
   static const CONSUMER_ACCOUNT = '/account';
   static const CONSUMER_PROXY = '/proxy';

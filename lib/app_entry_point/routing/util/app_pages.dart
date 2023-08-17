@@ -13,6 +13,7 @@ import 'package:ekikrit/Consumer/Shopping/Pages/Orders.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/auth_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/params_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
+import 'package:ekikrit/onBoarding/pages/link_identity.dart';
 import 'package:ekikrit/onBoarding/pages/login_page.dart';
 import 'package:ekikrit/onBoarding/pages/registration_page.dart';
 import 'package:ekikrit/onBoarding/pages/splash.dart';
@@ -53,6 +54,11 @@ class AppPages{
     GetPage(
         name: Routes.REGISTRATION,
         page: () =>  Registration(),
+        transition: Transition.noTransition),
+    // reg
+    GetPage(
+        name: Routes.LINK_ACCOUNT,
+        page: () =>  LinkIdentity(),
         transition: Transition.noTransition),
 
 

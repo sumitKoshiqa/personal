@@ -7,6 +7,9 @@ class ApiEndPoints {
   static const String sendOTP = "${baseUrl}authentication/user/otp/initiate";
   static const String reSendOTP = "${baseUrl}authentication/user/otp/resend";
   static const String verifyOTP = "${baseUrl}authentication/user/otp/verify";
+  static const String verifyProfile = "${baseUrl}profile/user/basic-profile/verify";
+
+  static const String linkAccount = "${baseUrl}profile/user/basic-profile/identity";
 
   static const String verifyGoogleLogin = "${baseUrl}authentication/user/google/verify";
 

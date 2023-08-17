@@ -8,10 +8,31 @@ import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/onBoarding/data_model/SendOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/VerifyOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/registration_data_model.dart';
+import 'package:ekikrit/onBoarding/data_model/verify_profile_data_model.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthenticationApi {
   var dio = GetDio().getDio();
+
+  // Link Account
+  Future<dynamic> linkAccount({jsonParam}) async {
+    try {
+      print("jsonParam otp >> ${jsonDecode(jsonParam)}");
+      print("reSend otp >> ${ApiEndPoints.linkAccount}");
+      Response response = await dio.put(
+          ApiEndPoints.linkAccount,
+          data: jsonDecode(jsonParam));
+      print("Send otp response 43 $response");
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("Exception occurred sending otp $e");
+      return null;
+    }
+  }
 
   //Logout
   Future<dynamic> logout() async {
@@ -32,7 +53,6 @@ class AuthenticationApi {
       return false;
     }
   }
-
   // register User
   Future<dynamic> registerUser({jsonParam}) async {
     try {
@@ -54,10 +74,35 @@ class AuthenticationApi {
       return null;
     }
   }
-
-
+  // verify Profile
+  Future<dynamic> verifyProfile({phone, otp}) async {
+    print(
+        'PreferenceManager().getUniqueId()>>> ${PreferenceManager().getUniqueId()}');
+    try {
+      String jsonParam =
+          '{"smsOtp": "$otp","emailOtp": "$otp","deviceId": "${PreferenceManager().getDeviceId()}","appId": "${PreferenceManager().getUniqueId()}"}';
+      print('jsonParam>>> $jsonParam');
+      print('ApiEndPoints.verifyOTP>>> ${ApiEndPoints.verifyProfile}');
+      Response response =
+      await dio.post(ApiEndPoints.verifyProfile, data: jsonParam);
+      print(
+          "Verify otp response for $phone $otp $response");
+      if (response.statusCode == 200) {
+        VerifyProfileDataModel verifyProfileDataModel =
+        VerifyProfileDataModel.fromJson(response.data);
+        return verifyProfileDataModel;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      ShowMessages()
+          .showSnackBarRed("Invalid OTP", "OTP didn't match. Try again!");
+      print("Exception occurred verify otp $e");
+      return null;
+    }
+  }
   // resend otp
-  Future<dynamic> resendOTP({phone, captchaToken, isWeb}) async {
+  Future<dynamic> resendOTP({phone, captchaToken}) async {
     try {
       String jsonParam =
           '{ "clientId": "${Constants.clientId}", "clientSecret": "string", "authenticationProviderEnum": "INTERNAL", "authenticationWayEnum": "OTP", "phoneNumber": "", "email": "$phone","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "$captchaToken" }';
