@@ -19,16 +19,14 @@ class AuthenticationApi {
     try {
       print("jsonParam otp >> ${jsonDecode(jsonParam)}");
       print("reSend otp >> ${ApiEndPoints.linkAccount}");
-      Response response = await dio.post(
+      Response response = await dio.put(
           ApiEndPoints.linkAccount,
           data: jsonDecode(jsonParam));
       print("Send otp response 43 $response");
       if (response.statusCode == 200) {
-        RegistrationDataModel regResponseDataModel =
-        RegistrationDataModel.fromJson(response.data);
-        return regResponseDataModel;
+        return true;
       } else {
-        return null;
+        return false;
       }
     } catch (e) {
       print("Exception occurred sending otp $e");

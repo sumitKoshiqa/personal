@@ -54,8 +54,10 @@ class AuthController extends GetxController with StateMixin {
     );
     print('data>>> $data');
     if(data != null) {
-      RegistrationDataModel resResponseModel = data;
-      PreferenceManager().saveProfileId(profileID:resResponseModel.response!.profile!.id);
+      ShowMessages().showSnackBarGreen("Congratulations!!!", "Your indentity has been linked with your Ekikrit account" );
+      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+    }else{
+      ShowMessages().showSnackBarRed("Oops!!!", "Something went wrong! Please try again later." );
     }
   }
 
@@ -281,5 +283,21 @@ class AuthController extends GetxController with StateMixin {
     showOTPButton.value = false;
   }
 
+  verifyGoogleLogin({
+    accessToken,idToken,emailId,userId,clientCode,deviceId,appId
+  }) async{
+    isLoading.value = true;
+    String stJsonParam = '{"accessToken": "$accessToken","emailId": "$emailId","userId": "$userId","clientCode": "$clientCode","deviceId": "$deviceId","appId": "$appId","idToken": "$idToken"}';
+    var data = await AuthenticationApi().verifyGoogleLogin(stJsonParam);
+    if (data != null) {
+      PreferenceManager().saveLogin(
+        isLoggedIn: true,
+      );
+      PreferenceManager().saveEmail(eMail: emailId);
+      PreferenceManager()
+          .saveToken(token: data);
+      handleProfile();
+    }
+  }
 
 }

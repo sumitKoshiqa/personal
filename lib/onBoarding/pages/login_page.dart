@@ -1,10 +1,12 @@
 import 'package:ekikrit/Common/utils/ApiEndPoints.dart';
 import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Common/utils/common_service_provider.dart';
+import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:ekikrit/onBoarding/pages/login_with_email.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String stWebViewURL = '';
   String stWebViewFBURL = '';
+  final AuthController authController = Get.put(AuthController());
 
   @override
   void initState() {
@@ -24,7 +27,25 @@ class _LoginPageState extends State<LoginPage> {
     stWebViewFBURL =  '${ApiEndPoints.baseUrl}authentication/user/login/facebook?client=ANDROID_APP&appId=${commonServices.getAppID()}&deviceId=${prefServices.getDeviceId()}';
     stWebViewURL = '${ApiEndPoints.baseUrl}authentication/user/login/google?client=ANDROID_APP&appId=${commonServices.getAppID()}&deviceId=${prefServices.getDeviceId()}';
   }
+  Future<void> callSignInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    print('googleUser>>> ${googleUser!.email}>>>> ${googleUser.id}');
+    final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
+    print('googleAuth>>> ${googleAuth!.idToken}');
+    authController.isLoading.value = true;
+    await authController.verifyGoogleLogin(
+        accessToken:googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+        emailId: googleUser.email,
+        userId: googleUser.id,
+        clientCode: 'ANDROID_APP',
+        deviceId: prefServices.getDeviceId(),
+        appId: commonServices.getAppID()
 
+    );
+
+
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -287,14 +308,19 @@ class _LoginPageState extends State<LoginPage> {
                   Positioned(
                     left: 94,
                     top: 620,
-                    child: Text(
-                      'Continue with Google',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFF424141),
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w600,
+                    child: InkWell(
+                      onTap: (){
+                        callSignInWithGoogle();
+                      },
+                      child: Text(
+                        'Continue with Google',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xFF424141),
+                          fontSize: 16,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),

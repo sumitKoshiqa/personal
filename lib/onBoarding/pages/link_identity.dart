@@ -65,7 +65,7 @@ class _LinkIdentityState extends State<LinkIdentity> {
                       hint: "Last 4 digit of SSN",
                       isEnabled: true,
                       txtInputType: TextInputType.text,
-                      textLength: 4,
+                      textLength: 100,
                       imagePath: 'assets/images/onboarding/ic_ssn.png',
                     ),
                   ),
@@ -76,9 +76,9 @@ class _LinkIdentityState extends State<LinkIdentity> {
                       onTap: ()async{
                         final datePick= await showDatePicker(
                             context: context,
-                            initialDate:  DateTime(DateTime.now().year-18,DateTime.now().month,DateTime.now().day-1,),
+                            initialDate:  DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,),
                             firstDate:  DateTime(1900),
-                            lastDate:  DateTime(DateTime.now().year-18,DateTime.now().month,DateTime.now().day,),
+                            lastDate:  DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,),
                         );
                         if(datePick!=null && datePick!=birthDate){
                           setState(() {
