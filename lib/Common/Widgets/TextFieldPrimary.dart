@@ -1,5 +1,3 @@
-
-
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +36,9 @@ class _TextFieldPrimaryState extends State<TextFieldPrimary> {
         child: TextField(
             controller: widget.textEditingController,
             onChanged: (value){
-              widget.onChanged!(value);
+              if (widget.onChanged != null){
+                widget.onChanged!(value);
+              }
             },
             enabled: widget.isEnabled ?? false,
             keyboardType: widget.txtInputType,
