@@ -7,6 +7,7 @@ import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/onBoarding/data_model/SendOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/VerifyOtpResponseModel.dart';
+import 'package:ekikrit/onBoarding/data_model/registration_data_model.dart';
 import 'package:flutter/foundation.dart';
 
 class AuthenticationApi {
@@ -40,11 +41,11 @@ class AuthenticationApi {
       Response response = await dio.post(
           ApiEndPoints.createProfile,
           data: jsonDecode(jsonParam));
-      print("Send otp response $response");
+      print("Send otp response 43 $response");
       if (response.statusCode == 200) {
-        // SendOtpResponseModel sendOtpResponseModel =
-        // SendOtpResponseModel.fromJson(response.data);
-        // return sendOtpResponseModel;
+        RegistrationDataModel regResponseDataModel =
+        RegistrationDataModel.fromJson(response.data);
+        return regResponseDataModel;
       } else {
         return null;
       }

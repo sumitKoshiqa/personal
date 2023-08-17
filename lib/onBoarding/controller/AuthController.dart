@@ -10,6 +10,7 @@ import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:ekikrit/onBoarding/data_model/CountryCodeModel.dart';
 import 'package:ekikrit/onBoarding/data_model/SendOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/data_model/VerifyOtpResponseModel.dart';
+import 'package:ekikrit/onBoarding/data_model/registration_data_model.dart';
 import 'package:ekikrit/onBoarding/networking/auth_api_calls.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -51,7 +52,11 @@ class AuthController extends GetxController with StateMixin {
       jsonParam: jsonParam
     );
     print('data>>> $data');
-
+    if(data != null) {
+      RegistrationDataModel resResponseModel = data;
+      PreferenceManager().saveProfileId(profileID:resResponseModel.response!.profile!.id);
+      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+    }
   }
 
   disableLoader() async {
@@ -141,7 +146,7 @@ class AuthController extends GetxController with StateMixin {
       // PreferenceManager().savePhone(phone: phone);
       PreferenceManager().saveEmail(eMail: email);
       PreferenceManager().saveToken(token: verifyOtpResponseModel.verifyResponse.token);
-      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+      CustomNavigator.pushReplace(Routes.REGISTRATION);
     }
     isLoading.value = false;
   }
@@ -209,6 +214,7 @@ class AuthController extends GetxController with StateMixin {
     bool isLogin = await PreferenceManager().getLogin();
     print('isLogin>>> $isLogin');
     if (isLogin) {
+      CustomNavigator.pushTo(Routes.CONSUMER_HOME);
       // setUpMessaging();
       // getUserRole();
     } else {
