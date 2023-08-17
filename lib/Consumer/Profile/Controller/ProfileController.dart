@@ -1,28 +1,48 @@
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
+import 'package:ekikrit/Common/utils/custom_navigator.dart';
+import 'package:ekikrit/Consumer/Profile/Model/MinorSearchResponseModel.dart';
+import 'package:ekikrit/Consumer/Profile/Model/OtherProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Profile/Networking/ProfileApi.dart';
+import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 
-class ProfileController extends GetxController{
+class ProfileController extends GetxController with StateMixin{
 
   // RxList<AddressList> addressList = <AddressList>[].obs;
   Rxn<ProfileResponseModel> profileModel = Rxn<ProfileResponseModel>();
-
+  Rxn<OtherProfileResponseModel> otherProfileModel = Rxn<OtherProfileResponseModel>();
+  Rxn<MinorSearchResponseModel> minorModel = Rxn<MinorSearchResponseModel>();
+  RxString actingUserId = PreferenceManager().getActingAsUserId().obs;
+  RxString actingProfileId = PreferenceManager().getActingAsProfileId().obs;
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     getProfile();
+    getOtherUserProfile();
   }
 
-  getProfile() async{
+  Future<void> getProfile() async{
     isLoading.value = true;
     var data = await ProfileApi().getProfile();
     profileModel.value = null;
     if (data != null){
+      profileModel.value = data;
+    }
+    isLoading.value = false;
+  }
 
+  Future<void> getOtherUserProfile() async{
+    isLoading.value = true;
+    var data = await ProfileApi().getOtherUserProfile();
+    otherProfileModel.value = null;
+    if (data != null){
+      otherProfileModel.value = data;
     }
     isLoading.value = false;
   }
@@ -35,7 +55,7 @@ class ProfileController extends GetxController{
       phoneNumber: phoneNumber
     );
     if (data != null){
-
+      Get.back();
     }
     isLoading.value = false;
   }
@@ -48,21 +68,26 @@ class ProfileController extends GetxController{
       zipcode: zipcode,
       dob: dob
     );
+    minorModel.value = null;
     if (data != null){
-
+      minorModel.value = data;
+      Map map = {};
+      map["minorModel"] = minorModel.value;
+      CustomNavigator.pushTo(Routes.CONSUMER_MINOR_SEARCH_RESULTS, arguments: map);
     }
     isLoading.value = false;
   }
 
-  createMinor({ssn, zipcode, dob}) async{
+  Future<void> createMinor({ssn, zipcode, dob}) async{
     isLoading.value = true;
     var data = await ProfileApi().createMinor(
         ssn: ssn,
         zipcode: zipcode,
         dob: dob
     );
-    if (data != null){
-
+    if (data == "ok"){
+      Get.back();
+      ShowMessages().showSnackBarRed("Minor Added", "");
     }
     isLoading.value = false;
   }

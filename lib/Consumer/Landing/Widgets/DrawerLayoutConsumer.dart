@@ -2,7 +2,11 @@ import 'package:ekikrit/Common/Widgets/BackButtonSecondary.dart';
 import 'package:ekikrit/Common/Widgets/InfoCardPrimary.dart';
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/Common/utils/custom_navigator.dart';
+import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
+import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +22,8 @@ class DrawerLayoutConsumer extends StatefulWidget {
 
 class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
   final AuthController authController = Get.put(AuthController());
+  ProfileController profileController = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -52,7 +58,14 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 ),
 
                 TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    PreferenceManager().saveActingAsUserId(actingUserId: "");
+                    PreferenceManager().saveActingAsProfileId(actingProfileId: "");
+                    profileController.actingUserId.value = "";
+                    profileController.actingProfileId.value = "";
+                    setState(() {});
+                    ShowMessages().showSnackBarRed("Identity modified", "Your are now acting as yourself");
+                  },
                   child:  Text("Act as Self",
                     style: Get.theme.textTheme.titleMedium!.copyWith(
                       fontWeight: FontWeight.w600,
@@ -74,69 +87,71 @@ class _DrawerLayoutConsumerState extends State<DrawerLayoutConsumer> {
                 CustomSpacers.height14,
 
                 // acting as
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
-                    // self info
-                    Column(
+                Obx(() =>
+                    profileController.profileModel.value != null ? Row(
+                      mainAxisAlignment: profileController.actingUserId.value.isNotEmpty ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.center,
                       children: [
 
-                        // self image
-                        const CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 30,
-                          backgroundImage: CachedNetworkImageProvider("https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
+                        // self info
+                        Column(
+                          children: [
+
+                            // self image
+                            CircleAvatar(
+                              backgroundColor: Colors.grey,
+                              radius: 30,
+                              backgroundImage: CachedNetworkImageProvider(profileController.profileModel.value!.data!.profile!.profileImage!.url!),
+                            ),
+
+                            CustomSpacers.height8,
+
+                            Text(profileController.profileModel.value!.data!.profile!.name!.firstName!,
+                              style: Get.theme.textTheme.titleMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+
+                            Text("ID: ${profileController.profileModel.value!.data!.id!.substring(0,5).toUpperCase()}",
+                              style: Get.theme.textTheme.titleSmall,
+                            ),
+                          ],
                         ),
 
-                        CustomSpacers.height8,
-
-                        Text("Smith Paul",
+                        profileController.actingUserId.value.isNotEmpty ? Text("(Acting As)",
                           style: Get.theme.textTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
+                              color: Colors.grey.shade700,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400
                           ),
-                        ),
+                        ) : Container(),
 
-                        Text("ID: 09434",
-                          style: Get.theme.textTheme.titleSmall,
-                        ),
+                        // acting info
+                        (profileController.actingUserId.value.isNotEmpty && profileController.otherProfileModel.value != null) ? Column(
+                          children: [
+
+                            // self image
+                            CircleAvatar(
+                              backgroundColor: Colors.grey,
+                              radius: 30,
+                              backgroundImage: CachedNetworkImageProvider(profileController.otherProfileModel.value!.data!.profileImage!.url!),
+                            ),
+
+                            CustomSpacers.height8,
+
+                            Text("${profileController.otherProfileModel.value!.data!.name!.firstName!} ${profileController.otherProfileModel.value!.data!.name!.lastName!}",
+                              style: Get.theme.textTheme.titleMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+
+                            Text("ID: ${profileController.actingUserId.value.substring(0,5).toUpperCase()}",
+                              style: Get.theme.textTheme.titleSmall,
+                            ),
+                          ],
+                        ) : Container(),
+
                       ],
-                    ),
-
-                    Text("(Acting As)",
-                      style: Get.theme.textTheme.titleMedium!.copyWith(
-                        color: Colors.grey.shade700,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400
-                      ),
-                    ),
-
-                    // acting info
-                    Column(
-                      children: [
-
-                        // self image
-                        const CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 30,
-                          backgroundImage: CachedNetworkImageProvider("https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"),
-                        ),
-
-                        CustomSpacers.height8,
-
-                        Text("Smith Paul",
-                          style: Get.theme.textTheme.titleMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-
-                        Text("ID: 09434",
-                          style: Get.theme.textTheme.titleSmall,
-                        ),
-                      ],
-                    ),
-
-                  ],
+                    ) : Container(),
                 ),
 
                 CustomSpacers.height14,

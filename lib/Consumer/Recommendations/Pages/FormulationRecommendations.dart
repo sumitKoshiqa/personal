@@ -83,9 +83,9 @@ class _FormulationRecommendationsState
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(8),
-                                                  image: const DecorationImage(
+                                                  image: DecorationImage(
                                                       image: CachedNetworkImageProvider(
-                                                          "https://i.pinimg.com/736x/61/dc/88/61dc88dee4f6b45d0a69918001943c6a.jpg"),
+                                                        productController.productList[position].productDto!.thumbnailImage!),
                                                       fit: BoxFit.cover)),
                                             ),
 
@@ -94,13 +94,10 @@ class _FormulationRecommendationsState
                                             ),
 
                                             Text(
-                                              productController
-                                                  .productList[position]
-                                                  .product!
-                                                  .name!,
+                                              productController.productList[position].productDto!.name!,
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
-                                                  fontWeight: FontWeight.w500),
+                                                  fontWeight: FontWeight.w600),
                                             ),
 
                                             const SizedBox(
@@ -108,10 +105,7 @@ class _FormulationRecommendationsState
                                             ),
 
                                             Text(
-                                              productController
-                                                  .productList[position]
-                                                  .product!
-                                                  .description!,
+                                              productController.productList[position].productDto!.description!,
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.w400,
@@ -154,12 +148,10 @@ class _FormulationRecommendationsState
                                             ButtonSecondary(
                                               onTap: (){
                                                 cartController.modifyCart(
-                                                    sellerProductId:
-                                                    productController
-                                                        .productList[position]
-                                                        .id,
+                                                    sellerProductId: productController.productList[position].id!,
                                                     cartType: "SHOPPING_CART",
-                                                    quantity: 1);
+                                                    quantity: 1
+                                                );
                                               },
                                               buttonText: "Add to Cart",
                                             )

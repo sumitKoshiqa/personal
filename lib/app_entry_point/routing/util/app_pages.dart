@@ -1,6 +1,7 @@
 import 'package:ekikrit/Consumer/Landing/Pages/ConsumerHome.dart';
 import 'package:ekikrit/Consumer/Landing/Pages/HomeContainerConsumer.dart';
-import 'package:ekikrit/Consumer/Profile/Pages/CreateMinor.dart';
+import 'package:ekikrit/Consumer/Profile/Pages/MinorSearchResult.dart';
+import 'package:ekikrit/Consumer/Profile/Pages/SearchMinor.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CreateProxy.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/CustomerService.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/LegalPolicyPage.dart';
@@ -98,8 +99,8 @@ class AppPages{
 
     // consumer create minors
     GetPage(
-        name: Routes.CONSUMER_CREATE_MINORS,
-        page: () => const CreateMinor(),
+        name: Routes.CONSUMER_SEARCH_MINORS,
+        page: () => const SearchMinor(),
         middlewares: middleWares,
         transition: Transition.noTransition),
 
@@ -130,6 +131,15 @@ class AppPages{
     GetPage(
         name: Routes.CONSUMER_ORDERS,
         page: () => const Orders(),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+    // consumer minor search result
+    GetPage(
+        name: Routes.CONSUMER_MINOR_SEARCH_RESULTS,
+        page: () => MinorSearchResult(
+          minorSearchResponseModel: Get.arguments["minorModel"],
+        ),
         middlewares: middleWares,
         transition: Transition.noTransition),
 

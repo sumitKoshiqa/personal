@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final productModel = productModelFromJson(jsonString);
-
 import 'dart:convert';
 
 ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.decode(str));
@@ -9,6 +5,15 @@ ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.deco
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
+  DateTime? timestamp;
+  int? status;
+  String? statusCode;
+  String? statusSubCode;
+  String? message;
+  String? hostName;
+  String? requestId;
+  List<ProductList>? data;
+
   ProductModel({
     this.timestamp,
     this.status,
@@ -19,15 +24,6 @@ class ProductModel {
     this.requestId,
     this.data,
   });
-
-  DateTime? timestamp;
-  int? status;
-  String? statusCode;
-  String? statusSubCode;
-  String? message;
-  String? hostName;
-  String? requestId;
-  List<ProductList>? data;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     timestamp: json["timestamp"] == null ? null : DateTime.parse(json["timestamp"]),
@@ -53,50 +49,89 @@ class ProductModel {
 }
 
 class ProductList {
-  ProductList({
-    this.seller,
-    this.product,
-    this.id,
-  });
-
-  Seller? seller;
-  Product? product;
+  SellerDto? sellerDto;
+  ProductDto? productDto;
+  String? productId;
+  String? sellerId;
+  double? sellingPrice;
+  int? availableUnits;
   String? id;
+  String? datumId;
+  int? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  factory ProductList.fromJson(Map<String, dynamic> json) => ProductList(
-    seller: json["seller"] == null ? null : Seller.fromJson(json["seller"]),
-    product: json["product"] == null ? null : Product.fromJson(json["product"]),
-    id: json["id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "seller": seller?.toJson(),
-    "product": product?.toJson(),
-    "id": id,
-  };
-}
-
-class Product {
-  Product({
-    this.name,
-    this.description,
-    this.sku,
-    this.mrp,
-    this.weight,
-    this.categoryIdList,
-    this.brandId,
-    this.sellerId,
-    this.availableUnits,
-    this.lowStockLimit,
-    this.imageList,
-    this.thumbnailImage,
-    this.id,
+  ProductList({
+    this.sellerDto,
+    this.productDto,
     this.productId,
+    this.sellerId,
+    this.sellingPrice,
+    this.availableUnits,
+    this.id,
+    this.datumId,
     this.status,
     this.createdAt,
     this.updatedAt,
   });
 
+  factory ProductList.fromJson(Map<String, dynamic> json) => ProductList(
+    sellerDto: json["sellerDto"] == null ? null : SellerDto.fromJson(json["sellerDto"]),
+    productDto: json["productDto"] == null ? null : ProductDto.fromJson(json["productDto"]),
+    productId: json["productId"],
+    sellerId: json["sellerId"],
+    sellingPrice: json["sellingPrice"],
+    availableUnits: json["availableUnits"],
+    id: json["id"],
+    datumId: json["id"],
+    status: json["status"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "sellerDto": sellerDto?.toJson(),
+    "productDto": productDto?.toJson(),
+    "productId": productId,
+    "sellerId": sellerId,
+    "sellingPrice": sellingPrice,
+    "availableUnits": availableUnits,
+    "id": datumId,
+    "status": status,
+    "createdAt": createdAt?.toIso8601String(),
+    "updatedAt": updatedAt?.toIso8601String(),
+  };
+}
+
+class Id {
+  int? timestamp;
+  int? counter;
+  int? randomValue1;
+  int? randomValue2;
+
+  Id({
+    this.timestamp,
+    this.counter,
+    this.randomValue1,
+    this.randomValue2,
+  });
+
+  factory Id.fromJson(Map<String, dynamic> json) => Id(
+    timestamp: json["timestamp"],
+    counter: json["counter"],
+    randomValue1: json["randomValue1"],
+    randomValue2: json["randomValue2"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "timestamp": timestamp,
+    "counter": counter,
+    "randomValue1": randomValue1,
+    "randomValue2": randomValue2,
+  };
+}
+
+class ProductDto {
   String? name;
   String? description;
   String? sku;
@@ -110,12 +145,32 @@ class Product {
   List<String>? imageList;
   String? thumbnailImage;
   Id? id;
-  String? productId;
+  String? productDtoId;
   int? status;
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
+  ProductDto({
+    this.name,
+    this.description,
+    this.sku,
+    this.mrp,
+    this.weight,
+    this.categoryIdList,
+    this.brandId,
+    this.sellerId,
+    this.availableUnits,
+    this.lowStockLimit,
+    this.imageList,
+    this.thumbnailImage,
+    this.id,
+    this.productDtoId,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  factory ProductDto.fromJson(Map<String, dynamic> json) => ProductDto(
     name: json["name"],
     description: json["description"],
     sku: json["sku"],
@@ -129,7 +184,7 @@ class Product {
     imageList: json["imageList"] == null ? [] : List<String>.from(json["imageList"]!.map((x) => x)),
     thumbnailImage: json["thumbnailImage"],
     id: json["_id"] == null ? null : Id.fromJson(json["_id"]),
-    productId: json["id"],
+    productDtoId: json["id"],
     status: json["status"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
@@ -149,74 +204,46 @@ class Product {
     "imageList": imageList == null ? [] : List<dynamic>.from(imageList!.map((x) => x)),
     "thumbnailImage": thumbnailImage,
     "_id": id?.toJson(),
-    "id": productId,
+    "id": productDtoId,
     "status": status,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
   };
 }
 
-class Id {
-  Id({
-    this.timestamp,
-    this.counter,
-    this.randomValue1,
-    this.randomValue2,
-  });
-
-  int? timestamp;
-  int? counter;
-  int? randomValue1;
-  int? randomValue2;
-
-  factory Id.fromJson(Map<String, dynamic> json) => Id(
-    timestamp: json["timestamp"],
-    counter: json["counter"],
-    randomValue1: json["randomValue1"],
-    randomValue2: json["randomValue2"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "timestamp": timestamp,
-    "counter": counter,
-    "randomValue1": randomValue1,
-    "randomValue2": randomValue2,
-  };
-}
-
-class Seller {
-  Seller({
-    this.name,
-    this.description,
-    this.type,
-    this.link,
-    this.contactInfo,
-    this.id,
-    this.sellerId,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-  });
-
+class SellerDto {
   String? name;
   String? description;
   String? type;
   String? link;
   ContactInfo? contactInfo;
   Id? id;
-  String? sellerId;
+  String? sellerDtoId;
   int? status;
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  factory Seller.fromJson(Map<String, dynamic> json) => Seller(
+  SellerDto({
+    this.name,
+    this.description,
+    this.type,
+    this.link,
+    this.contactInfo,
+    this.id,
+    this.sellerDtoId,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  factory SellerDto.fromJson(Map<String, dynamic> json) => SellerDto(
     name: json["name"],
     description: json["description"],
     type: json["type"],
     link: json["link"],
     contactInfo: json["contactInfo"] == null ? null : ContactInfo.fromJson(json["contactInfo"]),
     id: json["_id"] == null ? null : Id.fromJson(json["_id"]),
-    sellerId: json["id"],
+    sellerDtoId: json["id"],
     status: json["status"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
@@ -229,7 +256,7 @@ class Seller {
     "link": link,
     "contactInfo": contactInfo?.toJson(),
     "_id": id?.toJson(),
-    "id": sellerId,
+    "id": sellerDtoId,
     "status": status,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
@@ -237,13 +264,13 @@ class Seller {
 }
 
 class ContactInfo {
+  String? phoneNumber;
+  String? email;
+
   ContactInfo({
     this.phoneNumber,
     this.email,
   });
-
-  String? phoneNumber;
-  String? email;
 
   factory ContactInfo.fromJson(Map<String, dynamic> json) => ContactInfo(
     phoneNumber: json["phoneNumber"],

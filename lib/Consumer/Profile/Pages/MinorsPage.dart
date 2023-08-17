@@ -5,7 +5,11 @@ import 'package:ekikrit/Common/Widgets/CustomContainer.dart';
 import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/Widgets/TextFieldPrimary.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
 import 'package:ekikrit/Common/utils/custom_navigator.dart';
+import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
+import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +22,8 @@ class MinorsPage extends StatefulWidget {
 }
 
 class _MinorsPageState extends State<MinorsPage> {
+
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,68 +51,101 @@ class _MinorsPageState extends State<MinorsPage> {
 
                   CustomSpacers.height14,
 
-                  // proxy list
-                  Row(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            image: const DecorationImage(
-                                image: CachedNetworkImageProvider("https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2lkfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60"),
-                                fit: BoxFit.cover
-                            )
-                        ),
-                      ),
-
-                      CustomSpacers.width10,
-
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  // minors list
+                  Obx(() =>
+                  (profileController.profileModel.value != null && profileController.profileModel.value!.data!.minorProfileList!.isNotEmpty) ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: profileController.profileModel.value!.data!.minorProfileList!.length,
+                    itemBuilder: (context, position){
+                      var minorModel = profileController.profileModel.value!.data!.minorProfileList![position];
+                      return Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Row(
                           children: [
-                            Text("kid1@ekikrit.com",
-                              style: Get.theme.textTheme.titleMedium!.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  image: const DecorationImage(
+                                      image: CachedNetworkImageProvider("https://images.unsplash.com/photo-1554244933-d876deb6b2ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80"),
+                                      fit: BoxFit.cover
+                                  )
                               ),
                             ),
 
-                            CustomSpacers.height4,
+                            CustomSpacers.width10,
 
-                            Text("ID: 00458",
-                              style: Get.theme.textTheme.titleMedium!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.grey,
-                                  fontSize: 14
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(minorModel.email!,
+                                    style: Get.theme.textTheme.titleMedium!.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14
+                                    ),
+                                  ),
+
+                                  CustomSpacers.height4,
+
+                                  Text("ID: ${minorModel.id != null ? minorModel.id!.substring(0,5).toUpperCase() : ""}",
+                                    style: Get.theme.textTheme.titleMedium!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.grey,
+                                        fontSize: 14
+                                    ),
+                                  ),
+                                ],
                               ),
+                            ),
+
+                            // drop down options
+                            PopupMenuButton<String>(
+                              icon: const Icon(Icons.more_vert, color: Colors.grey,),
+                              onSelected: (value) async{
+                                print("Selected Value $value");
+                                if (value == "Act As"){
+                                  PreferenceManager().saveActingAsUserId(actingUserId: "");
+                                  PreferenceManager().saveActingAsProfileId(actingProfileId: minorModel.id!);
+                                  profileController.actingUserId.value = minorModel.id!;
+                                  profileController.actingProfileId.value = minorModel.id!;
+                                  setState(() {});
+                                  await profileController.getProfile();
+                                  await profileController.getOtherUserProfile();
+                                  Get.back();
+                                  ShowMessages().showSnackBarRed("Great! Identity modified", "Your are now acting as ${minorModel.email!}");
+                                }
+                              },
+                              itemBuilder: (BuildContext context) {
+                                return {'Act As', 'Delete'}.map((String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    child: Text(choice,
+                                      style: Get.theme.textTheme.titleMedium!.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    ),
+                                  );
+                                }).toList();
+                              },
                             ),
                           ],
                         ),
+                      );
+                    },
+                  ) : Container(
+                    child: Center(
+                      child: Text("No Minors Found",
+                        style: Get.textTheme.titleMedium!.copyWith(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500
+                        ),
                       ),
-
-                      // drop down options
-                      PopupMenuButton<String>(
-                        icon: const Icon(Icons.more_vert, color: Colors.grey,),
-                        onSelected: (value){
-                          print("Selected Value $value");
-                        },
-                        itemBuilder: (BuildContext context) {
-                          return {'Act As', 'Delete'}.map((String choice) {
-                            return PopupMenuItem<String>(
-                              value: choice,
-                              child: Text(choice,
-                                style: Get.theme.textTheme.titleMedium!.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500
-                                ),
-                              ),
-                            );
-                          }).toList();
-                        },
-                      ),
-                    ],
+                    ),
+                  )
                   )
 
                 ],
@@ -126,8 +165,8 @@ class _MinorsPageState extends State<MinorsPage> {
           Padding(
             padding: const EdgeInsets.all(12),
             child: ButtonPrimary(onTap: (){
-              CustomNavigator.pushTo(Routes.CONSUMER_CREATE_MINORS);
-            }, buttonText: "Create"),
+              CustomNavigator.pushTo(Routes.CONSUMER_SEARCH_MINORS);
+            }, buttonText: "Search"),
           )
         ],
       ),

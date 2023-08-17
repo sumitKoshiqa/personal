@@ -49,8 +49,8 @@ class _CheckoutState extends State<Checkout> {
                               const SizedBox(height: 20,),
 
                               // checkout image
-                              Row(
-                                children: const [
+                              const Row(
+                                children: [
                                   Image(
                                     height: 25,
                                     width: 25,
@@ -81,10 +81,10 @@ class _CheckoutState extends State<Checkout> {
                                     const SizedBox(height: 10,),
 
                                     // price
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10.0, right: 10),
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 10.0, right: 10),
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Expanded(
                                             child:  Text("Price:",
                                               style: TextStyle(
@@ -107,10 +107,10 @@ class _CheckoutState extends State<Checkout> {
                                     const SizedBox(height: 10,),
 
                                     // tax
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10.0, right: 10),
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 10.0, right: 10),
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Expanded(
                                             child:  Text("Tax:",
                                               style: TextStyle(
@@ -133,10 +133,10 @@ class _CheckoutState extends State<Checkout> {
                                     const SizedBox(height: 10,),
 
                                     // shipping
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10.0, right: 10),
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 10.0, right: 10),
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Expanded(
                                             child:  Text("Shipping:",
                                               style: TextStyle(
@@ -164,8 +164,8 @@ class _CheckoutState extends State<Checkout> {
                                         borderRadius: BorderRadius.circular(8),
                                         color: const Color(0xffFCF7EE)
                                       ),
-                                      child: Row(
-                                        children: const [
+                                      child: const Row(
+                                        children: [
                                           Expanded(
                                             child:  Text("Total:",
                                               style: TextStyle(
@@ -231,10 +231,10 @@ class _CheckoutState extends State<Checkout> {
                               const SizedBox(height: 15,),
 
                               // delivery by
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10.0, right: 10),
                                 child: Row(
-                                  children: const [
+                                  children: [
                                     Text("Delivery By:",
                                       style: TextStyle(
                                           fontSize: 14,
@@ -243,7 +243,7 @@ class _CheckoutState extends State<Checkout> {
                                       ),
                                     ),
 
-                                    const SizedBox(width: 10,),
+                                    SizedBox(width: 10,),
 
                                     Text("Monday April 24th",
                                       style: TextStyle(
@@ -276,17 +276,17 @@ class _CheckoutState extends State<Checkout> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              addressController.addressList.isNotEmpty ?  const Padding(
-                                                padding: EdgeInsets.only(left: 12.0),
-                                                child: Text("John Smith - 13th Street. 47 W 13th St, New York, NY 10011, USA",
-                                                  style: TextStyle(
+                                              addressController.addressList.isNotEmpty ?  Padding(
+                                                padding: const EdgeInsets.only(left: 12.0),
+                                                child: Text("${addressController.addressList[0].name!}, ${addressController.addressList[0].line1!}, ${addressController.addressList[0].line2!} ${addressController.addressList[0].pinCode!.pinCode}, ${addressController.addressList[0].state!.name!}, ${addressController.addressList[0].country!.name}",
+                                                  style: const TextStyle(
                                                       fontSize: 14,
                                                       fontWeight: FontWeight.w400
                                                   ),
                                                 ),
                                               ) : Container(
-                                                padding: EdgeInsets.only(left: 12),
-                                                child: Text("No Address Found",
+                                                padding: const EdgeInsets.only(left: 12),
+                                                child: const Text("No Address Found",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Colors.red,
@@ -329,10 +329,10 @@ class _CheckoutState extends State<Checkout> {
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(color:  const Color(0xffFCF7EE))
                                 ),
-                                child:  Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, right: 10),
+                                child:  const Padding(
+                                  padding: EdgeInsets.only(left: 10.0, right: 10),
                                   child: Row(
-                                    children: const [
+                                    children: [
 
                                       Text("Pay Using",
                                         style: TextStyle(
@@ -349,13 +349,13 @@ class _CheckoutState extends State<Checkout> {
                               const SizedBox(height: 25,),
 
                               // credit card payment
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10.0, right: 10),
                                 child: Row(
                                   children: [
                                     Expanded(
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Image(
                                             height: 30,
                                             width: 30,
@@ -374,7 +374,7 @@ class _CheckoutState extends State<Checkout> {
                                       ),
                                     ),
 
-                                    const Icon(Icons.arrow_forward_ios, size: 16,)
+                                    Icon(Icons.arrow_forward_ios, size: 16,)
                                   ],
                                 ),
                               ),
@@ -387,13 +387,13 @@ class _CheckoutState extends State<Checkout> {
                               const SizedBox(height: 15,),
 
                               // apple pay payment
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10.0, right: 10),
                                 child: Row(
                                   children: [
                                     Expanded(
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Image(
                                             height: 30,
                                             width: 30,
@@ -412,7 +412,7 @@ class _CheckoutState extends State<Checkout> {
                                       ),
                                     ),
 
-                                    const Icon(Icons.arrow_forward_ios, size: 16,)
+                                    Icon(Icons.arrow_forward_ios, size: 16,)
                                   ],
                                 ),
                               ),
@@ -425,13 +425,13 @@ class _CheckoutState extends State<Checkout> {
                               const SizedBox(height: 15,),
 
                               // paypal payment
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0, right: 10),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 10.0, right: 10),
                                 child: Row(
                                   children: [
                                     Expanded(
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Image(
                                             height: 30,
                                             width: 30,
@@ -450,7 +450,7 @@ class _CheckoutState extends State<Checkout> {
                                       ),
                                     ),
 
-                                    const Icon(Icons.arrow_forward_ios, size: 16,)
+                                    Icon(Icons.arrow_forward_ios, size: 16,)
                                   ],
                                 ),
                               ),

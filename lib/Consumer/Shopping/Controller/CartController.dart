@@ -99,12 +99,10 @@ class CartController extends GetxController with StateMixin{
       print("Current route ${Get.currentRoute}");
       PaymentInfoResponseModel paymentInfoResponseModel = data;
       if (paymentInfoResponseModel.data!.orderState == "INITIATE_PAYMENT"){
-        if (Get.currentRoute == "/Checkout"){
-          Get.off(Payment(
-            amount: amount.toString(),
-            pi: paymentInfoResponseModel.data!.paymentDetails!.clientSecret,
-          ));
-        }
+        Get.off(Payment(
+          amount: amount.toString(),
+          pi: paymentInfoResponseModel.data!.paymentDetails!.clientSecret,
+        ));
         currentRetries = 0;
         isLoading.value = false;
       }else if (paymentInfoResponseModel.data!.orderState == "IN_PROGRESS"){

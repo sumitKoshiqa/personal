@@ -6,6 +6,22 @@ class PreferenceManager{
 
   final storage = GetStorage();
 
+  saveActingAsUserId({required String? actingUserId}) async{
+    storage.write('actingUserId', actingUserId);
+  }
+
+  String getActingAsUserId() {
+    return storage.read('actingUserId') ?? "";
+  }
+
+  saveActingAsProfileId({required String? actingProfileId}) async{
+    storage.write('actingProfileId', actingProfileId);
+  }
+
+  String getActingAsProfileId() {
+    return storage.read('actingProfileId') ?? "";
+  }
+
   saveHomeTermsAccepted({required bool homeTerms}) async{
     storage.write('homeTerms', homeTerms);
   }

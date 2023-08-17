@@ -6,6 +6,9 @@ import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/Widgets/TextFieldPrimary.dart';
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
+import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
+import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +24,8 @@ class _CreateProxyState extends State<CreateProxy> {
 
   TextEditingController etEmail = TextEditingController();
   TextEditingController etPhone = TextEditingController();
+
+  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +82,18 @@ class _CreateProxyState extends State<CreateProxy> {
 
           Padding(
             padding: const EdgeInsets.all(12),
-            child: ButtonPrimary(onTap: (){}, buttonText: "Create"),
+            child: ButtonPrimary(onTap: (){
+              if (etPhone.text.isNotEmpty && etEmail.text.isNotEmpty){
+                profileController.createProxy(
+                  phoneNumber: etPhone.text,
+                  email: etEmail.text,
+                  countryCode: "+1"
+                );
+              }else{
+                ShowMessages().showSnackBarRed("Empty Fields", "All fields are mandatory.");
+              }
+
+            }, buttonText: "Create"),
           )
         ],
       ),

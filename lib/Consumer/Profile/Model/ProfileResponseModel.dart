@@ -68,7 +68,7 @@ class Data {
     profile: json["profile"] == null ? null : Profile.fromJson(json["profile"]),
     minorProfileList: json["minorProfileList"] == null ? [] : List<Profile>.from(json["minorProfileList"]!.map((x) => Profile.fromJson(x))),
     proxyList: json["proxyList"] == null ? [] : List<ProxyList>.from(json["proxyList"]!.map((x) => ProxyList.fromJson(x))),
-    identityDto: json["identityDto"] == null ? null : IdentityDto.fromJson(json["identityDto"]),
+    identityDto: json["identity"] == null ? null : IdentityDto.fromJson(json["identity"]),
   );
 
   Map<String, dynamic> toJson() => {

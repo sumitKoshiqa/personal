@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
               Locale('bn', 'BD'),
             ],
             theme: ThemeData(
-                primarySwatch: Colors.orange,
+                primarySwatch: Colors.green,
                 fontFamily: 'SfProDisplay',
                 appBarTheme: AppBarTheme(
                     backgroundColor: Constants.lightOrange,
