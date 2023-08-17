@@ -10,10 +10,11 @@ abstract class Routes {
   static const CONSUMER_PROXY = '/proxy';
   static const CONSUMER_CREATE_PROXY = '/create-proxy';
   static const CONSUMER_MINORS = '/minors';
-  static const CONSUMER_CREATE_MINORS = '/create-minor';
+  static const CONSUMER_SEARCH_MINORS = '/create-minor';
   static const CONSUMER_NOTIFICATION_SETTINGS = '/notification-settings';
   static const CONSUMER_CUSTOMER_SERVICE = '/customer-service';
   static const CONSUMER_POLICY_PAGE = '/standards-and-policy';
   static const CONSUMER_ORDERS = '/orders';
+  static const CONSUMER_MINOR_SEARCH_RESULTS = '/minor-search';
 
 }

@@ -77,7 +77,7 @@ class _PaymentState extends State<Payment> {
 
                 Expanded(
                   child: InAppWebView(
-                    initialUrlRequest: URLRequest(url: Uri.parse('https://pinpointcode.com/stripe/checkout?amount=${widget.amount}&pi=${widget.pi}')),
+                    initialUrlRequest: URLRequest(url: Uri.parse('https://pinpointcode.com/ekikrit/payments?amount=${widget.amount}&pi=${widget.pi}')),
                     androidOnPermissionRequest: (InAppWebViewController controller, String origin, List<String> resources) async {
                       return PermissionRequestResponse(resources: resources, action: PermissionRequestResponseAction.GRANT);
                     },

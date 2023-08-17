@@ -1,5 +1,6 @@
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Consumer/Landing/Pages/Blank.dart';
+import 'package:ekikrit/Consumer/Landing/Pages/Cart.dart';
 import 'package:ekikrit/Consumer/Landing/Widgets/DrawerLayoutConsumer.dart';
 import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
 import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
@@ -26,7 +27,6 @@ class _HomeContainerConsumerState extends State<HomeContainerConsumer> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   // CartController cartController = Get.put(CartController());
-  ProfileController profileController = Get.put(ProfileController());
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -172,7 +172,7 @@ class _HomeContainerConsumerState extends State<HomeContainerConsumer> {
                 const ConsumerHome(),
                 const FormulationRecommendations(),
                 const Blank(),
-                const Blank(),
+                const Cart(),
               ],
             ),
         )

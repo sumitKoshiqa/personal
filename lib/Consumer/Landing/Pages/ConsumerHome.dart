@@ -1,6 +1,7 @@
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
 import 'package:ekikrit/Consumer/Landing/Widgets/DrawerLayoutConsumer.dart';
+import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,14 @@ class ConsumerHome extends StatefulWidget {
 class _ConsumerHomeState extends State<ConsumerHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController etSearch = TextEditingController();
+  ProfileController profileController = Get.put(ProfileController());
+
+  @override
+  void initState() {
+    super.initState();
+    profileController.getProfile();
+    profileController.getOtherUserProfile();
+  }
 
   @override
   Widget build(BuildContext context) {

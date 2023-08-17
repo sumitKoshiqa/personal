@@ -17,7 +17,7 @@ class ShoppingApi {
   Future<dynamic> getProducts() async{
     try {
       Response response = await dio.get(
-        "http://3.142.229.170:30001/gateway/inventory/user/seller-product",
+        "${ApiEndPoints.baseUrl}inventory/user/seller-product",
       );
       print("Get products Response $response");
       if (response.statusCode == 200) {
@@ -100,7 +100,7 @@ class ShoppingApi {
           "Sending param cartId $cartId billingId $billingAddressId shippingId $shippingAddressId isPayOnDelivery $isPayOnDelivery");
       var postParam = '{ "cartId": "$cartId", "billingAddressId": "$billingAddressId", "shippingAddressId": "$shippingAddressId", "isPayOnDelivery": $isPayOnDelivery }';
       Response response = await dio.post(
-          "http://3.142.229.170:20004/order/user/order/checkout",
+          "${ApiEndPoints.baseUrl}order/user/order/checkout",
           data: postParam
       );
       print("Get checkout Response $response");
@@ -145,7 +145,7 @@ class ShoppingApi {
   Future<dynamic> getOrders() async {
     try {
       Response response = await dio.get(
-          "${ApiEndPoints.baseUrl}order/user/order/allOrders?pageNo=0&pageSize=5",
+          "${ApiEndPoints.baseUrl}order/user/order?pageNo=0&pageSize=5",
       );
       print("Get orders Response $response");
       if (response.statusCode == 200) {

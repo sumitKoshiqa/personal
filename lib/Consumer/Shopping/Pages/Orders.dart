@@ -47,19 +47,26 @@ class _OrdersState extends State<Orders> {
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.all(10),
+                                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                                     decoration: BoxDecoration(
-                                        color: Constants.accentGreen,
+                                        color: Constants.lightGreen.withOpacity(0.8),
                                         borderRadius: BorderRadius.circular(8)),
                                     child: Row(
                                       children: [
-                                        Image(
+                                        Container(
                                           height: 80,
                                           width: 80,
-                                          image: CachedNetworkImageProvider(
-                                              cartController
-                                                  .ordersList[position]
-                                                  .orderItems![0]
-                                                  .imageList![0]),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(8),
+                                            image: DecorationImage(
+                                              image: CachedNetworkImageProvider(
+                                                  cartController
+                                                      .ordersList[position]
+                                                      .orderItems![0]
+                                                      .imageList![0]),
+                                              fit: BoxFit.cover
+                                            )
+                                          ),
                                         ),
                                         const SizedBox(
                                           width: 10,
@@ -91,7 +98,7 @@ class _OrdersState extends State<Orders> {
                                                 style: const TextStyle(
                                                     fontSize: 13,
                                                     fontWeight:
-                                                        FontWeight.w500),
+                                                        FontWeight.w400),
                                               ),
                                               Text(
                                                 "${DateFormat("hh:mm a  dd-MM-yyyy").format(cartController.ordersList[position].orderItems![0].updatedAt!)} ",
@@ -100,7 +107,7 @@ class _OrdersState extends State<Orders> {
                                                 style: const TextStyle(
                                                     fontSize: 13,
                                                     fontWeight:
-                                                        FontWeight.w500),
+                                                        FontWeight.w400),
                                               ),
                                             ],
                                           ),

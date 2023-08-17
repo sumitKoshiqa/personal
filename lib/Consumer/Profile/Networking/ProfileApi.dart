@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:ekikrit/Common/utils/ApiEndPoints.dart';
 import 'package:ekikrit/Common/utils/GetDio.dart';
+import 'package:ekikrit/Common/utils/ShowMessages.dart';
+import 'package:ekikrit/Consumer/Profile/Model/MinorSearchResponseModel.dart';
+import 'package:ekikrit/Consumer/Profile/Model/OtherProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'dart:io';
 
@@ -27,11 +30,30 @@ class ProfileApi {
     }
   }
 
+  // get other user profile
+  Future<dynamic> getOtherUserProfile() async{
+    try {
+      Response response = await dio.get(
+        "${ApiEndPoints.baseUrl}profile/user/basic-profile/acting-profile",
+      );
+      print("Get other profile response $response");
+      if (response.statusCode == 200) {
+        OtherProfileResponseModel otherProfileResponseModel = OtherProfileResponseModel.fromJson(response.data);
+        return otherProfileResponseModel;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Exception occurred get profile $e");
+      return null;
+    }
+  }
+
 
   // create proxy
   Future<dynamic> createProxy({email, countryCode, phoneNumber}) async{
     try {
-      var postParam = '{ "email": "$email", "phone": { "countryCode": "+$countryCode", "number": "$phoneNumber" } }';
+      var postParam = '{ "email": "$email", "phone": { "countryCode": "$countryCode", "number": "$phoneNumber" } }';
       Response response = await dio.post(
         "${ApiEndPoints.baseUrl}profile/user/basic-profile/proxy",
         data: postParam
@@ -57,7 +79,11 @@ class ProfileApi {
       );
       print("Search minor response $response");
       if (response.statusCode == 200) {
-        return "ok";
+        MinorSearchResponseModel minorSearchResponseModel = MinorSearchResponseModel.fromJson(response.data);
+        return minorSearchResponseModel;
+      }else if (response.statusCode == 204) {
+        ShowMessages().showSnackBarRed("No Profile Found", "We could not find any matches with given info");
+        return null;
       } else {
         return null;
       }
@@ -72,7 +98,7 @@ class ProfileApi {
   Future<dynamic> createMinor({ssn, zipcode, dob}) async{
     try {
       var postParam = '{ "ssn": "$ssn", "zipCode": "$zipcode", "dob": "$dob" }';
-      Response response = await dio.put(
+      Response response = await dio.post(
           "${ApiEndPoints.baseUrl}profile/user/basic-profile/minor/identity",
           data: postParam
       );
@@ -83,7 +109,7 @@ class ProfileApi {
         return null;
       }
     } catch (e) {
-      print("Exception occurred create proxy $e");
+      print("Exception occurred create minor $e");
       return null;
     }
   }
