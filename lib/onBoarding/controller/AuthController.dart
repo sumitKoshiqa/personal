@@ -8,6 +8,8 @@ import 'package:ekikrit/Common/utils/custom_navigator.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 
 import 'package:ekikrit/onBoarding/data_model/CountryCodeModel.dart';
+import 'package:ekikrit/onBoarding/data_model/SendOtpResponseModel.dart';
+import 'package:ekikrit/onBoarding/data_model/VerifyOtpResponseModel.dart';
 import 'package:ekikrit/onBoarding/networking/auth_api_calls.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -67,33 +69,96 @@ class AuthController extends GetxController with StateMixin {
     var data = await AuthenticationApi().sendOTP(
         email: email,
         captchaToken: gReCaptchaToken!.value,
-        isWeb: isWeb
     );
     print('data>>> $data');
     if (data != null) {
-      // if(data.statusCode == 'OK') {
+      if(data.statusCode == 'OK') {
       // SendOtpResponseModel sendOtpResponseModel = data;
-      // CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'phone': phone});
+      CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'email': email});
       if(!isWeb) {
         Future.delayed(const Duration(milliseconds: 500), () {
           disableLoader();
           isSendingOTP.value = false;
         });
       }else {
-        // CustomNavigator.pushTo(Routes.VERIFY_OTP,
-        //     arguments: {'phone': phone});
+        CustomNavigator.pushTo(Routes.VERIFY_OTP,
+            arguments: {'email': email});
       }
-
-      // }else{
-      //   ShowMessages()
-      //       .showSnackBarRed("Oops!!!", "$data");
-      // }
+      }else{
+        ShowMessages()
+            .showSnackBarRed("Oops!!!", "$data");
+      }
     } else {
       ShowMessages()
           .showSnackBarRed("Oops!!!", "User Account is Locked for 24 hours");
     }
     isLoading.value = false;
     isSendingOTP.value = false;
+  }
+
+  resendOTP({phone,isWeb}) async {
+    isLoading.value = true;
+    isSendingOTP.value = true;
+    // var uuid = const Uuid();
+    // PreferenceManager().saveUniqueId(uniqueId: uuid.v1());
+    var data = await AuthenticationApi().resendOTP(
+        phone: phone,
+        captchaToken: gReCaptchaToken!.value,
+        isWeb: isWeb
+    );
+    if (data != null) {
+      SendOtpResponseModel sendOtpResponseModel = data;
+
+      ShowMessages().showSnackBarRed("Success", "Confirmation code has been sent again");
+
+      // CustomNavigator.pushTo(Routes.VERIFY_OTP, arguments: {'phone': phone});
+      Future.delayed(const Duration(milliseconds: 500), () {
+        disableLoader();
+        isSendingOTP.value = false;
+        allowRetry.value = false;
+        start.value = 30;
+        startTimer();
+      });
+    } else {
+      ShowMessages()
+          .showSnackBarRed("Error!", "Error occurred while sending OTP!!!");
+    }
+  }
+
+  verifyOTP({email, otp}) async {
+    isLoading.value = true;
+    var data = await AuthenticationApi().verifyOTP(
+      email: email,
+      otp: otp,
+    );
+    // print('verifyOtp>>> ${verifyOtpResponseModel.verifyResponse.token}');
+    if (data != null) {
+      VerifyOtpResponseModel verifyOtpResponseModel = data;
+      PreferenceManager().saveLogin(
+        isLoggedIn: true,
+      );
+      print('verifyOtp>>> ${verifyOtpResponseModel.verifyResponse.token}');
+      // PreferenceManager().savePhone(phone: phone);
+      PreferenceManager().saveEmail(eMail: email);
+      PreferenceManager().saveToken(token: verifyOtpResponseModel.verifyResponse.token);
+      CustomNavigator.pushReplace("${Routes.CONSUMER_CREATE_PROFILE}?showNavBar=false");
+    }
+    isLoading.value = false;
+  }
+
+  startTimer() {
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (start.value == 1) {
+          timer.cancel();
+          allowRetry.value = true;
+        } else {
+          start.value--;
+        }
+      },
+    );
   }
 
 

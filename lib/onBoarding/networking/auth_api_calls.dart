@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:ekikrit/Common/utils/ApiEndPoints.dart';
+import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/GetDio.dart';
 import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Common/utils/ShowMessages.dart';
@@ -59,10 +59,10 @@ class AuthenticationApi {
   Future<dynamic> resendOTP({phone, captchaToken, isWeb}) async {
     try {
       String jsonParam =
-          '{ "clientId": "4283b2dc-df16-4d33-a24f-6537d7a84e07", "clientSecret": "string", "authenticationProviderEnum": "INTERNAL", "authenticationWayEnum": "OTP", "phoneNumber": "", "email": "$phone","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "$captchaToken" }';
+          '{ "clientId": "${Constants.clientId}", "clientSecret": "string", "authenticationProviderEnum": "INTERNAL", "authenticationWayEnum": "OTP", "phoneNumber": "", "email": "$phone","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "$captchaToken" }';
       print("reSend otp >> ${ApiEndPoints.reSendOTP}>>>>> $kIsWeb");
       Response response = await dio.post(
-          (kIsWeb) ? ApiEndPoints.reSendOTP : ApiEndPoints.reSendOTPMobile,
+           ApiEndPoints.reSendOTP ,
           data: jsonParam);
       print("Send otp response $response");
       if (response.statusCode == 200) {
@@ -78,13 +78,12 @@ class AuthenticationApi {
     }
   }
   // // send otp
-  Future<dynamic> sendOTP({email, captchaToken, isWeb}) async {
+  Future<dynamic> sendOTP({email, captchaToken}) async {
     try {
-      String jsonParam = '{ "clientId": "4283b2dc-df16-4d33-a24f-6537d7a84e07", "clientSecret": "string", "authenticationProviderEnum": "EMAIL", "authenticationWayEnum": "OTP", "phoneNumber": "String", "email": "$email","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaResponse": "qwerty" }';
-      print("Send otp >> ${(isWeb)?ApiEndPoints.sendOTP:ApiEndPoints.sendOTPMobile}");
+      String jsonParam = '{ "clientId": "${Constants.clientId}", "clientSecret": "string", "authenticationProviderEnum": "EMAIL", "authenticationWayEnum": "OTP", "phoneNumber": "String", "email": "$email","deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}","captchaRequest": {"captchaProviderEnum": "GOOGLE","response": "string"} }';
+      print("Send otp >> ${ApiEndPoints.sendOTP}");
       print("jsonParam >> $jsonParam");
-      Response response = await dio.post(
-          (isWeb) ? ApiEndPoints.sendOTP : ApiEndPoints.sendOTPMobile,
+      Response response = await dio.post(ApiEndPoints.sendOTP,
           data: jsonParam);
       print("Send otp response $response");
       if (response.statusCode == 200) {
@@ -106,18 +105,18 @@ class AuthenticationApi {
     }
   }
   // // verify otp
-  Future<dynamic> verifyOTP({phone, otp}) async {
+  Future<dynamic> verifyOTP({email, otp}) async {
     print(
         'PreferenceManager().getUniqueId()>>> ${PreferenceManager().getUniqueId()}');
     try {
       String jsonParam =
-          '{ "authenticationProviderEnum": "EMAIL", "authenticationWayEnum": "OTP", "phoneNumber": "", "email": "$phone","otp": "$otp", "deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}", "clientId": "4283b2dc-df16-4d33-a24f-6537d7a84e07", "clientSecret": "string" }';
+          '{ "authenticationProviderEnum": "EMAIL", "authenticationWayEnum": "OTP", "phoneNumber": "", "email": "$email","otp": "$otp", "deviceId": "${PreferenceManager().getDeviceId()}", "appId": "${PreferenceManager().getUniqueId()}", "clientId": "${Constants.clientId}", "clientSecret": "string" }';
       print('jsonParam>>> $jsonParam');
       print('ApiEndPoints.verifyOTP>>> ${ApiEndPoints.verifyOTP}');
       Response response =
       await dio.post(ApiEndPoints.verifyOTP, data: jsonParam);
       print(
-          "Verify otp response for $phone $otp $response");
+          "Verify otp response for $email $otp $response");
       if (response.statusCode == 200) {
         VerifyOtpResponseModel verifyOtpResponseModel =
         VerifyOtpResponseModel.fromJson(response.data);

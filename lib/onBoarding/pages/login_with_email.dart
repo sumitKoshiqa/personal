@@ -153,6 +153,9 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                 color: Constants.lightGreen,
                 hint: "Email Address",
                 isEnabled: true,
+                onChanged: (){
+
+                },
                 txtInputType: TextInputType.emailAddress,
                 textLength: 100,
                 imagePath: 'assets/your-account/mail.png',
@@ -171,10 +174,6 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                   ShowMessages().showSnackBarRed('Oops!!!',
                       'Please enter a valid email id.');
                 }
-
-                // String stParam = getUserProfileParam();
-                // print('stParam>>> ${jsonDecode(stParam)}');
-                // await authController.userRegistration(jsonEncode(stParam));
               },
               child: Container(
                 width: Get.width,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Constants {
 
 
-
+  static const String clientId = 'eac88b43-8408-4294-9223-37d66adaf9d0';
   static const String stRupeeSymbol = '\u{20B9}';
   static String appFont = "Manrope";
   static double fontSizeLarge = 22;

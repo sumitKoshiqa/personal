@@ -12,6 +12,7 @@ import 'package:ekikrit/app_entry_point/routing/middleware/params_middleware.dar
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:ekikrit/onBoarding/pages/login_page.dart';
 import 'package:ekikrit/onBoarding/pages/splash.dart';
+import 'package:ekikrit/onBoarding/pages/verify_otp.dart';
 import 'package:get/get.dart';
 
 
@@ -37,6 +38,11 @@ class AppPages{
     GetPage(
         name: Routes.LOGIN,
         page: () =>  LoginPage(),
+        transition: Transition.noTransition),
+    // login
+    GetPage(
+        name: Routes.VERIFY_OTP,
+        page: () =>  VerifyOTP(),
         transition: Transition.noTransition),
 
 

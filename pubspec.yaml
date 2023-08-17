@@ -38,6 +38,7 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   device_info_plus: ^8.2.0
   flutter_svg: ^2.0.5
+  sms_autofill: ^2.2.0
   flutter_screenutil: ^5.8.2
 
 dev_dependencies:

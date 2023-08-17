@@ -107,7 +107,6 @@ class _RegistrationState extends State<Registration> {
                         ),
                       ),
                       CustomSpacers.height24,
-
                       TextFieldPrimary(
                         textEditingController: _nameController,
                         color: Constants.lightOrange,
