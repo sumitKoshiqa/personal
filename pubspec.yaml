@@ -63,6 +63,8 @@ flutter:
     - assets/notification/
     - assets/proxy-guardian/
     - assets/your-account/
+    - assets/home-screen/
+    - assets/anim/
     - assets/images/onboarding/
     - assets/policy/
     - assets/i18n/

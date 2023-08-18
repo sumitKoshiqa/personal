@@ -8,6 +8,7 @@ import 'package:ekikrit/Consumer/Shopping/Controller/ProductController.dart';
 import 'package:ekikrit/Consumer/Shopping/Widgets/CheckoutBanner.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FormulationRecommendations extends StatefulWidget {
   const FormulationRecommendations({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _FormulationRecommendationsState
               onRefresh: onRefresh,
               child: Stack(
                 children: [
+
                   Column(
                     children: [
                       Expanded(
@@ -49,19 +51,18 @@ class _FormulationRecommendationsState
                               ),
 
                               Row(
-                                children: const [
-                                  Image(
-                                    height: 20,
-                                    width: 20,
+                                children: [
+                                  const Image(
+                                    height: 30,
+                                    width: 30,
                                     image: CachedNetworkImageProvider(
-                                        "https://cdn-icons-png.flaticon.com/512/2954/2954893.png"),
+                                        "https://cdn-icons-png.flaticon.com/512/3980/3980346.png"),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
-                                    "Recommendation",
-                                    style: TextStyle(fontWeight: FontWeight.w500),
+                                  Text("Supplements",
+                                    style: GoogleFonts.getFont(Constants.appFont, fontSize: 16, fontWeight: FontWeight.w600),
                                   )
                                 ],
                               ),
@@ -96,7 +97,7 @@ class _FormulationRecommendationsState
                                             Text(
                                               productController.productList[position].productDto!.name!,
                                               textAlign: TextAlign.center,
-                                              style: const TextStyle(
+                                              style: GoogleFonts.getFont(Constants.appFont,
                                                   fontWeight: FontWeight.w600),
                                             ),
 
@@ -107,7 +108,7 @@ class _FormulationRecommendationsState
                                             Text(
                                               productController.productList[position].productDto!.description!,
                                               textAlign: TextAlign.center,
-                                              style: const TextStyle(
+                                              style: GoogleFonts.getFont(Constants.appFont,
                                                   fontWeight: FontWeight.w400,
                                                   color: Colors.grey),
                                             ),
@@ -125,12 +126,12 @@ class _FormulationRecommendationsState
                                                       BorderRadius.circular(8)),
                                               child: Row(
                                                 children: [
-                                                  const Expanded(
+                                                  Expanded(
                                                     child: Text(
                                                       "On 30 Day Subscription",
                                                       textAlign: TextAlign.center,
-                                                      style: TextStyle(
-                                                        fontWeight: FontWeight.w400,
+                                                      style: GoogleFonts.getFont(Constants.appFont,
+                                                        fontWeight: FontWeight.w500,
                                                       ),
                                                     ),
                                                   ),

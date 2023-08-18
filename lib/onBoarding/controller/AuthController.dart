@@ -267,11 +267,11 @@ class AuthController extends GetxController with StateMixin {
     bool isLogin = await PreferenceManager().getLogin();
     print('isLogin>>> $isLogin');
     if (isLogin) {
-      CustomNavigator.pushTo(Routes.CONSUMER_HOME);
+      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
       // setUpMessaging();
       // getUserRole();
     } else {
-      CustomNavigator.pushTo(Routes.LOGIN);
+      CustomNavigator.pushReplace(Routes.LOGIN);
     }
   }
 

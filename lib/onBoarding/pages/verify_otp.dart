@@ -143,10 +143,10 @@ class _VerifyOTPState extends State<VerifyOTP> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     vSpacer(44),
-                    Header(),
+                    const Header(),
                     vSpacer(24),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20.0, right: 20),
                       child: Text(
                         'Verification',
                         style: TextStyle(
@@ -170,7 +170,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                       child: Center(
                         child: Text(
                           (!isVerifyEmail)?'An OTP has been sent to your phone number $phone':'An OTP has been sent to your email address $email',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xFF424141),
                             fontSize: 20,
                             fontFamily: 'Roboto',
@@ -197,7 +197,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                                   padding: const EdgeInsets.only(left: 30.0),
                                   child: Text(
                                   (!isVerifyEmail)?'OTP from $phone':'OTP from $email',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF424141),
                                       fontSize: 13,
                                       fontFamily: 'Roboto',
@@ -215,7 +215,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                                     codeLength: _otpCodeLength,
                                     boxSize: 60,
                                     filledAfterTextChange: true,
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                       fontSize: 16,
                                     ),
                                     borderStyle: OutlineInputBorder(
@@ -239,7 +239,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                                           fontWeight: FontWeight.w500,
                                           color: (_start == 0)
                                               ? Constants.accentOrange
-                                              : Color(0xFF9E9FA9)),
+                                              : const Color(0xFF9E9FA9)),
                                     ),
                                     onTap: () async {
                                       authController.resendOTP(
@@ -289,8 +289,8 @@ class _VerifyOTPState extends State<VerifyOTP> {
       return Container(
         width: 19,
         height: 19,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        child: const CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.orangeAccent),
         ),
       );
     } else {

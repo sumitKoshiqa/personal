@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/utils/Constants.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,7 @@ class _CartState extends State<Cart> {
                       children: [
 
                         Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
+                          padding: const EdgeInsets.only(left: 12.0, right: 12),
                           child: ListView(
                             children: [
 
@@ -66,16 +67,16 @@ class _CartState extends State<Cart> {
                               const Row(
                                 children: [
                                   Image(
-                                    height: 25,
-                                    width: 25,
-                                    image: CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/4290/4290854.png"),
+                                    height: 30,
+                                    width: 30,
+                                    image: CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/128/891/891462.png"),
                                   ),
 
                                   SizedBox(width: 10,),
 
                                   Text("Cart",
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w500
+                                        fontWeight: FontWeight.w600
                                     ),
                                   )
                                 ],
@@ -89,12 +90,13 @@ class _CartState extends State<Cart> {
                                   ? Container(
                                 height: 80,
                                 width: Get.width,
-                                padding: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(5),
+                                margin: EdgeInsets.only(left: 5, right: 5),
                                 decoration: BoxDecoration(
-                                    color: const Color(0xFFFCF7EE),
+                                    color: Constants.lightGreen,
                                     borderRadius: BorderRadius.circular(8),
                                     boxShadow: [BoxShadow(
-                                        color: Colors.grey.withOpacity(0.1),
+                                        color: Colors.grey.withOpacity(0.2),
                                         spreadRadius: 1,
                                         blurRadius: 10.0,
                                         offset: const Offset(0,3)
@@ -135,6 +137,8 @@ class _CartState extends State<Cart> {
                                 ),
                               ) : Container(),
                               ),
+
+                             CustomSpacers.height14,
 
                              // cart items list
                              Obx(() =>

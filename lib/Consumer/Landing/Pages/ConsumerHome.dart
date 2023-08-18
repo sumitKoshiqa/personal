@@ -1,7 +1,9 @@
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Consumer/Landing/Controller/HomeNavigationController.dart';
 import 'package:ekikrit/Consumer/Landing/Widgets/DrawerLayoutConsumer.dart';
 import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +16,7 @@ class ConsumerHome extends StatefulWidget {
 
 class _ConsumerHomeState extends State<ConsumerHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  HomeNavigationController homeNavigationController = Get.put(HomeNavigationController());
   TextEditingController etSearch = TextEditingController();
   ProfileController profileController = Get.put(ProfileController());
 
@@ -48,7 +51,29 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                         onPressed: (){
                           _scaffoldKey.currentState!.openDrawer();
                         },
-                        icon: Icon(Icons.menu),
+                        icon: const Icon(Icons.menu),
+                      ),
+
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+
+                            IconButton(
+                              onPressed: (){},
+                              icon: const Icon(CupertinoIcons.bell),
+                            ),
+
+                            IconButton(
+                              onPressed: (){},
+                              icon: const Icon(CupertinoIcons.person_2),
+                            ),
+
+                            CustomSpacers.width10,
+
+
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -130,43 +155,54 @@ class _ConsumerHomeState extends State<ConsumerHome> {
 
                             // grab medicine
                             Expanded(
-                              child: Container(
-                                  height: Get.width * 0.5,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFFFEF8EE),
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [BoxShadow(
-                                          color: Colors.grey.withOpacity(0.1),
-                                          spreadRadius: 1,
-                                          blurRadius: 10.0,
-                                          offset: const Offset(0,3)
-                                      ),]
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        "Grab your Medicine",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14.0,
-                                          color: Color(0xFF837256),
+                              child: GestureDetector(
+                                onTap: (){
+                                  homeNavigationController.persistentTabController.jumpToTab(1);
+                                },
+                                child: Container(
+                                    height: Get.width * 0.5,
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFFEF8EE),
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [BoxShadow(
+                                            color: Colors.grey.withOpacity(0.1),
+                                            spreadRadius: 1,
+                                            blurRadius: 10.0,
+                                            offset: const Offset(0,3)
+                                        ),]
+                                    ),
+                                    child: const Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Grab Your Dietary Supplements",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14.0,
+                                          ),
                                         ),
-                                      ),
 
-                                      SizedBox(height: 5,),
+                                        SizedBox(height: 5,),
 
-                                      Text(
-                                        "Lorem Ipsum is simply dummy text of the printing.",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12.0,
-                                          color: Color(0xFFA38857),
+                                        Text(
+                                          "Get it at your door step",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12.0,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )
+
+                                        CustomSpacers.height4,
+
+                                        Expanded(
+                                          child: Image(
+                                            image: AssetImage('assets/home-screen/supplements.png'),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                ),
                               ),
                             ),
 
@@ -187,38 +223,38 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                                           offset: const Offset(0,3)
                                       ),]
                                   ),
-                                  child: Stack(
+                                  child: const Stack(
                                     children: [
 
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Image(
-                                          image: AssetImage('assets/performyoga.png'),
-                                        ),
-                                      ),
 
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
+                                        children: [
                                           Text(
                                             "Perform Yoga and Meditation",
                                             style: TextStyle(
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                               fontSize: 14.0,
-                                              color: Color(0xFF53702E),
                                             ),
                                           ),
 
                                           SizedBox(height: 5,),
 
                                           Text(
-                                            "Lorem Ipsum is simply dummy text of the printing.",
+                                            "Perform Yoga and Earn Points",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 12.0,
-                                              color: Color(0xFF53702E),
                                             ),
                                           ),
+
+                                          CustomSpacers.height4,
+
+                                          Expanded(
+                                            child: Image(
+                                              image: AssetImage('assets/home-screen/yoga.png'),
+                                            ),
+                                          )
                                         ],
                                       ),
                                     ],
@@ -254,28 +290,34 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                                           offset: const Offset(0,3)
                                       ),]
                                   ),
-                                  child: Column(
+                                  child: const Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const [
+                                    children: [
                                       Text(
                                         "Diet",
                                         style: TextStyle(
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 14.0,
-                                          color: Color(0xFF53702E),
                                         ),
                                       ),
 
                                       SizedBox(height: 5,),
 
                                       Text(
-                                        "Lorem Ipsum is simply dummy text of the printing.",
+                                        "Get the specific meal plans customized for your unique needs",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12.0,
-                                          color: Color(0xFF53702E),
                                         ),
                                       ),
+
+                                      CustomSpacers.height4,
+
+                                      Expanded(
+                                        child: Image(
+                                          image: AssetImage('assets/home-screen/diet.png'),
+                                        ),
+                                      )
                                     ],
                                   )
                               ),
@@ -298,28 +340,34 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                                           offset: const Offset(0,3)
                                       ),]
                                   ),
-                                  child: Column(
+                                  child: const Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const [
+                                    children: [
                                       Text(
                                         "Perform Sleep",
                                         style: TextStyle(
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 14.0,
-                                          color: Color(0xFF837256),
                                         ),
                                       ),
 
                                       SizedBox(height: 5,),
 
                                       Text(
-                                        "Lorem Ipsum is simply dummy text of the printing.",
+                                        "Perform Sleep Meditation and Earn Points",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12.0,
-                                          color: Color(0xFFA38857),
                                         ),
                                       ),
+
+                                      CustomSpacers.height4,
+
+                                      Expanded(
+                                        child: Image(
+                                          image: AssetImage('assets/home-screen/sleep.png'),
+                                        ),
+                                      )
                                     ],
                                   )
                               ),
@@ -355,38 +403,40 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                                           offset: const Offset(0,3)
                                       ),]
                                   ),
-                                  child: Stack(
+                                  child: const Stack(
                                     children: [
 
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Image(
-                                          image: AssetImage('assets/journal.png'),
-                                        ),
-                                      ),
 
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
+                                        children: [
                                           Text(
                                             "Journal Entry",
                                             style: TextStyle(
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                               fontSize: 14.0,
-                                              color: Color(0xFF837256),
                                             ),
                                           ),
 
                                           SizedBox(height: 5,),
 
                                           Text(
-                                            "Lorem Ipsum is simply dummy text of the printing.",
+                                            "Share your results and earn points",
                                             style: TextStyle(
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w400,
                                               fontSize: 12.0,
-                                              color: Color(0xFFA38857),
                                             ),
                                           ),
+
+                                          CustomSpacers.height4,
+
+                                          Expanded(
+                                            child: Image(
+                                              image: AssetImage('assets/home-screen/journal.png'),
+                                            ),
+                                          )
+
+
                                         ],
                                       ),
                                     ],
@@ -412,38 +462,39 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                                           offset: const Offset(0,3)
                                       ),]
                                   ),
-                                  child: Stack(
+                                  child: const Stack(
                                     children: [
 
-                                      const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Image(
-                                          image: AssetImage('assets/wellness.png'),
-                                        ),
-                                      ),
 
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
+                                        children: [
                                           Text(
                                             "Wellness Goals",
                                             style: TextStyle(
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                               fontSize: 14.0,
-                                              color: Color(0xFF53702E),
                                             ),
                                           ),
 
                                           SizedBox(height: 5,),
 
                                           Text(
-                                            "Lorem Ipsum is simply dummy text of the printing.",
+                                            "Understand your wellness needs and therapies",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 12.0,
-                                              color: Color(0xFF53702E),
                                             ),
                                           ),
+
+                                          CustomSpacers.height4,
+
+                                          Expanded(
+                                            child: Image(
+                                              image: AssetImage('assets/home-screen/wellness.png'),
+                                            ),
+                                          )
+
                                         ],
                                       ),
                                     ],

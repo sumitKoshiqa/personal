@@ -27,7 +27,7 @@ class _PaymentConfirmState extends State<PaymentConfirm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
-                Lottie.asset('assets/complete.json',
+                Lottie.asset('assets/anim/success.json',
                     repeat: false,
                     frameRate: FrameRate.max
                 ),
