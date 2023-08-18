@@ -302,7 +302,7 @@ class _YourAccountState extends State<YourAccount> {
         "countryCode": "+91",
         "number": "${etPhone.text.trim()}"
       },
-      "gender": "${selectedGender.toUpperCase()}",
+      "gender": "${selectedGender.toUpperCase()}"
     }''';
     return stParam;
   }

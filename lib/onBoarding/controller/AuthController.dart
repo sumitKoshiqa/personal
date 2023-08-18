@@ -186,7 +186,6 @@ class AuthController extends GetxController with StateMixin {
       }
       else {
         ProfileResponseModel profileResponseModel = profileData;
-
         PreferenceManager().saveProfileId(
             profileID: profileResponseModel.data!.profile!.id!);
         PreferenceManager().saveProfileName(
@@ -194,7 +193,11 @@ class AuthController extends GetxController with StateMixin {
             '${profileResponseModel.data!.profile!.name!.firstName!} ${profileResponseModel.data!.profile!.name!.lastName!}');
         PreferenceManager().saveEmail(
             eMail: profileResponseModel.data!.profile!.phone!.number!);
-        CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+        if(profileResponseModel.data!.identityDto != null) {
+          CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+        }else{
+          CustomNavigator.pushReplace(Routes.LINK_ACCOUNT);
+        }
         disableLoader();
       }
     } else {
@@ -266,7 +269,8 @@ class AuthController extends GetxController with StateMixin {
     bool isLogin = await PreferenceManager().getLogin();
     print('isLogin>>> $isLogin');
     if (isLogin) {
-      CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
+      handleProfile();
+      // CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
       // setUpMessaging();
       // getUserRole();
     } else {
