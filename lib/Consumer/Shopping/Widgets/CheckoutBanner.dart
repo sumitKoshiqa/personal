@@ -19,17 +19,16 @@ class _CheckoutBannerState extends State<CheckoutBanner> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-          () => Positioned(
-        bottom: 5,
-        left: 5,
-        right: 5,
-        child: cartController.cartList.isNotEmpty
+    return Obx(() => Positioned(
+              bottom: 5,
+              left: 5,
+              right: 5,
+              child: cartController.cartList.isNotEmpty
             ? GestureDetector(
           onTap: () {
             // Get.to(const Cart(showBackButton: true,));
             print("Current route ${Get.currentRoute}");
-            if (Get.currentRoute.toString() == "/HomeContainerConsumer"){
+            if (Get.currentRoute.toString() == "/home"){
               homeNavigationController.selectedIndex.value = 3;
             }
           },
@@ -46,11 +45,11 @@ class _CheckoutBannerState extends State<CheckoutBanner> {
                 mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
+                  const Padding(
                     padding:
-                    const EdgeInsets.only(left: 20.0),
+                    EdgeInsets.only(left: 20.0),
                     child: Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.shopping_bag_outlined,
                           color: Colors.white,

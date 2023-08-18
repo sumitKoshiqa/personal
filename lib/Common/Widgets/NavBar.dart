@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 
 class NavBar extends StatefulWidget {
   final String? title;
-  const NavBar({this.title, Key? key}) : super(key: key);
+  final bool? hideBackButton;
+  const NavBar({this.title, this.hideBackButton, Key? key}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -22,7 +23,7 @@ class _NavBarState extends State<NavBar> {
           Row(
             children: [
 
-              const BackButtonPrimary(),
+              (widget.hideBackButton != null) ? Container() : const BackButtonPrimary(),
 
               CustomSpacers.width10,
 

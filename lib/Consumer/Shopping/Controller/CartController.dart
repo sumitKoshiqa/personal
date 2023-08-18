@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Model/CartResponseModel.dart';
 import '../Model/CheckoutResponseModel.dart';
 import '../Model/OrdersResponseModel.dart';
@@ -99,10 +101,18 @@ class CartController extends GetxController with StateMixin{
       print("Current route ${Get.currentRoute}");
       PaymentInfoResponseModel paymentInfoResponseModel = data;
       if (paymentInfoResponseModel.data!.orderState == "INITIATE_PAYMENT"){
-        Get.off(Payment(
-          amount: amount.toString(),
-          pi: paymentInfoResponseModel.data!.paymentDetails!.clientSecret,
-        ));
+        if (kIsWeb){
+          print("Opening web payments");
+          await launchUrl(
+            Uri.parse("https://pinpointcode.com/ekikrit/payments?amount=$amount&pi=${paymentInfoResponseModel.data!.paymentDetails!.clientSecret}"),
+            webOnlyWindowName:'_blank',
+          );
+        }else{
+          Get.off(Payment(
+            amount: amount.toString(),
+            pi: paymentInfoResponseModel.data!.paymentDetails!.clientSecret,
+          ));
+        }
         currentRetries = 0;
         isLoading.value = false;
       }else if (paymentInfoResponseModel.data!.orderState == "IN_PROGRESS"){
