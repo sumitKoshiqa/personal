@@ -6,6 +6,7 @@ import 'package:ekikrit/Consumer/Profile/Model/OtherProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Profile/Networking/ProfileApi.dart';
 import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
+import 'package:ekikrit/onBoarding/networking/auth_api_calls.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
@@ -25,6 +26,16 @@ class ProfileController extends GetxController with StateMixin{
     super.onInit();
     getProfile();
     getOtherUserProfile();
+  }
+
+  editUserProfile({jsonParam})async{
+    var data = await AuthenticationApi().registerUser(
+        jsonParam: jsonParam
+    );
+    print('data>>> $data');
+    if(data != null) {
+      return true;
+    }
   }
 
   Future<void> getProfile() async{
