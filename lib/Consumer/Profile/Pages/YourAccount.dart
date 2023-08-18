@@ -10,6 +10,7 @@ import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class YourAccount extends StatefulWidget {
   const YourAccount({Key? key}) : super(key: key);
@@ -32,6 +33,7 @@ class _YourAccountState extends State<YourAccount> {
   TextEditingController etZip = TextEditingController(text: "abc");
 
   bool isEditing = false;
+  String imagePath = "";
 
   @override
   void initState() {
@@ -62,171 +64,204 @@ class _YourAccountState extends State<YourAccount> {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-      layout: Column(
+      layout: Stack(
         children: [
+          Column(
+            children: [
 
-          const NavBar(title: "Your Account"),
+              const NavBar(title: "Your Account"),
 
-          CustomSpacers.height14,
+              CustomSpacers.height14,
 
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12),
-              child: ListView(
-                children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 12, right: 12),
+                  child: ListView(
+                    children: [
 
-                  // profile pic and update button
-                  Obx(() =>
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                      // profile pic and update button
+                      Obx(() =>
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
 
-                          // self image
-                          CircleAvatar(
-                            backgroundColor: Colors.grey,
-                            radius: 30,
-                            backgroundImage: CachedNetworkImageProvider(profileController.profileModel.value!.data!.profile!.profileImage!.url!),
-                          ),
-
-                          InkWell(
-                            onTap: (){},
-                            child: Container(
-                              height: 30,
-                              padding: const EdgeInsets.only(left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                  color: Constants.lightGreen,
-                                  borderRadius: BorderRadius.circular(15),
-                                  border: Border.all(color: Constants.accentGreen)
+                              // self image
+                              CircleAvatar(
+                                backgroundColor: Colors.grey,
+                                radius: 30,
+                                backgroundImage: CachedNetworkImageProvider(profileController.profileModel.value!.data!.profile!.profileImage!.url!),
                               ),
-                              child: Center(
-                                child: Text("Update Profile",
-                                  style: Get.theme.textTheme.titleMedium!.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12
+
+                              InkWell(
+                                onTap: (){
+                                  pickImage();
+                                },
+                                child: Container(
+                                  height: 30,
+                                  padding: const EdgeInsets.only(left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                      color: Constants.lightGreen,
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Constants.accentGreen)
+                                  ),
+                                  child: Center(
+                                    child: Text("Update Picture",
+                                      style: Get.theme.textTheme.titleMedium!.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          )
-                        ],
+                              )
+                            ],
+                          ),
                       ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etFirstName,
+                        isEnabled: isEditing,
+                        color: Constants.lightOrange,
+                        hint: "First Name",
+                        imagePath: 'assets/your-account/name.png',
+                      ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etLastName,
+                        isEnabled: isEditing,
+                        color: Constants.lightGreen,
+                        hint: "Last Name",
+                        imagePath: 'assets/your-account/name.png',
+                      ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etGender,
+                        isEnabled: isEditing,
+                        color: Constants.lightOrange,
+                        hint: "Gender",
+                        imagePath: 'assets/your-account/name.png',
+                      ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etEmail,
+                        isEnabled: isEditing,
+                        color: Constants.lightGreen,
+                        hint: "Email Address",
+                        imagePath: 'assets/your-account/mail.png',
+                      ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etPhone,
+                        isEnabled: isEditing,
+                        color: Constants.lightOrange,
+                        hint: "Phone",
+                        imagePath: 'assets/your-account/phone.png',
+                      ),
+
+                      CustomSpacers.height18,
+
+
+                      Text("This information is fetched from your EMR-EHR",
+                        style: Get.theme.textTheme.titleMedium!.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade700,
+                            fontSize: 12
+                        ),
+                      ),
+
+                      CustomSpacers.height18,
+
+                      TextFieldPrimary(
+                        textEditingController: etSsn,
+                        isEnabled: isEditing,
+                        color: Constants.lightGreen,
+                        hint: "Last 4 digit of SSN",
+                        imagePath: 'assets/your-account/ssn.png',
+                      ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etDob,
+                        isEnabled: isEditing,
+                        color: Constants.lightOrange,
+                        hint: "Date of Birth",
+                        imagePath: 'assets/your-account/dob.png',
+                      ),
+
+                      CustomSpacers.height14,
+
+                      TextFieldPrimary(
+                        textEditingController: etZip,
+                        isEnabled: isEditing,
+                        color: Constants.lightGreen,
+                        hint: "Zip Code",
+                        imagePath: 'assets/your-account/zip.png',
+                      ),
+
+
+                      CustomSpacers.height24,
+
+                    ],
                   ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etFirstName,
-                    isEnabled: isEditing,
-                    color: Constants.lightOrange,
-                    hint: "First Name",
-                    imagePath: 'assets/your-account/name.png',
-                  ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etLastName,
-                    isEnabled: isEditing,
-                    color: Constants.lightGreen,
-                    hint: "Last Name",
-                    imagePath: 'assets/your-account/name.png',
-                  ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etGender,
-                    isEnabled: isEditing,
-                    color: Constants.lightOrange,
-                    hint: "Gender",
-                    imagePath: 'assets/your-account/name.png',
-                  ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etEmail,
-                    isEnabled: isEditing,
-                    color: Constants.lightGreen,
-                    hint: "Email Address",
-                    imagePath: 'assets/your-account/mail.png',
-                  ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etPhone,
-                    isEnabled: isEditing,
-                    color: Constants.lightOrange,
-                    hint: "Phone",
-                    imagePath: 'assets/your-account/phone.png',
-                  ),
-
-                  CustomSpacers.height18,
-
-
-                  Text("This information is fetched from your EMR-EHR",
-                    style: Get.theme.textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey.shade700,
-                        fontSize: 12
-                    ),
-                  ),
-
-                  CustomSpacers.height18,
-
-                  TextFieldPrimary(
-                    textEditingController: etSsn,
-                    isEnabled: isEditing,
-                    color: Constants.lightGreen,
-                    hint: "Last 4 digit of SSN",
-                    imagePath: 'assets/your-account/ssn.png',
-                  ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etDob,
-                    isEnabled: isEditing,
-                    color: Constants.lightOrange,
-                    hint: "Date of Birth",
-                    imagePath: 'assets/your-account/dob.png',
-                  ),
-
-                  CustomSpacers.height14,
-
-                  TextFieldPrimary(
-                    textEditingController: etZip,
-                    isEnabled: isEditing,
-                    color: Constants.lightGreen,
-                    hint: "Zip Code",
-                    imagePath: 'assets/your-account/zip.png',
-                  ),
-
-
-                  CustomSpacers.height24,
-
-                ],
+                ),
               ),
-            ),
+              
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ButtonPrimary(onTap: (){
+                  if (!isEditing){
+                    setState(() {
+                      isEditing = !isEditing;
+                    });
+                  }else{
+                    setState(() {
+                      isEditing = !isEditing;
+                    });
+                  }
+                }, buttonText: isEditing ? "Save Profile" : "Edit Profile"),
+              )
+            ],
           ),
           
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ButtonPrimary(onTap: (){
-              if (!isEditing){
-                setState(() {
-                  isEditing = !isEditing;
-                });
-              }else{
-                setState(() {
-                  isEditing = !isEditing;
-                });
-              }
-            }, buttonText: isEditing ? "Save Profile" : "Edit Profile"),
+          Obx(() => 
+            profileController.isLoading.value ? Container(
+              height: Get.height,
+              width: Get.width,
+              color: Colors.white.withOpacity(0.4),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ) : Container(),
           )
         ],
       ),
     );
+  }
+
+  pickImage() async{
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    imagePath = image!.path;
+    if (image.path != null){}
+    setState(() {});
+    if (imagePath != null){
+      print("Uplaod image $imagePath");
+    }else{
+      print("Uplaod image null");
+    }
+
+    profileController.uploadImage(filePath: imagePath);
+
   }
 }

@@ -30,6 +30,26 @@ class ProfileApi {
     }
   }
 
+  // // save profile
+  // Future<dynamic> saveProfile({firstName, lastName, email, countryCode, phoneNumber, gender}) async{
+  //   try {
+  //     var postParam = '{ "name": { "firstName": "string", "lastName": "string" }, "email": "string", "phone": { "countryCode": "string", "number": "string" }, "gender": "MALE", "identityId": "string", "authenticationRequestDto": { "deviceId": "string", "appId": "string", "captchaRequest": { "captchaProviderEnum": "GOOGLE", "response": "string" } } }';
+  //     Response response = await dio.post(
+  //         "${ApiEndPoints.baseUrl}profile/user/basic-profile/proxy",
+  //         data: postParam
+  //     );
+  //     print("Create proxy response $response");
+  //     if (response.statusCode == 200) {
+  //       return "ok";
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print("Exception occurred create proxy $e");
+  //     return null;
+  //   }
+  // }
+
   // get other user profile
   Future<dynamic> getOtherUserProfile() async{
     try {
@@ -124,8 +144,9 @@ class ProfileApi {
     File file = File(filePath);
     String fileName = file.path.split('/').last;
     var formData = FormData.fromMap({
-      'profileImage': filePath == "" ? "" : await MultipartFile.fromFile(filePath,filename: fileName),
+      'profileImage=': filePath == "" ? "" : await MultipartFile.fromFile(filePath,filename: fileName),
     });
+    print("Uploading image ${fileName}");
     Response response = await dio.post(
         "${ApiEndPoints.baseUrl}profile/user/basic-profile/profile-image",
         data: formData

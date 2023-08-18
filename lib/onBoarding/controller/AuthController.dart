@@ -27,7 +27,6 @@ import 'package:uuid/uuid.dart';
 
 class AuthController extends GetxController with StateMixin {
 
-
   RxBool isLoading = false.obs;
   RxBool isLogoutLoading = false.obs;
   RxBool isUpdateAvailable = false.obs;

@@ -37,6 +37,12 @@ class ProfileController extends GetxController with StateMixin{
     isLoading.value = false;
   }
 
+  Future<void> saveProfile() async{
+    isLoading.value = true;
+
+    isLoading.value = false;
+  }
+
   Future<void> getOtherUserProfile() async{
     isLoading.value = true;
     var data = await ProfileApi().getOtherUserProfile();
@@ -93,5 +99,16 @@ class ProfileController extends GetxController with StateMixin{
   }
 
 
+  Future<void> uploadImage({filePath}) async{
+    isLoading.value = true;
+    var data = await ProfileApi().uploadImage(
+      filePath: filePath
+    );
+    if (data){
+
+    }
+    isLoading.value = false;
+
+  }
 
 }
