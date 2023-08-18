@@ -356,7 +356,7 @@ class _ConsumerHomeState extends State<ConsumerHome> {
                                       Text(
                                         "Perform Sleep Meditation and Earn Points",
                                         style: TextStyle(
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.w400,
                                           fontSize: 12.0,
                                         ),
                                       ),
