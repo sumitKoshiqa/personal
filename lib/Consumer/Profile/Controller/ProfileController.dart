@@ -29,7 +29,7 @@ class ProfileController extends GetxController with StateMixin{
   }
 
   editUserProfile({jsonParam})async{
-    var data = await AuthenticationApi().registerUser(
+    var data = await ProfileApi().editUserProfile(
         jsonParam: jsonParam
     );
     print('data>>> $data');
