@@ -17,6 +17,7 @@ class ProfileApi {
       Response response = await dio.get(
         "${ApiEndPoints.baseUrl}profile/user/basic-profile",
       );
+      print("Get profile URL ${"${ApiEndPoints.baseUrl}profile/user/basic-profile"}");
       print("Get profile response $response");
       if (response.statusCode == 200) {
         ProfileResponseModel profileResponseModel = ProfileResponseModel.fromJson(response.data);

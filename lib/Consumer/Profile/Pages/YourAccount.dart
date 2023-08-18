@@ -76,7 +76,7 @@ class _YourAccountState extends State<YourAccount> {
     return CustomContainer(
       layout: Stack(
         children: [
-          Column(
+          Obx(() => Column(
             children: [
 
               const NavBar(title: "Your Account"),
@@ -90,44 +90,42 @@ class _YourAccountState extends State<YourAccount> {
                     children: [
 
                       // profile pic and update button
-                      Obx(() =>
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
 
-                              // self image
-                              CircleAvatar(
-                                backgroundColor: Colors.grey,
-                                radius: 30,
-                                backgroundImage: CachedNetworkImageProvider(profileController.profileModel.value!.data!.profile!.profileImage!.url!),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+
+                          // self image
+                          CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            radius: 30,
+                            backgroundImage: CachedNetworkImageProvider(profileController.profileModel.value!.data!.profile!.profileImage!.url!),
+                          ),
+
+                          InkWell(
+                            onTap: (){
+                              pickImage();
+                            },
+                            child: Container(
+                              height: 30,
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              decoration: BoxDecoration(
+                                  color: Constants.lightGreen,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Constants.accentGreen)
                               ),
-
-                              InkWell(
-                                onTap: (){
-                                  pickImage();
-                                },
-                                child: Container(
-                                  height: 30,
-                                  padding: const EdgeInsets.only(left: 10, right: 10),
-                                  decoration: BoxDecoration(
-                                      color: Constants.lightGreen,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(color: Constants.accentGreen)
-                                  ),
-                                  child: Center(
-                                    child: Text("Update Picture",
-                                      style: Get.theme.textTheme.titleMedium!.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 12
-                                      ),
-                                    ),
+                              child: Center(
+                                child: Text("Update Picture",
+                                  style: Get.theme.textTheme.titleMedium!.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-
                       CustomSpacers.height14,
 
                       TextFieldPrimary(
@@ -237,7 +235,7 @@ class _YourAccountState extends State<YourAccount> {
                   ),
                 ),
               ),
-              
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ButtonPrimary(onTap: ()async{
@@ -249,7 +247,7 @@ class _YourAccountState extends State<YourAccount> {
                     String stParam = getUserProfileParam();
                     print('stParam>>> ${jsonDecode(stParam)}');
                     await profileController.editUserProfile(
-                        jsonParam: jsonEncode(stParam),
+                      jsonParam: jsonEncode(stParam),
                     );
                     setState(() {
                       isEditing = !isEditing;
@@ -261,9 +259,8 @@ class _YourAccountState extends State<YourAccount> {
                 }, buttonText: isEditing ? "Save Profile" : "Edit Profile"),
               )
             ],
-          ),
-          
-          Obx(() => 
+          )),
+          Obx(() =>
             profileController.isLoading.value ? Container(
               height: Get.height,
               width: Get.width,
