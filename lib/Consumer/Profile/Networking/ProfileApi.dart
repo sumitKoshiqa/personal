@@ -64,7 +64,7 @@ class ProfileApi {
         return null;
       }
     } catch (e) {
-      print("Exception occurred get profile $e");
+      print("Exception occurred get other profile $e");
       return null;
     }
   }
