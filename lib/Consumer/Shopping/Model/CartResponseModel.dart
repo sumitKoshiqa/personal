@@ -105,6 +105,7 @@ class CartItem {
     this.productSellingPrice,
     this.imageList,
     this.thumbnailImage,
+    this.isChecked
   });
 
   String? sellerProductId;
@@ -114,6 +115,7 @@ class CartItem {
   double? productSellingPrice;
   List<String>? imageList;
   String? thumbnailImage;
+  bool? isChecked;
 
   factory CartItem.fromJson(Map<String, dynamic> json) => CartItem(
     sellerProductId: json["sellerProductId"],
@@ -123,6 +125,7 @@ class CartItem {
     productSellingPrice: json["productSellingPrice"],
     imageList: json["imageList"] == null ? [] : List<String>.from(json["imageList"]!.map((x) => x)),
     thumbnailImage: json["thumbnailImage"],
+    isChecked: false
   );
 
   Map<String, dynamic> toJson() => {

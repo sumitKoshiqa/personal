@@ -83,99 +83,109 @@ class _HomeContainerConsumerState extends State<HomeContainerConsumer> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: scaffoldKey,
-        drawer: const DrawerLayoutConsumer(),
-        bottomNavigationBar: Obx(() =>
-            Container(
-              child: BottomNavigationBar(
-                currentIndex: homeNavigationController.selectedIndex.value,
-                selectedItemColor: Constants.accentGreen,
-                type: BottomNavigationBarType.fixed,
-                selectedLabelStyle:
-                GoogleFonts.getFont("Lato", color: Colors.black),
-                unselectedLabelStyle: GoogleFonts.getFont("Lato"),
-                items: <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    // iconFun(path:Icons.home,context: context )
-                    icon: Icon(
-                      CupertinoIcons.home,
-                      color: homeNavigationController.selectedIndex.value == 0 ? Constants.accentGreen : Colors.grey,
-                      size: 25,
+    return WillPopScope(
+      onWillPop: () async{
+        if (homeNavigationController.persistentTabController.index != 0){
+          homeNavigationController.persistentTabController.jumpToTab(0);
+          return false;
+        }else{
+          return true;
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          key: scaffoldKey,
+          drawer: const DrawerLayoutConsumer(),
+          bottomNavigationBar: Obx(() =>
+              Container(
+                child: BottomNavigationBar(
+                  currentIndex: homeNavigationController.selectedIndex.value,
+                  selectedItemColor: Constants.accentGreen,
+                  type: BottomNavigationBarType.fixed,
+                  selectedLabelStyle:
+                  GoogleFonts.getFont("Lato", color: Colors.black),
+                  unselectedLabelStyle: GoogleFonts.getFont("Lato"),
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      // iconFun(path:Icons.home,context: context )
+                      icon: Icon(
+                        CupertinoIcons.home,
+                        color: homeNavigationController.selectedIndex.value == 0 ? Constants.accentGreen : Colors.grey,
+                        size: 25,
+                      ),
+                      label: 'Home',
+                      //  backgroundColor: Colors.red,
                     ),
-                    label: 'Home',
-                    //  backgroundColor: Colors.red,
-                  ),
-                  BottomNavigationBarItem(
-                    // iconFun(path:Icons.home,context: context )
-                    icon: Icon(
-                      CupertinoIcons.app_badge,
-                      color: homeNavigationController.selectedIndex.value == 1 ? Constants.accentGreen : Colors.grey,
-                      size: 25,
+                    BottomNavigationBarItem(
+                      // iconFun(path:Icons.home,context: context )
+                      icon: Icon(
+                        CupertinoIcons.app_badge,
+                        color: homeNavigationController.selectedIndex.value == 1 ? Constants.accentGreen : Colors.grey,
+                        size: 25,
+                      ),
+                      label: 'Recommended',
+                      //  backgroundColor: Colors.red,
                     ),
-                    label: 'Recommended',
-                    //  backgroundColor: Colors.red,
-                  ),
-                  BottomNavigationBarItem(
-                    // iconFun(path:Icons.home,context: context )
-                    icon: Icon(
-                      Icons.history,
-                      color: homeNavigationController.selectedIndex.value == 2 ? Constants.accentGreen : Colors.grey,
-                      size: 25,
+                    BottomNavigationBarItem(
+                      // iconFun(path:Icons.home,context: context )
+                      icon: Icon(
+                        Icons.history,
+                        color: homeNavigationController.selectedIndex.value == 2 ? Constants.accentGreen : Colors.grey,
+                        size: 25,
+                      ),
+                      label: 'History',
+                      //  backgroundColor: Colors.red,
                     ),
-                    label: 'History',
-                    //  backgroundColor: Colors.red,
-                  ),
-                  BottomNavigationBarItem(
-                    // iconFun(path:Icons.home,context: context )
-                    icon: Stack(
-                      children: [
-                        Icon(
-                          CupertinoIcons.cart,
-                          color: homeNavigationController.selectedIndex.value == 3 ? Constants.accentGreen : Colors.grey,
-                          size: 25,
-                        ),
-                        // Positioned(
-                        //   right: -10,
-                        //   child: Container(
-                        //     height: 15,
-                        //     width: 15,
-                        //     decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(10),
-                        //       color: Colors.deepOrange,
-                        //     ),
-                        //   ),
-                        // )
-                      ],
+                    BottomNavigationBarItem(
+                      // iconFun(path:Icons.home,context: context )
+                      icon: Stack(
+                        children: [
+                          Icon(
+                            CupertinoIcons.cart,
+                            color: homeNavigationController.selectedIndex.value == 3 ? Constants.accentGreen : Colors.grey,
+                            size: 25,
+                          ),
+                          // Positioned(
+                          //   right: -10,
+                          //   child: Container(
+                          //     height: 15,
+                          //     width: 15,
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10),
+                          //       color: Colors.deepOrange,
+                          //     ),
+                          //   ),
+                          // )
+                        ],
+                      ),
+                      label: 'Cart',
+                      //  backgroundColor: Colors.red,
                     ),
-                    label: 'Cart',
-                    //  backgroundColor: Colors.red,
-                  ),
 
-                ],
-                onTap: (index) {
-                  setState(() {
-                    homeNavigationController.selectedIndex.value = index;
-                  });
-                  if (index == 1) {
+                  ],
+                  onTap: (index) {
+                    setState(() {
+                      homeNavigationController.selectedIndex.value = index;
+                    });
+                    if (index == 1) {
 
-                  }
-                },
+                    }
+                  },
+                ),
               ),
-            ),
+          ),
+          body: Obx(() =>
+              IndexedStack(
+                index: homeNavigationController.selectedIndex.value,
+                children: <Widget>[
+                  const ConsumerHome(),
+                  const FormulationRecommendations(),
+                  const Blank(),
+                  const Cart(),
+                ],
+              ),
+          )
         ),
-        body: Obx(() =>
-            IndexedStack(
-              index: homeNavigationController.selectedIndex.value,
-              children: <Widget>[
-                const ConsumerHome(),
-                const FormulationRecommendations(),
-                const Blank(),
-                const Cart(),
-              ],
-            ),
-        )
       ),
     );
   }

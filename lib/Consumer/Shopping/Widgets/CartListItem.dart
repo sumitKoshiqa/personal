@@ -25,12 +25,14 @@ class _CartListItemState extends State<CartListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.grey.withOpacity(0.3))
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
           // product image
@@ -39,8 +41,9 @@ class _CartListItemState extends State<CartListItem> {
             width: 100,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                image: const DecorationImage(
-                  image: CachedNetworkImageProvider("https://cdn.shopify.com/s/files/1/0035/8413/1145/products/amrit-600_5097fd1d-1887-4f60-8855-361fbfe26bc5_2000x.jpg?v=1659605594"),
+                image:  DecorationImage(
+                  image: CachedNetworkImageProvider(widget.cartItem!.thumbnailImage!),
+                  fit: BoxFit.cover
                 )
             ),
           ),
@@ -55,6 +58,7 @@ class _CartListItemState extends State<CartListItem> {
 
                 const SizedBox(height: 5,),
 
+                // name
                 Row(
                   children: [
                     Expanded(
@@ -80,10 +84,12 @@ class _CartListItemState extends State<CartListItem> {
                     )
                   ],
                 ),
+
+                // price
                 Text("\$${widget.cartItem!.productSellingPrice!}",
                   style: TextStyle(
-                      color: Colors.deepOrange.withOpacity(0.7),
-                      fontWeight: FontWeight.w600
+                      fontWeight: FontWeight.w600,
+                    fontSize: 16
                   ),
                 ),
 
@@ -96,9 +102,12 @@ class _CartListItemState extends State<CartListItem> {
                         height: 24.0,
                         width: 24.0,
                         child:  Checkbox(
-                          value: true,
+                          value: widget.cartItem!.isChecked!,
                           activeColor: Constants.accentGreen,
-                          onChanged: (newValue){},
+                          onChanged: (newValue){
+                            widget.cartItem!.isChecked = !widget.cartItem!.isChecked!;
+                            setState(() {});
+                          },
                         )
                     ),
 
@@ -119,14 +128,14 @@ class _CartListItemState extends State<CartListItem> {
 
                 // subscription dropdown
                 Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 2, bottom: 2),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(4),
                       border: Border.all(color: Colors.grey)
                   ),
                   child:  DropdownButton(
                     isDense: true,
-                    iconSize: 0,
+                    iconSize: 20,
                     underline: const SizedBox(),
                     hint: Padding(
                       padding: const EdgeInsets.only(left: 8.0),

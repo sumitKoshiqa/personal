@@ -50,7 +50,7 @@ class _CartState extends State<Cart> {
                 children: [
 
                   // nav bar
-                  NavBar(title: "Cart",),
+                  const NavBar(title: "Your Cart", hideBackButton: true,),
 
                   Expanded(
                     child: Stack(
@@ -63,8 +63,8 @@ class _CartState extends State<Cart> {
 
                               const SizedBox(height: 20,),
 
-                              Row(
-                                children: const [
+                              const Row(
+                                children: [
                                   Image(
                                     height: 25,
                                     width: 25,
@@ -89,9 +89,9 @@ class _CartState extends State<Cart> {
                                   ? Container(
                                 height: 80,
                                 width: Get.width,
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFFCF7EE),
+                                    color: const Color(0xFFFCF7EE),
                                     borderRadius: BorderRadius.circular(8),
                                     boxShadow: [BoxShadow(
                                         color: Colors.grey.withOpacity(0.1),
@@ -102,11 +102,11 @@ class _CartState extends State<Cart> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Expanded(
+                                    const Expanded(
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
+                                        children: [
                                           Text("Sub-Total Price:",
                                             style: TextStyle(
                                                 fontSize: 16,
@@ -126,8 +126,8 @@ class _CartState extends State<Cart> {
                                     Obx(() =>
                                         Text("\$${cartController.subTotalAmount}",
                                           style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600
                                           ),
                                         ),
                                     ),
@@ -180,9 +180,9 @@ class _CartState extends State<Cart> {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    color: Colors.grey.shade300,
+                                    color: Colors.grey.shade400,
                                       fontSize: 22,
-                                      fontWeight: FontWeight.w600
+                                      fontWeight: FontWeight.w500
                                   ),
                                 ),
                               ],
