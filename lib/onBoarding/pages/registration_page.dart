@@ -137,13 +137,13 @@ class _RegistrationState extends State<Registration> {
         "additionalProp3": "string"
       },
       "profileImage": {
-        "url": "string",
-        "id": "string"
+        "url": null,
+        "id": null
       },
       "imageList": [
         {
-          "url": "string",
-          "id": "string"
+          "url": null,
+          "id": null
         }
       ],
       "authenticationRequestDto": {
