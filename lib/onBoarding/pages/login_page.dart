@@ -1,8 +1,10 @@
 import 'package:ekikrit/Common/utils/ApiEndPoints.dart';
+import 'package:ekikrit/Common/utils/CustomSpacers.dart';
 import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Common/utils/common_service_provider.dart';
 import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 import 'package:ekikrit/onBoarding/pages/login_with_email.dart';
+import 'package:ekikrit/onBoarding/widgets/custom_label_card.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +18,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   String stWebViewURL = '';
   String stWebViewFBURL = '';
   final AuthController authController = Get.put(AuthController());
@@ -24,34 +25,109 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    stWebViewFBURL =  '${ApiEndPoints.baseUrl}authentication/user/login/facebook?client=ANDROID_APP&appId=${commonServices.getAppID()}&deviceId=${prefServices.getDeviceId()}';
-    stWebViewURL = '${ApiEndPoints.baseUrl}authentication/user/login/google?client=ANDROID_APP&appId=${commonServices.getAppID()}&deviceId=${prefServices.getDeviceId()}';
+    stWebViewFBURL =
+        '${ApiEndPoints.baseUrl}authentication/user/login/facebook?client=ANDROID_APP&appId=${commonServices.getAppID()}&deviceId=${prefServices.getDeviceId()}';
+    stWebViewURL =
+        '${ApiEndPoints.baseUrl}authentication/user/login/google?client=ANDROID_APP&appId=${commonServices.getAppID()}&deviceId=${prefServices.getDeviceId()}';
   }
+
   Future<void> callSignInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     print('googleUser>>> ${googleUser!.email}>>>> ${googleUser.id}');
-    final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser.authentication;
     print('googleAuth>>> ${googleAuth!.idToken}');
     authController.isLoading.value = true;
     await authController.verifyGoogleLogin(
-        accessToken:googleAuth.accessToken,
+        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
         emailId: googleUser.email,
         userId: googleUser.id,
         clientCode: 'ANDROID_APP',
         deviceId: prefServices.getDeviceId(),
-        appId: commonServices.getAppID()
-
-    );
-
-
+        appId: commonServices.getAppID());
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: ListView(
           children: [
+            // Container(
+            //   width: Get.width,
+            //   height: Get.height/2,
+            //   clipBehavior: Clip.antiAlias,
+            //   decoration: ShapeDecoration(
+            //
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(0),
+            //     ),
+            //   ),
+            //   child: Stack(
+            //     children: [
+            //       Positioned(
+            //         left: -72,
+            //         top: -21,
+            //         child: Opacity(
+            //           opacity: 0.10,
+            //           child: Container(
+            //             width: 520,
+            //             height: 206,
+            //             decoration: ShapeDecoration(
+            //               color: Color(0xFFFFB032),
+            //               shape: OvalBorder(),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       Positioned(
+            //         left: Get.width/3.5,
+            //         top: 82,
+            //         child: Image.asset('assets/images/onboarding/splash_logo.png',
+            //           height: 168,
+            //           width: 152,
+            //         ),
+            //       ),
+            //       Positioned(
+            //         left: 78,
+            //         top: 256,
+            //         child: Text(
+            //           '| Affordable | Personalized | Integrative |',
+            //           textAlign: TextAlign.center,
+            //           style: TextStyle(
+            //             color: Color(0xFFFAB100),
+            //             fontSize: 12,
+            //             fontFamily: 'Roboto',
+            //             fontWeight: FontWeight.w700,
+            //             height: 1.67,
+            //           ),
+            //         ),
+            //       ),
+            //       Positioned(
+            //         left: 47,
+            //         top: 286,
+            //         child: Text(
+            //           'Unleashing Full Potential In Chronic Conditions',
+            //           textAlign: TextAlign.center,
+            //           style: TextStyle(
+            //             color: Color(0xFF879C2E),
+            //             fontSize: 14,
+            //             fontFamily: 'Roboto',
+            //             fontWeight: FontWeight.w600,
+            //             height: 1.43,
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // CustomSpacers.height24,
+            // const CustomLabelCard(
+            //   iconPath: 'assets/your-account/facebook.png',
+            //   labelText: 'Continue with me',
+            // )
+            //           onTap: (){
             Container(
               width: Get.width,
               height: Get.height,
@@ -76,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 35,
                     top: 396,
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         Get.to(LoginWithEmail());
                       },
                       child: Container(
@@ -95,9 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 35,
                     top: 465,
                     child: InkWell(
-                      onTap: (){
-
-                      },
+                      onTap: () {},
                       child: Container(
                         width: 336,
                         height: 53,
@@ -114,9 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 35,
                     top: 534,
                     child: InkWell(
-                      onTap: (){
-
-                      },
+                      onTap: () {},
                       child: Container(
                         width: 336,
                         height: 53,
@@ -133,9 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 35,
                     top: 603,
                     child: InkWell(
-                      onTap: (){
-
-                      },
+                      onTap: () {},
                       child: Container(
                         width: 336,
                         height: 53,
@@ -152,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 95,
                     top: 413,
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Get.to(LoginWithEmail());
                       },
                       child: Text(
@@ -191,7 +261,8 @@ class _LoginPageState extends State<LoginPage> {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: 'By tapping Continue, you agree to our Terms and acknowledge that you have read our ',
+                              text:
+                                  'By tapping Continue, you agree to our Terms and acknowledge that you have read our ',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -249,7 +320,8 @@ class _LoginPageState extends State<LoginPage> {
                                     width: 24,
                                     height: 24,
                                     child: Stack(children: [
-                                      Image.asset('assets/your-account/facebook.png')
+                                      Image.asset(
+                                          'assets/your-account/facebook.png')
                                     ]),
                                   ),
                                 ),
@@ -264,19 +336,15 @@ class _LoginPageState extends State<LoginPage> {
                     left: 94,
                     top: 482,
                     child: GestureDetector(
-                      onTap: ()async{
+                      onTap: () async {
                         if (kIsWeb) {
                           await commonServices.launch(
-                              url: stWebViewFBURL,
-                              isNewTab: false
-                          );
-                        }
-                        else {
+                              url: stWebViewFBURL, isNewTab: false);
+                        } else {
                           await commonServices.launch(
                               url: stWebViewFBURL,
                               isNewTab: false,
-                              isInAppView: false
-                          );
+                              isInAppView: false);
                         }
                       },
                       child: Text(
@@ -309,7 +377,7 @@ class _LoginPageState extends State<LoginPage> {
                     left: 94,
                     top: 620,
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
                         callSignInWithGoogle();
                       },
                       child: Text(
@@ -347,7 +415,8 @@ class _LoginPageState extends State<LoginPage> {
                                     width: 24,
                                     height: 24,
                                     child: Stack(children: [
-                                      Image.asset('assets/your-account/apple.png')
+                                      Image.asset(
+                                          'assets/your-account/apple.png')
                                     ]),
                                   ),
                                 ),
@@ -390,7 +459,8 @@ class _LoginPageState extends State<LoginPage> {
                                     width: 24,
                                     height: 24,
                                     child: Stack(children: [
-                                      Image.asset('assets/your-account/google.png')
+                                      Image.asset(
+                                          'assets/your-account/google.png')
                                     ]),
                                   ),
                                 ),
@@ -425,7 +495,8 @@ class _LoginPageState extends State<LoginPage> {
                                     height: 17,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: AssetImage('assets/your-account/sms.png'),
+                                        image: AssetImage(
+                                            'assets/your-account/sms.png'),
                                         fit: BoxFit.fill,
                                       ),
                                     ),
@@ -454,9 +525,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   Positioned(
-                    left: Get.width/3.5,
+                    left: Get.width / 3.5,
                     top: 82,
-                    child: Image.asset('assets/images/onboarding/splash_logo.png',
+                    child: Image.asset(
+                      'assets/images/onboarding/splash_logo.png',
                       height: 168,
                       width: 152,
                     ),
