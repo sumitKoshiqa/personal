@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ekikrit/Common/Widgets/ButtonPrimary.dart';
 import 'package:ekikrit/Common/Widgets/CustomContainer.dart';
@@ -5,12 +7,16 @@ import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/Widgets/TextFieldPrimary.dart';
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/PreferenceManager.dart';
 import 'package:ekikrit/Consumer/Profile/Controller/ProfileController.dart';
 import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
+import 'package:ekikrit/onBoarding/controller/AuthController.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../Common/Widgets/option_selector.dart';
 
 class YourAccount extends StatefulWidget {
   const YourAccount({Key? key}) : super(key: key);
@@ -31,6 +37,10 @@ class _YourAccountState extends State<YourAccount> {
   TextEditingController etSsn = TextEditingController(text: "abc");
   TextEditingController etDob = TextEditingController(text: "abc");
   TextEditingController etZip = TextEditingController(text: "abc");
+  final AuthController authController = Get.put(AuthController());
+
+  List<String> genderList = ["Male", "Female"];
+  String selectedGender = "Male";
 
   bool isEditing = false;
   String imagePath = "";
@@ -140,13 +150,24 @@ class _YourAccountState extends State<YourAccount> {
 
                       CustomSpacers.height14,
 
-                      TextFieldPrimary(
-                        textEditingController: etGender,
-                        isEnabled: isEditing,
-                        color: Constants.lightOrange,
-                        hint: "Gender",
-                        imagePath: 'assets/your-account/name.png',
+                      OptionSelector(
+                          selectedOption: selectedGender,
+                          options: genderList,
+                          bgColor: 0xFFFFF7EB,
+                          setNewValue: (val) {
+                            setState(() {
+                              selectedGender = val;
+                            });
+                          }
                       ),
+
+                      // TextFieldPrimary(
+                      //   textEditingController: etGender,
+                      //   isEnabled: isEditing,
+                      //   color: Constants.lightOrange,
+                      //   hint: "Gender",
+                      //   imagePath: 'assets/your-account/name.png',
+                      // ),
 
                       CustomSpacers.height14,
 
@@ -219,16 +240,24 @@ class _YourAccountState extends State<YourAccount> {
               
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ButtonPrimary(onTap: (){
+                child: ButtonPrimary(onTap: ()async{
                   if (!isEditing){
                     setState(() {
                       isEditing = !isEditing;
                     });
                   }else{
+                    String stParam = getUserProfileParam();
+                    print('stParam>>> ${jsonDecode(stParam)}');
+                    await profileController.editUserProfile(
+                        jsonParam: jsonEncode(stParam),
+                    );
                     setState(() {
                       isEditing = !isEditing;
                     });
                   }
+
+
+
                 }, buttonText: isEditing ? "Save Profile" : "Edit Profile"),
               )
             ],
@@ -263,5 +292,45 @@ class _YourAccountState extends State<YourAccount> {
 
     profileController.uploadImage(filePath: imagePath);
 
+  }
+
+  String getUserProfileParam() {
+    String stParam = '''{
+      "name": {
+        "firstName": "${etFirstName.text.trim()}",
+        "lastName": "${etLastName.text.trim()}"
+      },
+      "email": "${etEmail.text.trim()}",
+      "phone": {
+        "countryCode": "+91",
+        "number": "${etPhone.text.trim()}"
+      },
+      "gender": "${selectedGender.toUpperCase()}",
+      "relationshipType": "SELF",
+      "attribute": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      },
+      "profileImage": {
+        "url": null,
+        "id": null
+      },
+      "imageList": [
+        {
+          "url": null,
+          "id": null
+        }
+      ],
+      "authenticationRequestDto": {
+        "deviceId": "${prefServices.getDeviceId()}",
+        "appId": "${prefServices.getUniqueId()}",
+        "captchaRequest": {
+          "captchaProviderEnum": "GOOGLE",
+          "response": "string"
+        }
+      }
+    }''';
+    return stParam;
   }
 }
