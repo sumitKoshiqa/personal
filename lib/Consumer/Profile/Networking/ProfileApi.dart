@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:ekikrit/Common/utils/ApiEndPoints.dart';
 import 'package:ekikrit/Common/utils/GetDio.dart';
@@ -7,9 +9,34 @@ import 'package:ekikrit/Consumer/Profile/Model/OtherProfileResponseModel.dart';
 import 'package:ekikrit/Consumer/Profile/Model/ProfileResponseModel.dart';
 import 'dart:io';
 
+import 'package:ekikrit/onBoarding/data_model/registration_data_model.dart';
+
 class ProfileApi {
 
   var dio = GetDio().getDio();
+
+
+  // register User
+  Future<dynamic> editUserProfile({jsonParam}) async {
+    try {
+      print("jsonParam otp >> ${jsonDecode(jsonParam)}");
+      print("reSend otp >> ${ApiEndPoints.createProfile}");
+      Response response = await dio.put(
+          ApiEndPoints.createProfile,
+          data: jsonDecode(jsonParam));
+      print("Send otp response 43 $response");
+      if (response.statusCode == 200) {
+        RegistrationDataModel regResponseDataModel =
+        RegistrationDataModel.fromJson(response.data);
+        return regResponseDataModel;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Exception occurred sending otp $e");
+      return null;
+    }
+  }
 
   // get profile
   Future<dynamic> getProfile() async{
