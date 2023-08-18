@@ -28,7 +28,7 @@ class _LinkIdentityState extends State<LinkIdentity> {
   final AuthController authController = Get.put(AuthController());
   String birthDateInStringDisplay='';
   String birthDateInStringParam='';
-  DateTime birthDate=DateTime.now();
+  DateTime selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
@@ -72,33 +72,15 @@ class _LinkIdentityState extends State<LinkIdentity> {
                   CustomSpacers.height24,
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0,right: 20),
-                    child: InkWell(
-                      onTap: ()async{
-                        final datePick= await showDatePicker(
-                            context: context,
-                            initialDate:  DateTime.now(),
-                            firstDate:  DateTime(1900),
-                            lastDate:  DateTime.now().add(Duration(days: 1)),
-                        );
-                        if(datePick!=null && datePick!=birthDate){
-                          setState(() {
-                            birthDate=datePick;
-                            birthDateInStringDisplay = DateFormat('dd MMM, yyyy').format(birthDate);
-                            birthDateInStringParam = DateFormat('yyyy-MM-dd').format(birthDate);
-                            dobController.text = birthDateInStringDisplay;
-
-                          });
-                        }
-
+                    child: TextFieldPrimary(
+                      textEditingController: dobController,
+                      color: Constants.lightGreen,
+                      hint: "Date of Birth",
+                      isEnabled: false,
+                      onTap: (){
+                        _selectDate(context);
                       },
-                      child: TextFieldPrimary(
-                        textEditingController: dobController,
-                        color: Constants.lightOrange,
-                        hint: "Date of birth",
-                        isEnabled: false,
-                        txtInputType: TextInputType.text,
-                        imagePath: 'assets/images/onboarding/calendar.png',
-                      ),
+                      imagePath: 'assets/your-account/dob.png',
                     ),
                   ),
                   CustomSpacers.height24,
@@ -136,8 +118,23 @@ class _LinkIdentityState extends State<LinkIdentity> {
     );
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+      dobController.text = DateFormat("yyyy-MM-dd").format(selectedDate);
+      print("Selected date ${DateFormat("yyyy-MM-dd").format(selectedDate)}");
+    }
+  }
+
   String getUserIdentityParam() {
-    String stParam = '{"ssn": "${ssnController.text.trim().toString()}","zipCode": "${zipCodeController.text.trim().toString()}","dob": "$birthDateInStringParam"}';
+    String stParam = '{"ssn": "${ssnController.text.trim().toString()}","zipCode": "${zipCodeController.text.trim().toString()}","dob": "${DateFormat("yyyy-MM-dd").format(selectedDate)}"}';
     return stParam;
   }
 }

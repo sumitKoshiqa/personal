@@ -306,30 +306,6 @@ class _YourAccountState extends State<YourAccount> {
         "number": "${etPhone.text.trim()}"
       },
       "gender": "${selectedGender.toUpperCase()}",
-      "relationshipType": "SELF",
-      "attribute": {
-        "additionalProp1": "string",
-        "additionalProp2": "string",
-        "additionalProp3": "string"
-      },
-      "profileImage": {
-        "url": null,
-        "id": null
-      },
-      "imageList": [
-        {
-          "url": null,
-          "id": null
-        }
-      ],
-      "authenticationRequestDto": {
-        "deviceId": "${prefServices.getDeviceId()}",
-        "appId": "${prefServices.getUniqueId()}",
-        "captchaRequest": {
-          "captchaProviderEnum": "GOOGLE",
-          "response": "string"
-        }
-      }
     }''';
     return stParam;
   }
