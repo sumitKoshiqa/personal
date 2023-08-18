@@ -66,16 +66,7 @@ class RegistrationSuccessful extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: Get.width/2.5,
-                  padding: const EdgeInsets.only(left: 20.0,right: 20),
-                  child: ButtonSecondary(
-                      onTap: (){
-                        CustomNavigator.pushReplace(Routes.CONSUMER_HOME);
-                      }, buttonText: "Skip"),
-                ),
-                hSpacer(8),
-                Container(
-                  width: Get.width/2.5,
+                  width: Get.width,
                   padding: const EdgeInsets.only(left: 20.0,right: 20),
                   child: ButtonPrimary(
                       onTap: (){
