@@ -245,7 +245,7 @@ class _CheckoutState extends State<Checkout> {
 
                                     SizedBox(width: 10,),
 
-                                    Text("Monday April 24th",
+                                    Text("Monday Sep 4th",
                                       style: TextStyle(
                                           fontSize: 14,
                                           color: Color(0xFF2C7504),
@@ -278,7 +278,7 @@ class _CheckoutState extends State<Checkout> {
                                             children: [
                                               addressController.addressList.isNotEmpty ?  Padding(
                                                 padding: const EdgeInsets.only(left: 12.0),
-                                                child: Text("${addressController.addressList[0].name!}, ${addressController.addressList[0].line1!}, ${addressController.addressList[0].line2!} ${addressController.addressList[0].pinCode!.pinCode}, ${addressController.addressList[0].state!.name!}, ${addressController.addressList[0].country!.name}",
+                                                child: Text("${addressController.selectedAddress.value!.name!}, ${addressController.selectedAddress.value!.line1!}, ${addressController.selectedAddress.value!.line2!} ${addressController.selectedAddress.value!.pinCode!.pinCode}, ${addressController.selectedAddress.value!.state!.name!}, ${addressController.selectedAddress.value!.country!.name}",
                                                   style: const TextStyle(
                                                       fontSize: 14,
                                                       fontWeight: FontWeight.w400
