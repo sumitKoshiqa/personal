@@ -183,7 +183,7 @@ class _YourAccountState extends State<YourAccount> {
 
                       TextFieldPrimary(
                         textEditingController: etSsn,
-                        isEnabled: isEditing,
+                        isEnabled: false,
                         color: Constants.lightGreen,
                         hint: "Last 4 digit of SSN",
                         imagePath: 'assets/your-account/ssn.png',
@@ -193,7 +193,7 @@ class _YourAccountState extends State<YourAccount> {
 
                       TextFieldPrimary(
                         textEditingController: etDob,
-                        isEnabled: isEditing,
+                        isEnabled: false,
                         color: Constants.lightOrange,
                         hint: "Date of Birth",
                         imagePath: 'assets/your-account/dob.png',
@@ -203,7 +203,7 @@ class _YourAccountState extends State<YourAccount> {
 
                       TextFieldPrimary(
                         textEditingController: etZip,
-                        isEnabled: isEditing,
+                        isEnabled: false,
                         color: Constants.lightGreen,
                         hint: "Zip Code",
                         imagePath: 'assets/your-account/zip.png',
