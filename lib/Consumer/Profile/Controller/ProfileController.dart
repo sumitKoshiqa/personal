@@ -72,6 +72,7 @@ class ProfileController extends GetxController with StateMixin{
       phoneNumber: phoneNumber
     );
     if (data != null){
+      getProfile();
       Get.back();
     }
     isLoading.value = false;
@@ -105,6 +106,7 @@ class ProfileController extends GetxController with StateMixin{
     if (data == "ok"){
       Get.back();
       ShowMessages().showSnackBarRed("Minor Added", "");
+      getProfile();
     }
     isLoading.value = false;
   }
@@ -116,6 +118,7 @@ class ProfileController extends GetxController with StateMixin{
       filePath: filePath
     );
     if (data){
+      getProfile();
 
     }
     isLoading.value = false;
