@@ -69,6 +69,7 @@ class AuthController extends GetxController with StateMixin {
       RegistrationDataModel resResponseModel = data;
       PreferenceManager().saveProfileId(profileID:resResponseModel.response!.profile!.id);
       CustomNavigator.pushReplace(Routes.VERIFY_OTP,arguments: {'phone': enteredPhone,'isRegistered': 'true'});
+
     }
   }
 

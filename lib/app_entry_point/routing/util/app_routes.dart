@@ -2,6 +2,7 @@ abstract class Routes {
   Routes._();
 
   static const SPLASH = '/';
+  static const TEMP_FILE = '/temp-file';
   static const LOGIN = '/login';
   static const VERIFY_OTP = '/verify_otp';
   static const CONSUMER_HOME = '/home';
