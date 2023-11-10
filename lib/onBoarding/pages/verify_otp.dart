@@ -12,7 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class VerifyOTP extends StatefulWidget {
-  const VerifyOTP({super.key});
+  final String? stTemValue;
+  const VerifyOTP({super.key,this.stTemValue});
 
   @override
   State<VerifyOTP> createState() => _VerifyOTPState();
