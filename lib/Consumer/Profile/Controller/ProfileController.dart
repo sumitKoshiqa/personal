@@ -79,6 +79,7 @@ class ProfileController extends GetxController with StateMixin{
   }
 
 
+
   searchMinor({ssn, zipcode, dob}) async{
     isLoading.value = true;
     var data = await ProfileApi().searchMinor(

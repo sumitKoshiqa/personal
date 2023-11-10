@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ekikrit/Common/Widgets/NavBar.dart';
 import 'package:ekikrit/Common/utils/Constants.dart';
 import 'package:ekikrit/Common/utils/CustomSpacers.dart';
+import 'package:ekikrit/Common/utils/custom_navigator.dart';
+import 'package:ekikrit/app_entry_point/routing/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:get/get.dart';
@@ -205,9 +207,7 @@ class _CartState extends State<Cart> {
                     cartController.cartList.isNotEmpty && cartController.isLoading.value == false
                         ? GestureDetector(
                       onTap: (){
-                        Get.to(Checkout(
-                          cartId: cartController.cartModel.value!.data!.cartId!,
-                        ));
+                        CustomNavigator.pushTo("${Routes.CONSUMER_CHECKOUT}?cartId=${cartController.cartModel.value!.data!.cartId!}");
                       },
                       child: Container(
                        height: 50,

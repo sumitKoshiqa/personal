@@ -9,6 +9,7 @@ import 'package:ekikrit/Consumer/Profile/Pages/MinorsPage.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/NotificationSettings.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/ProxyPage.dart';
 import 'package:ekikrit/Consumer/Profile/Pages/YourAccount.dart';
+import 'package:ekikrit/Consumer/Shopping/Pages/Checkout.dart';
 import 'package:ekikrit/Consumer/Shopping/Pages/Orders.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/auth_middleware.dart';
 import 'package:ekikrit/app_entry_point/routing/middleware/params_middleware.dart';
@@ -42,30 +43,30 @@ class AppPages{
     // login
     GetPage(
         name: Routes.LOGIN,
-        page: () =>  LoginPage(),
+        page: () =>  const LoginPage(),
         transition: Transition.noTransition),
     // login
     GetPage(
         name: Routes.VERIFY_OTP,
-        page: () =>  VerifyOTP(),
+        page: () =>  const VerifyOTP(),
         transition: Transition.noTransition),
 
     // reg
     GetPage(
         name: Routes.REGISTRATION,
-        page: () =>  Registration(),
+        page: () =>  const Registration(),
         transition: Transition.noTransition),
     // reg
     GetPage(
         name: Routes.LINK_ACCOUNT,
-        page: () =>  LinkIdentity(),
+        page: () =>  const LinkIdentity(),
         transition: Transition.noTransition),
 
 
     // consumer home
     GetPage(
         name: Routes.CONSUMER_HOME,
-        page: () => HomeContainerConsumer(),
+        page: () => const HomeContainerConsumer(),
         middlewares: middleWares,
         transition: Transition.noTransition),
 
@@ -139,6 +140,15 @@ class AppPages{
         name: Routes.CONSUMER_MINOR_SEARCH_RESULTS,
         page: () => MinorSearchResult(
           minorSearchResponseModel: Get.arguments["minorModel"],
+        ),
+        middlewares: middleWares,
+        transition: Transition.noTransition),
+
+    // consumer checkout
+    GetPage(
+        name: Routes.CONSUMER_CHECKOUT,
+        page: () => Checkout(
+          cartId: Get.parameters["cartId"],
         ),
         middlewares: middleWares,
         transition: Transition.noTransition),

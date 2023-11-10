@@ -119,7 +119,7 @@ class _RegistrationState extends State<Registration> {
   }
 
   String getUserProfileParam() {
-    String stParam = '{"name": {"firstName": "${_nameController.text.trim()}","lastName": "${_lastNameController.text.trim()}"},"email": "${PreferenceManager().getEmail()}","phone": {"countryCode": "+91","number": "${_phoneController.text.trim()}"},"gender": "${selectedGender.toUpperCase()}","relationshipType": "SELF","authenticationRequestDto": {"deviceId": "${prefServices.getDeviceId()}","appId": "${prefServices.getUniqueId()}"}}';
+    String stParam = '{"name": {"firstName": "${_nameController.text.trim()}","lastName": "${_lastNameController.text.trim()}"},"email": "${PreferenceManager().getEmail()}","phone": {"countryCode": "+1","number": "${_phoneController.text.trim()}"},"gender": "${selectedGender.toUpperCase()}","relationshipType": "SELF","authenticationRequestDto": {"deviceId": "${prefServices.getDeviceId()}","appId": "${prefServices.getUniqueId()}"}}';
     return stParam;
   }
 }

@@ -17,5 +17,6 @@ abstract class Routes {
   static const CONSUMER_POLICY_PAGE = '/standards-and-policy';
   static const CONSUMER_ORDERS = '/orders';
   static const CONSUMER_MINOR_SEARCH_RESULTS = '/minor-search';
+  static const CONSUMER_CHECKOUT = '/checkout';
 
 }

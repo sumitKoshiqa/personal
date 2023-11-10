@@ -634,20 +634,23 @@ class _CheckoutState extends State<Checkout> {
                   )
               ),
 
-              ElevatedButton(
-                onPressed: (){
-                  Get.back();
-                  Get.to(const AddAddress(),
-                      transition: Transition.downToUp
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Constants.accentGreen
-                ),
-                child: const Text("Add New Address",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: ElevatedButton(
+                  onPressed: (){
+                    Get.back();
+                    Get.to(const AddAddress(),
+                        transition: Transition.downToUp
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Constants.accentGreen
+                  ),
+                  child: const Text("Add New Address",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500
+                    ),
                   ),
                 ),
               ),

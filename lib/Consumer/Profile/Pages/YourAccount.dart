@@ -299,7 +299,7 @@ class _YourAccountState extends State<YourAccount> {
       },
       "email": "${etEmail.text.trim()}",
       "phone": {
-        "countryCode": "+91",
+        "countryCode": "+1",
         "number": "${etPhone.text.trim()}"
       },
       "gender": "${selectedGender.toUpperCase()}"

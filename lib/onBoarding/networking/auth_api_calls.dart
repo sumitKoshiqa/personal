@@ -19,7 +19,7 @@ class AuthenticationApi {
     try {
       print("jsonParam otp >> ${jsonDecode(jsonParam)}");
       print("reSend otp >> ${ApiEndPoints.linkAccount}");
-      Response response = await dio.put(
+      Response response = await dio.post(
           ApiEndPoints.linkAccount,
           data: jsonDecode(jsonParam));
       print("Send otp response 43 $response");
